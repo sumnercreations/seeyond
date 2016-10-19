@@ -4,9 +4,10 @@
 ## Technologies & Libraries
 
 ### Angular 2.x 
-Angular 
+Javascript Framework for building dynamic web applications.
 
 - Source: https://angular.io/
+- Docs: https://angular.io/docs/ts/latest/
 
 ### Angular-cli
 Command Line Interface for Angular 2
@@ -16,9 +17,15 @@ Command Line Interface for Angular 2
 ### Threejs 
 Javascript 3D library used to render the visualization for the user using webGL
 
-
 - Source: https://github.com/mrdoob/three.js
 - Docs: https://threejs.org/docs/
 
-### Verb - https://github.com/pboyer/verb
+### Verb 
 Open-source, cross-platform NURBS library for generating the tesselations
+
+- Source: https://github.com/pboyer/verb
+- Docs: http://verbnurbs.com/docs/
+
+### Using Verb with Threejs
+https://github.com/pboyer/verb/blob/master/examples/js/verbToThreeConversion.js
+
