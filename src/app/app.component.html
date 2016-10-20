@@ -1,0 +1,22 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<h1 class="text-center">{{header}}</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<p class="md">{{title}}</p>
+		</div>
+	</div>
+	<div class="row">
+		<ul class="list-inline">
+			<li *ngFor="let feature of features" class="col-sm-3">
+				<a href="{{feature.type}}">
+					<img src="{{feature.image}}" alt="{{feature.type}}" class="img-responsive">
+				</a>
+				<p class="text-center">{{feature.title}}</p>
+			</li>
+		</ul>
+	</div>
+</div>
