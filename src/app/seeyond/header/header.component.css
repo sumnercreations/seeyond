@@ -1,0 +1,13 @@
+.header {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.header h1, .header ul, .header ul li {
+	display: inline;
+}
+
+.header ul.pull-right {
+	margin-top: 13px;
+}
