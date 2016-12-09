@@ -1,16 +1,7 @@
-<!-- <seeyond-navigation></seeyond-navigation>
-<seeyond-dimensions *ngIf="activeTab == 'dimensions'"></seeyond-dimensions>
+<!-- <seeyond-navigation></seeyond-navigation> -->
+<!-- <seeyond-dimensions *ngIf="activeTab == 'dimensions'"></seeyond-dimensions>
 <seeyond-design *ngIf="activeTab == 'design'"></seeyond-design> -->
 
-<!-- This is going to change depending on the activeTab. Well, at least the text of the button will. How do we handle that?
-A. Move this row and button into the design and dimension component's html file. (This will duplicate code)
-B. Set the text of the code in the options.component.ts file and pass that through the same as we do the estimatedAmt. (Can we pass HTML? Will the icomoon chevron work being passed as a string?)
-
-I'm leaning towards just passing some values from the options.component.ts file that have the classes based on the activeTab.
-
-<p>Est. Total <span class="est-amt pull-right">{{estimatedAmt}}</span></p>
-		<button class="button button-gray btn-block">{{buttonText}}<span class="icomoon-chevron-thin-{{chevronPosition}} pull-{{chevronPosition}}"></span></button>
--->
 <div class="row">
 	<div class="col-xs-12">
 		<p>Est. Total <span class="est-amt pull-right">{{estimatedAmt}}</span></p>
