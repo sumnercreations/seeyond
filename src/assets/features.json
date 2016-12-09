@@ -1,0 +1,29 @@
+[{
+  "type": "wall",
+  "title": "Wall Feature",
+  "image": "http://dummyimage.com/600x300",
+  "params": {
+    "length": 100
+  }
+}, {
+  "type": "wall_to_ceiling",
+  "title": "Wall-to-Ceiling Feature",
+  "image": "http://dummyimage.com/600x300",
+  "params": {
+    "length": 100
+  }
+}, {
+  "type": "linear_partition",
+  "title": "Freestanding Linear Partition",
+  "image": "http://dummyimage.com/600x300",
+  "params": {
+    "length": 100
+  }
+}, {
+  "type": "curved_partition",
+  "title": "Freestanding Curved Partition",
+  "image": "http://dummyimage.com/600x300",
+  "params": {
+    "length": 100
+  }
+}]
