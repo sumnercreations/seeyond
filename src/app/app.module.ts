@@ -14,6 +14,9 @@ import { OptionsComponent } from './seeyond/options/options.component';
 import { HeaderComponent } from './seeyond/header/header.component';
 import { VisualizationComponent } from './seeyond/visualization/visualization.component';
 import { ActionsComponent } from './seeyond/actions/actions.component';
+import { NavigationComponent } from './seeyond/navigation/navigation.component';
+import { DimensionsComponent } from './seeyond/dimensions/dimensions.component';
+import { DesignComponent } from './seeyond/design/design.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { ActionsComponent } from './seeyond/actions/actions.component';
     HeaderComponent,
     VisualizationComponent,
     ActionsComponent,
+    NavigationComponent,
+    DimensionsComponent,
+    DesignComponent,
   ],
   imports: [
     BrowserModule,

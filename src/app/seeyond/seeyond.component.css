@@ -1,7 +1,19 @@
+/*
+:host {
+  padding: 100px 0;
+  display: block;
+}
+*/
+
+.seeyond-wrapper {
+  background-color: #fff;
+  padding: 20px 0;
+}
+
 .bordered {
 	border: 1px solid gray;
 }
 
-.options, .design {
+/*.options, .design {
 	background-color: #fff;
-}
+}*/

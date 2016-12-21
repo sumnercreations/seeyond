@@ -6,6 +6,7 @@
 
 .header h1, .header ul, .header ul li {
 	display: inline;
+  padding: 0;
 }
 
 .header ul.pull-right {

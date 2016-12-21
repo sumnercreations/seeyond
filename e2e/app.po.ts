@@ -6,6 +6,6 @@ export class SeeyondPage {
   }
 
   getParagraphText() {
-    return element(by.css('seeyond-root h1')).getText();
+    return element(by.css('app-root h1')).getText();
   }
 }
