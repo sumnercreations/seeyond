@@ -3,7 +3,7 @@
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.22-1.
 
 ## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://dev-ng.3-form.com:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
@@ -62,7 +62,17 @@ Open-source, cross-platform NURBS library for generating the tesselations
 https://github.com/pboyer/verb/blob/master/examples/js/verbToThreeConversion.js
 
 ## Setup instructions
-(right now these are notes of what I did to get started. I imagine these will change.)
 
-1. install angular-cli - `npm install -g angular-cli`
-2. initialize the project - `ng init --prefix seeyond`
+1. install angular-cli - `npm install -g angular-cli` (unless already installed)
+2. install packages - `npm install`
+3. build code - `ng build`
+4. run server - `ng serve`
+5. access server - `http://dev-ng.3-form.com:4200/`
+
+In order to use the url `http://dev-ng.3-form.com:4200/` you will need to create a record in your hosts file that points to your localhost. On the mac we use an application called [Hosts](https://github.com/specialunderwear/Hosts.prefpane/downloads). My record looks like this:
+
+```
+127.0.0.1    dev-ng.3-form.com
+```
+
+We need to use this URL because of CORS with the global css file that is loaded from our Amazon S3. (http://3form.s3.amazonaws.com/assets/3form-bootstrap3-combined.min.css)
