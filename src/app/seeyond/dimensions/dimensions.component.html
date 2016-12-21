@@ -1,0 +1,16 @@
+<select class="form-control">
+	<option *ngFor="let feature of features" [value]="feature.type">{{feature.title}}</option>
+</select>
+
+<!-- <seeyond-measurements></seeyond-measurements> -->
+
+<!-- <img src="http://dummyimage.com/360x300" alt="" class="img-responsive"> -->
+
+<img src="{{selectedFeature?.image}}" alt="{{selectedFeature?.type}}" class="img-responsive">
+
+<form class="measurements">
+  <div class="form-group" *ngFor="let measurement of selectedFeature.measurements">
+    <label [for]="measurement.label">{{measurement.label}}</label>
+    <input type="text" name="{{measurement.label}}" id="{{measurement.label}}" value="{{measurement.value}}">
+  </div>
+</form>

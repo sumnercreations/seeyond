@@ -1,0 +1,53 @@
+[{
+  "type": "wall",
+  "title": "Wall Feature",
+  "image": "http://dummyimage.com/360x300",
+  "measurements": [
+    {
+      "label": "R",
+      "value": 240
+    },
+    {
+      "label": "H",
+      "value": 240
+    },
+    {
+      "label": "T",
+      "value": 240
+    },
+    {
+      "label": "L",
+      "value": 240
+    }
+  ]
+}, {
+  "type": "wall_to_ceiling",
+  "title": "Wall-to-Ceiling Feature",
+  "image": "http://dummyimage.com/360x300",
+  "measurements": {
+    "R": 240,
+    "H": 240,
+    "T": 240,
+    "L": 240
+  }
+}, {
+  "type": "linear_partition",
+  "title": "Freestanding Linear Partition",
+  "image": "http://dummyimage.com/360x300",
+  "measurements": {
+    "R": 240,
+    "H": 240,
+    "T": 240,
+    "L": 240
+  }
+}, {
+  "type": "curved_partition",
+  "title": "Freestanding Curved Partition",
+  "image": "http://dummyimage.com/360x300",
+  "measurements": {
+    "R": 240,
+    "H": 240,
+    "T": 240,
+    "L": 240
+  }
+}]

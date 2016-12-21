@@ -21,14 +21,14 @@ describe('App: Seeyond', () => {
   it(`should have as title 'app works!'`, async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     let app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Begin by choosing the type of feature you are working on');
+    expect(app.title).toEqual('Begin by choosing the type of feature you are working on.');
   }));
 
   it('should render title in a p tag', async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     let compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('p').textContent).toContain('Begin by choosing the type of feature you are working on');
+    expect(compiled.querySelector('p').textContent).toContain('Begin by choosing the type of feature you are working on.');
   }));
 
   it(`should have as header 'Welcome to the Seeyond Design Tool'`, async(() => {
