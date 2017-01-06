@@ -5,11 +5,28 @@
 }
 */
 
-.seeyond-wrapper {
+
+/*.seeyond-wrapper {
+  border: 1px solid #000;
   background-color: #fff;
   padding: 20px 0;
-}
+}*/
 
 .bordered {
 	border: 1px solid gray;
+}
+
+.options-wrapper {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.options {
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+.design {
+  background-color: #fff;
+  padding: 20px;
 }
