@@ -1,4 +1,5 @@
 import { SeeyondPage } from './app.po';
+import { browser, element, by } from 'protractor';
 
 describe('seeyond App', function() {
   let page: SeeyondPage;
@@ -7,8 +8,9 @@ describe('seeyond App', function() {
     page = new SeeyondPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should have an h1 header on initial load.', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    var header = element(by.css('.title'));
+    expect(header.isPresent()).toBeTruthy();
   });
 });
