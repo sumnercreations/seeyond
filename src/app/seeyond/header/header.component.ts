@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Feature } from '../Feature';
 
 @Component({
   selector: 'seeyond-header',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 	featureTitle = 'Freestanding Curved Partition';
 
-  constructor() { }
+  constructor(private feature: Feature) { }
 
   ngOnInit() {
   }
