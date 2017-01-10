@@ -11,13 +11,32 @@ export class OptionsComponent implements OnInit {
 
 	// activeTab will be determined by the seeyond-navigation component
 	activeTab = 'dimensions';
+
 	// buttonText and chevronPosition are determined by the value of activeTab
-	buttonText = 'step 2: design';
-	chevronPosition = 'right';
+	buttonText = '';
+	chevronPosition = '';
 
   constructor() { }
 
   ngOnInit() {
+    switch (this.activeTab) {
+      case 'dimensions':
+        this.buttonText = 'step 2: design';
+        this.chevronPosition = 'right';
+        break;
+
+      case 'design':
+        this.buttonText = 'step 1: dimensions';
+        this.chevronPosition = 'left';
+        break;
+
+      default:
+        alert('Active Tab ' + this.activeTab + ' is not valid.');
+      }
+  }
+
+  public updateActiveTab(tab: string) {
+    this.activeTab = tab;
   }
 
 }

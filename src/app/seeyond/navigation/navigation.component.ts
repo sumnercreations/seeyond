@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'seeyond-navigation',
@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+  @Input() activeTab: String = 'dimensions';
+  @Output() activeTabEmitter = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit() {
   }
-
 }
