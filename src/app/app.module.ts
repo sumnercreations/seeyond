@@ -18,6 +18,9 @@ import { NavigationComponent } from './seeyond/navigation/navigation.component';
 import { DimensionsComponent } from './seeyond/dimensions/dimensions.component';
 import { DesignComponent } from './seeyond/design/design.component';
 
+// classes
+import { Feature } from './seeyond/Feature';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +40,9 @@ import { DesignComponent } from './seeyond/design/design.component';
     HttpModule,
     routing
   ],
-  providers: [],
+  providers: [
+    Feature
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,16 @@
+.options-wrapper {
+  background-color: #fff;
+  padding: 20px;
+}
+
+button {
+  margin-top: 20px;
+}
+
+.button-chevron {
+  line-height: 1.8;
+}
+
+.est-amt {
+  margin: 0;
+}

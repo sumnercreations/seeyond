@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Feature } from '../Feature';
 import 'rxjs/add/operator/map';
@@ -13,15 +12,22 @@ var featuresJSON = require('../../../assets/features.json');
 })
 export class DimensionsComponent implements OnInit {
   features = [];
-  selectedFeature: Feature;
 
-  constructor(http: Http) {
+  constructor(private feature: Feature) {
     this.features = featuresJSON;
-    this.selectedFeature = this.features[0];
+    // feature.updateFeature(this.features[0]);
+  }
+
+  ngAfterViewInit() {
+    this.feature.updateFeature(this.features[0]);
   }
 
   ngOnInit() {
 
+  }
+
+  public updateSelectedFeature(index: number) {
+    this.feature.updateFeature(this.features[index]);
   }
 
 }
