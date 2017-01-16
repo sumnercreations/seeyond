@@ -9,7 +9,12 @@ export class VisualizationComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+ngOnInit() {
+    var syd_t = require( 'syd-tessellation' );
+    var syd_v = require( 'syd-visualization' );
+    
+    syd_t.QT.UpdateFeature();
+    var data = syd_t.QT.GetTessellationArray();
+    syd_v.QT.Visualization.visualizeWall(data, 8, 6, 0x80ff00);
   }
-
 }
