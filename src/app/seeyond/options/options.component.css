@@ -19,5 +19,6 @@ button {
 .options-bottom-section {
   position: absolute;
   bottom: 0;
-  width: 320px;
+  width: 100%;
+  padding-right: 70px;
 }
