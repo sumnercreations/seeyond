@@ -15,28 +15,31 @@ export class OptionsComponent implements OnInit {
 	// buttonText and chevronPosition are determined by the value of activeTab
 	buttonText = '';
 	chevronPosition = '';
+  buttonLink = '';
 
   constructor() { }
 
   ngOnInit() {
+    this.updateActiveTab(this.activeTab);
+  }
+
+  public updateActiveTab(tab: string) {
+    this.activeTab = tab;
     switch (this.activeTab) {
       case 'dimensions':
         this.buttonText = 'step 2: design';
         this.chevronPosition = 'right';
+        this.buttonLink = 'design';
         break;
 
       case 'design':
         this.buttonText = 'step 1: dimensions';
         this.chevronPosition = 'left';
+        this.buttonLink = 'dimensions';
         break;
 
       default:
         alert('Active Tab ' + this.activeTab + ' is not valid.');
-      }
+    }
   }
-
-  public updateActiveTab(tab: string) {
-    this.activeTab = tab;
-  }
-
 }
