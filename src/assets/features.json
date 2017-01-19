@@ -1,89 +1,69 @@
 [{
   "type": "wall",
   "title": "Wall Feature",
-  "image": "http://dummyimage.com/360x300",
+  "image": "https://dummyimage.com/360x300",
   "measurements": [
     {
-      "label": "R",
-      "value": 240
+      "label": "Width",
+      "value": 250
     },
     {
-      "label": "H",
-      "value": 240
-    },
-    {
-      "label": "T",
-      "value": 240
-    },
-    {
-      "label": "L",
-      "value": 240
+      "label": "Height",
+      "value": 250
     }
   ]
 }, {
   "type": "wall_to_ceiling",
   "title": "Wall-to-Ceiling Feature",
-  "image": "http://dummyimage.com/360x300",
+  "image": "https://dummyimage.com/360x300",
   "measurements": [
     {
-      "label": "R",
-      "value": 100
+      "label": "Width",
+      "value": 250
     },
     {
-      "label": "H",
+      "label": "Height",
       "value": 240
     },
     {
-      "label": "T",
+      "label": "Angle",
       "value": 240
     },
     {
-      "label": "L",
+      "label": "Ceiling Extent (Height)",
       "value": 240
     }
   ]
 }, {
   "type": "linear_partition",
   "title": "Freestanding Linear Partition",
-  "image": "http://dummyimage.com/360x300",
+  "image": "https://dummyimage.com/360x300",
   "measurements": [
     {
-      "label": "R",
-      "value": 300
+      "label": "Width",
+      "value": 250
     },
     {
-      "label": "H",
-      "value": 240
-    },
-    {
-      "label": "T",
-      "value": 240
-    },
-    {
-      "label": "L",
+      "label": "Height",
       "value": 240
     }
   ]
 }, {
   "type": "curved_partition",
   "title": "Freestanding Curved Partition",
-  "image": "http://dummyimage.com/360x300",
+  "image": "https://dummyimage.com/360x300",
   "measurements": [
     {
-      "label": "R",
-      "value": 200
+      "label": "Width",
+      "value": 250
     },
     {
-      "label": "H",
+      "label": "Height",
       "value": 240
     },
     {
-      "label": "T",
-      "value": 240
-    },
-    {
-      "label": "L",
-      "value": 240
+      "label": "Radius",
+      "value": 45
     }
   ]
 }]

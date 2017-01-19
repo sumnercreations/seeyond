@@ -7,7 +7,6 @@ import { Feature } from '../Feature';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-	featureTitle = 'Freestanding Curved Partition';
 
   constructor(private feature: Feature) { }
 

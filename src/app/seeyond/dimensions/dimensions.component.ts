@@ -30,4 +30,15 @@ export class DimensionsComponent implements OnInit {
     this.feature.updateFeature(this.features[index]);
   }
 
+  public updateFeatureMeasurement(measurement: string, index: number) {
+    console.log('feature data');
+    console.log(measurement);
+    console.log(index);
+
+    this.feature.measurements[index].value = measurement;
+    console.log(this.feature.measurements);
+
+    this.feature.reloadVisualization();
+  }
+
 }

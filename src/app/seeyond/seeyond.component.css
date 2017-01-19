@@ -17,10 +17,16 @@
 
 .options {
   background-color: #f1f1f1;
-  padding: 20px;
+  height: 748px;
+  position: relative;
+  padding-bottom: 20px;
 }
 
 .design {
   background-color: #fff;
   padding: 20px;
+}
+
+.container {
+  padding-bottom: 0;
 }

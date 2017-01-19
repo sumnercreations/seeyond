@@ -2,16 +2,17 @@
 <div class="options-wrapper">
   <seeyond-dimensions *ngIf="activeTab == 'dimensions'"></seeyond-dimensions>
   <seeyond-design *ngIf="activeTab == 'design'"></seeyond-design>
-
-  <div class="row">
-  	<div class="col-xs-12">
-      <hr>
-  		<p class="est-amt">Estimated Total <span class="pull-right">{{estimatedAmt}}</span></p>
+  <div class="options-bottom-section">
+    <div class="row">
+      <div class="col-xs-12">
+        <hr>
+        <p class="est-amt">Estimated Total <span class="pull-right">{{estimatedAmt}}</span></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <button (click)="updateActiveTab(buttonLink)" class="button button-gray btn-block">{{buttonText}}<span class="icomoon-chevron-thin-{{chevronPosition}} pull-{{chevronPosition}} button-chevron"></span></button>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <button class="button button-gray btn-block">{{buttonText}}<span class="icomoon-chevron-thin-{{chevronPosition}} pull-{{chevronPosition}} button-chevron"></span></button>
-    </div>
   </div>
-</div>
