@@ -9,7 +9,7 @@
     },
     {
       "label": "Height",
-      "value": 500
+      "value": 250
     }
   ]
 }, {
@@ -45,7 +45,7 @@
     },
     {
       "label": "Height",
-      "value": 500
+      "value": 240
     }
   ]
 }, {
@@ -59,7 +59,7 @@
     },
     {
       "label": "Height",
-      "value": 500
+      "value": 240
     },
     {
       "label": "Radius",
