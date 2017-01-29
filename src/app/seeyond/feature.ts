@@ -38,11 +38,10 @@ export class Feature {
         "Tessellation": 0,
         "Width": this.measurements[0]['value'],
         "Height": this.measurements[1]['value'],
-        "Radius": this.measurements[2]? this.measurements[2] : 0,
+        "Radius": this.measurements[2]? this.measurements[2] : 400,
         "Angle":  this.measurements[3]? this.measurements[3] : 0,
       }
     }
-
     this.reloadVisualization();
   }
 
@@ -50,13 +49,16 @@ export class Feature {
   {
     // CURRENT WORKAROUND. EVENTUALLY WE WANT TO BE ABLE TO JUST PASS THE WHOLE FEATURE. MAYBE...
     var jsonProperties = this.getJsonProperties();
-    this.syd_t.QT.SetUserDataProperties(JSON.stringify(jsonProperties));
+    this.syd_t.QT.SetUserDataPropertiesJSONString(JSON.stringify(jsonProperties));
 
     // this.syd_t.QT.SetUserDataProperties(feature);
-    this.syd_t.QT.SetTessellationArray({});
     this.syd_t.QT.UpdateFeature();
-    this.data = this.syd_t.QT.GetTessellationArray();
-    this.syd_v.QT.Visualization.visualizeWall(this.data, 8, 6, 0xff9933);
+    var front = this.syd_t.QT.GetFrontSurfacePoints();
+    var back = this.syd_t.QT.GetBackSurfacePoints();
+    var uNum = this.syd_t.QT.GetU();
+    var vNum = this.syd_t.QT.GetV();
+
+    this.syd_v.QT.Visualization.visualizeFeature(front, back, uNum, vNum, 0xddffdd);
   }
 
   getJsonProperties()
@@ -67,7 +69,7 @@ export class Feature {
         "Tessellation": 0,
         "Width": this.measurements[0]['value'],
         "Height": this.measurements[1]['value'],
-        "Radius": this.measurements[2]? this.measurements[2] : 0,
+        "Radius": this.measurements[2]? this.measurements[2] : 400,
         "Angle":  this.measurements[3]? this.measurements[3] : 0,
       }
     }
