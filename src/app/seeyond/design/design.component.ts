@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./design.component.css']
 })
 export class DesignComponent implements OnInit {
+  position = 'above';
 
   constructor() { }
 

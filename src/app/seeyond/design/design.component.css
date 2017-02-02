@@ -1,4 +1,32 @@
-.pattern {
+.pattern, .material {
   padding-left: 5px;
   padding-right: 5px;
+  margin-bottom: 10px;
+  width: 116px;
+}
+
+.pattern img {
+  border: 1px solid rgb(205,205,205);
+}
+
+// .pattern img, .material img {
+//   width: 106px
+// }
+
+.tooltip-host {
+  display: inline-flex;
+  align-items: center;
+}
+
+.selected {
+  border: 5px solid #f5a01a;
+}
+
+.materials-container {
+  height: 220px;
+  overflow: scroll;
+}
+
+.pattern-strenth-range {
+  margin-top: 12px;
 }
