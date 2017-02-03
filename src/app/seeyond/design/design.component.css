@@ -1,3 +1,7 @@
+.design-column-padding-adjust {
+  padding-left: 5px;
+}
+
 .pattern, .material {
   padding-left: 5px;
   padding-right: 5px;
@@ -6,12 +10,8 @@
 }
 
 .pattern img {
-  border: 1px solid rgb(205,205,205);
+  border: 1px solid #cdcdcd;
 }
-
-// .pattern img, .material img {
-//   width: 106px
-// }
 
 .tooltip-host {
   display: inline-flex;
@@ -29,4 +29,13 @@
 
 .pattern-strenth-range {
   margin-top: 12px;
+}
+
+p.header {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+label {
+  font-weight: 300;
 }
