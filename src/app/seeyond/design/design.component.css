@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-.selected {
+.selected img {
   border: 5px solid #f5a01a;
 }
 
@@ -38,4 +38,12 @@ p.header {
 
 label {
   font-weight: 300;
+}
+
+.md-slider-horizontal {
+  width: 100%;
+}
+
+.md-slider-thumb {
+  background-color: #cdcdcd;
 }
