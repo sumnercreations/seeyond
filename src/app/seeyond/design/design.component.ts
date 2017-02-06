@@ -19,7 +19,7 @@ export class DesignComponent implements OnInit {
   tickInterval = 1;
   step = 1;
   thumbLabel = true;
-  patternStrength = 1;
+  patternStrength = 3;
   vertical = false;
 
   selectedPattern = 'billow';
