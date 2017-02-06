@@ -21,28 +21,25 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-sm-3 design-column-padding-adjust">
-    <label for="pattern-strength">Pattern Strength</label>
-  </div>
-  <div class="col-sm-6">
-    <!-- <input type="range" min="1" max="10" value="1" id="pattern-strength" step="1" class="pattern-strenth-range"> -->
-    <md-slider
-        class="pattern-strength"
-        [disabled]="disabled"
-        [invert]="invert"
-        [max]="max"
-        [min]="min"
-        [step]="step"
-        [thumb-label]="thumbLabel"
-        [tick-interval]="tickInterval"
-        [value]="patternStrength"
-        [vertical]="vertical" (change)="updatePatternStrength($event.value)">
-    </md-slider>
-  </div>
-    <div class="col-sm-3">
-    <input type="text" [value]="patternStrength" (change)="updatePatternStrength($event.target.value)" id="pattern-strength-input" class="form-control">
+  <div class="col-sm-12 design-column-padding-adjust">
+    <label for="pattern-strength2">Pattern Strength</label>
+  <!-- </div> -->
+  <!-- <div class="col-sm-7"> -->
+    <select name="pattern-strength2" id="pattern-strength2" [value]="patternStrength" (change)="updatePatternStrength($event.target.value)" class="form-control">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
   </div>
 </div>
+<hr>
 <div class="row">
   <div class="col-sm-12 design-column-padding-adjust">
     <p class='header'>Materials</p>

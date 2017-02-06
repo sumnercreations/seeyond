@@ -15,10 +15,10 @@ export class DesignComponent implements OnInit {
   invert = false;
   max = 10;
   min = 1;
-  showTicks = true;
+  showTicks = false;
   tickInterval = 1;
   step = 1;
-  thumbLabel = true;
+  thumbLabel = false;
   patternStrength = 3;
   vertical = false;
 
