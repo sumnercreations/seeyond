@@ -8,22 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class DesignComponent implements OnInit {
   // tooltip position
   position = 'above';
-
-  // slider settings
-  autoTicks = false;
-  disabled = false;
-  invert = false;
-  max = 10;
-  min = 1;
-  showTicks = false;
-  tickInterval = 1;
-  step = 1;
-  thumbLabel = false;
-  patternStrength = 3;
-  vertical = false;
-
+  // Selected Defaults
   selectedPattern = 'billow';
   selectedMaterial = 'burnt_umber';
+  patternStrength = 3;
 
   constructor() { }
 
