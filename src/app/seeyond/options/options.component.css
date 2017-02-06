@@ -1,0 +1,24 @@
+.options-wrapper {
+  background-color: #fff;
+  padding: 20px;
+  height: 100%;
+}
+
+button {
+  margin-top: 20px;
+}
+
+.button-chevron {
+  margin-top: 3px;
+}
+
+.est-amt {
+  margin: 0;
+}
+
+.options-bottom-section {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-right: 70px;
+}
