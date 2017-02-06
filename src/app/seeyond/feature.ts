@@ -43,7 +43,8 @@ export class Feature {
     this.syd_t.QT.SetUserDataPropertiesJSONString(JSON.stringify(jsonProperties));
 
     // set the patternStrength
-    this.syd_t.QT.SetPatternStrength(this.patternStrength);
+    // this will need to go away once the tessellation code is updated.
+    this.syd_t.QT.SetPatternStrength(this.patternStrength / 10);
 
     // this.syd_t.QT.SetUserDataProperties(feature);
     this.syd_t.QT.UpdateFeature();
