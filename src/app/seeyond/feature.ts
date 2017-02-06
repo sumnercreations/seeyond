@@ -7,8 +7,9 @@ export class Feature {
   public title: string = '';
   public image: string = '';
   public measurements: any = [];
+  public material: string = '';
   public pattern: string = '';
-  public patternStrength: string = '';
+  public patternStrength: number = 3;
   public syd_v: any = {};
   public syd_t: any = {};
   public data: any = [];
