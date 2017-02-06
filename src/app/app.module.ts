@@ -1,7 +1,11 @@
+// core
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+
+// angular material
+import { MaterialModule } from '@angular/material';
 
 // routing
 import {routing} from './app.routes';
@@ -38,7 +42,8 @@ import { Feature } from './seeyond/Feature';
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    MaterialModule.forRoot()
   ],
   providers: [
     Feature

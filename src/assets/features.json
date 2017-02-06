@@ -1,7 +1,7 @@
 [{
   "type": "wall",
   "title": "Wall Feature",
-  "image": "https://dummyimage.com/360x300",
+  "image": "//images.3-form.com/seeyond/features/wall.jpg",
   "measurements": [
     {
       "label": "Width",
@@ -15,7 +15,7 @@
 }, {
   "type": "wall_to_ceiling",
   "title": "Wall-to-Ceiling Feature",
-  "image": "https://dummyimage.com/360x300",
+  "image": "//images.3-form.com/seeyond/features/wall_to_ceiling.jpg",
   "measurements": [
     {
       "label": "Width",
@@ -30,14 +30,14 @@
       "value": 240
     },
     {
-      "label": "Ceiling Extent (Height)",
+      "label": "Ceiling Length",
       "value": 240
     }
   ]
 }, {
   "type": "linear_partition",
   "title": "Freestanding Linear Partition",
-  "image": "https://dummyimage.com/360x300",
+  "image": "//images.3-form.com/seeyond/features/freestanding_linear_partition.jpg",
   "measurements": [
     {
       "label": "Width",
@@ -51,7 +51,7 @@
 }, {
   "type": "curved_partition",
   "title": "Freestanding Curved Partition",
-  "image": "https://dummyimage.com/360x300",
+  "image": "//images.3-form.com/seeyond/features/freestanding_curved_partition.jpg",
   "measurements": [
     {
       "label": "Width",
