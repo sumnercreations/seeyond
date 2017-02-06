@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Feature {
   private static _instance: Feature = new Feature();
-  public type: string = '';
+  public type: number = 0;
   public title: string = '';
   public image: string = '';
   public measurements: any = [];
   public material: string = '';
-  public pattern: string = '';
+  public tessellation: number = 0;
   public patternStrength: number = 3;
   public syd_v: any = {};
   public syd_t: any = {};
@@ -31,18 +31,8 @@ export class Feature {
     this.title = feature.title;
     this.measurements = feature.measurements;
     this.image = feature.image;
+    this.type = feature.type;
 
-    // update the visualization
-    var jsonProperties = {
-      "UserInputs": {
-        "Type": 0,
-        "Tessellation": 0,
-        "Width": this.measurements[0]['value'],
-        "Height": this.measurements[1]['value'],
-        "Radius": this.measurements[2]? this.measurements[2] : 400,
-        "Angle":  this.measurements[3]? this.measurements[3] : 0,
-      }
-    }
     this.reloadVisualization();
   }
 
@@ -51,6 +41,9 @@ export class Feature {
     // CURRENT WORKAROUND. EVENTUALLY WE WANT TO BE ABLE TO JUST PASS THE WHOLE FEATURE. MAYBE...
     var jsonProperties = this.getJsonProperties();
     this.syd_t.QT.SetUserDataPropertiesJSONString(JSON.stringify(jsonProperties));
+
+    // set the patternStrength
+    this.syd_t.QT.SetPatternStrength(this.patternStrength);
 
     // this.syd_t.QT.SetUserDataProperties(feature);
     this.syd_t.QT.UpdateFeature();
@@ -66,8 +59,8 @@ export class Feature {
   {
     return {
       "UserInputs": {
-        "Type": 0,
-        "Tessellation": 0,
+        "Type": this.type? this.type : 0,
+        "Tessellation": this.tessellation? this.tessellation : 0,
         "Width": this.measurements[0]['value'],
         "Height": this.measurements[1]['value'],
         "Radius": this.measurements[2]? this.measurements[2] : 400,
