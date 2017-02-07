@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Feature } from '../Feature';
+import { Feature } from '../feature';
 import 'rxjs/add/operator/map';
 
 var featuresJSON = require('../../../assets/features.json');
