@@ -23,7 +23,7 @@ import { DimensionsComponent } from './seeyond/dimensions/dimensions.component';
 import { DesignComponent } from './seeyond/design/design.component';
 
 // classes
-import { Feature } from './seeyond/Feature';
+import { Feature } from './seeyond/feature';
 
 @NgModule({
   declarations: [
