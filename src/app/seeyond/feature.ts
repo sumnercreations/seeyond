@@ -64,8 +64,8 @@ export class Feature {
         "Tessellation": this.tessellation? this.tessellation : 0,
         "Width": this.measurements[0]['value'],
         "Height": this.measurements[1]['value'],
-        "Radius": this.measurements[2]? this.measurements[2] : 400,
-        "Angle":  this.measurements[3]? this.measurements[3] : 0,
+        "Radius": this.measurements[2]? this.measurements[2]['value'] : 400,
+        "Angle":  this.measurements[3]? this.measurements[3]['value'] : 0,
       }
     }
   }
