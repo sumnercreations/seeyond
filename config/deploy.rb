@@ -21,7 +21,7 @@ set :repo_url, "git@github.com:3-form/seeyond.git"
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_dirs, fetch(:linked_dirs, []).push('node_modules')
+# set :linked_dirs, fetch(:linked_dirs, []).push('node_modules')
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
