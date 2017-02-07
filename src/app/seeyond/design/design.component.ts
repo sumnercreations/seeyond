@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Feature } from '../Feature';
+import { Feature } from '../feature';
 
 @Component({
   selector: 'seeyond-design',
