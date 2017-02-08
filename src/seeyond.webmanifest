@@ -3,8 +3,8 @@
   "short_name": "Seeyond",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#666",
-  "theme_color": "#FF9933",
+  "background_color": "#cdcdcd",
+  "theme_color": "#f5a01a",
   "orientation": "any",
   "icons": [
     {
