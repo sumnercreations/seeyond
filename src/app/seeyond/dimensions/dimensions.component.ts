@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Feature } from '../Feature';
+import { Feature } from '../feature';
 import 'rxjs/add/operator/map';
 
 var featuresJSON = require('../../../assets/features.json');
@@ -15,7 +15,6 @@ export class DimensionsComponent implements OnInit {
 
   constructor(private feature: Feature) {
     this.features = featuresJSON;
-    // feature.updateFeature(this.features[0]);
   }
 
   ngAfterViewInit() {
@@ -27,6 +26,7 @@ export class DimensionsComponent implements OnInit {
   }
 
   public updateSelectedFeature(index: number) {
+    console.log(this.features[index]);
     this.feature.updateFeature(this.features[index]);
   }
 
