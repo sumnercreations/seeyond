@@ -7,7 +7,7 @@ export class Feature {
   public title: string = '';
   public image: string = '';
   public measurements: any = [];
-  public material: string = '';
+  public material: string = '/assets/images/materials/burnt_umber.jpg';
   public tessellation: number = 0;
   public patternStrength: number = 3;
   public syd_v: any = {};
@@ -38,18 +38,11 @@ export class Feature {
 
   reloadVisualization()
   {
-    // CURRENT WORKAROUND. EVENTUALLY WE WANT TO BE ABLE TO JUST PASS THE WHOLE FEATURE. MAYBE...
     var jsonProperties = this.getJsonProperties();
+
     this.syd_t.QT.SetUserDataPropertiesJSONString(JSON.stringify(jsonProperties));
-
-    // set the patternStrength
-    // this.syd_t.QT.SetPatternStrength(this.patternStrength);
-
-    // set the material
-    // this.syd_t.QT.SetMaterial(this.material);
-
-    // this.syd_t.QT.SetUserDataProperties(feature);
     this.syd_t.QT.UpdateFeature();
+
     var front = this.syd_t.QT.GetFrontSurfacePoints();
     var back = this.syd_t.QT.GetBackSurfacePoints();
     var uNum = this.syd_t.QT.GetU();
