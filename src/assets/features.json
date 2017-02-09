@@ -14,7 +14,7 @@
     }
   ]
 }, {
-  "type": 5,
+  "type": 3,
   "type_name": "wall_to_ceiling",
   "title": "Wall-to-Ceiling Feature",
   "image": "/assets/images/features/wall_to_ceiling.jpg",
