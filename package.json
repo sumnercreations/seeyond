@@ -1,6 +1,6 @@
 {
   "name": "seeyond",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
@@ -40,6 +40,8 @@
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.42",
     "codelyzer": "~2.0.0-beta.1",
+    "grunt": "^1.0.1",
+    "grunt-bump": "^0.8.0",
     "jasmine-core": "2.5.2",
     "jasmine-spec-reporter": "2.5.0",
     "karma": "1.2.0",
