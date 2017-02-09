@@ -2,7 +2,7 @@
   "type": 2,
   "type_name": "wall",
   "title": "Wall Feature",
-  "image": "//images.3-form.com/seeyond/features/wall.jpg",
+  "image": "/assets/images/features/wall.jpg",
   "measurements": [
     {
       "label": "Width",
@@ -17,7 +17,7 @@
   "type": 5,
   "type_name": "wall_to_ceiling",
   "title": "Wall-to-Ceiling Feature",
-  "image": "//images.3-form.com/seeyond/features/wall_to_ceiling.jpg",
+  "image": "/assets/images/features/wall_to_ceiling.jpg",
   "measurements": [
     {
       "label": "Width",
@@ -40,7 +40,7 @@
   "type": 0,
   "type_name": "linear_partition",
   "title": "Freestanding Linear Partition",
-  "image": "//images.3-form.com/seeyond/features/freestanding_linear_partition.jpg",
+  "image": "/assets/images/features/freestanding_linear_partition.jpg",
   "measurements": [
     {
       "label": "Width",
@@ -55,7 +55,7 @@
   "type": 1,
   "type_name": "curved_partition",
   "title": "Freestanding Curved Partition",
-  "image": "//images.3-form.com/seeyond/features/freestanding_curved_partition.jpg",
+  "image": "/assets/images/features/freestanding_curved_partition.jpg",
   "measurements": [
     {
       "label": "Width",
