@@ -11,25 +11,17 @@ export class DesignComponent implements OnInit {
   position = 'above';
   // Selected Defaults
   selectedTessellation = this.feature.tessellation? this.feature.tessellation : 'billow';
-  selectedMaterial = this.feature.material? this.feature.material : 'burnt_umber';
+  selectedMaterial = 'burnt_umber';
   patternStrength = this.feature.patternStrength? this.feature.patternStrength : 3;
   strengths = [1,2,3,4,5,6,7,8,9,10];
 
   constructor(private feature: Feature) { }
 
   ngOnInit() {
-    console.log(this.feature);
   }
 
   public updateSelectedTessellation(tessellation: string) {
     console.log(tessellation);
-    var tessellations: {
-      0: "court",
-      1: "cusp",
-      2: "kink",
-      3: "tilt",
-      4: "billow"
-    };
 
     switch (tessellation) {
       case "court":
@@ -56,7 +48,6 @@ export class DesignComponent implements OnInit {
         alert(tessellation + " is not a supported tessellation");
         break;
     }
-    // this.selectedTessellation = this.feature.tessellation = tessellation;
     this.selectedTessellation = tessellation;
 
     // update the visualization
@@ -65,7 +56,8 @@ export class DesignComponent implements OnInit {
 
   public updateSelectedMaterial(material: string) {
     console.log(material);
-    this.selectedMaterial = this.feature.material = material;
+    this.selectedMaterial = material;
+    this.feature.material = '/assets/images/materials/' + material + '.jpg';
 
     // update the visualization
     this.feature.reloadVisualization()

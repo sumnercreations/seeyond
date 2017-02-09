@@ -7,7 +7,7 @@ export class Feature {
   public title: string = '';
   public image: string = '';
   public measurements: any = [];
-  public material: string = '';
+  public material: string = '/assets/images/materials/burnt_umber.jpg';
   public tessellation: number = 0;
   public patternStrength: number = 3;
   public syd_v: any = {};
@@ -38,15 +38,11 @@ export class Feature {
 
   reloadVisualization()
   {
-    // CURRENT WORKAROUND. EVENTUALLY WE WANT TO BE ABLE TO JUST PASS THE WHOLE FEATURE. MAYBE...
     var jsonProperties = this.getJsonProperties();
+
     this.syd_t.QT.SetUserDataPropertiesJSONString(JSON.stringify(jsonProperties));
-
-    // set the patternStrength
-    this.syd_t.QT.SetPatternStrength(this.patternStrength);
-
-    // this.syd_t.QT.SetUserDataProperties(feature);
     this.syd_t.QT.UpdateFeature();
+
     var front = this.syd_t.QT.GetFrontSurfacePoints();
     var back = this.syd_t.QT.GetBackSurfacePoints();
     var uNum = this.syd_t.QT.GetU();
@@ -59,11 +55,21 @@ export class Feature {
   {
     return {
       "UserInputs": {
+        // 0 = straight partition, 1 = arc partition, 2 = bent partition, 3 = facing, 4 = transition, 5 = ceiling
         "Type": this.type? this.type : 0,
+        // 0 = quad, 1 = twist, 2 = kink, 3 = pleat, 4 = wave
         "Tessellation": this.tessellation? this.tessellation : 0,
+        // valid values = .1 - 1.0 (we send whole numbers 1-10 and the tesselation divides by 10)
+        "PatternStrength": this.patternStrength? this.patternStrength : 3,
+        // relative path to rendering material image
+        "Material": this.material? this.material : '',
+        // in inches
         "Width": this.measurements[0]['value'],
+        // in inches
         "Height": this.measurements[1]['value'],
+        // in inches
         "Radius": this.measurements[2]? this.measurements[2]['value'] : 400,
+        // in degrees 0-360
         "Angle":  this.measurements[3]? this.measurements[3]['value'] : 0,
       }
     }
