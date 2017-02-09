@@ -7,7 +7,8 @@ export class Feature {
   public title: string = '';
   public image: string = '';
   public measurements: any = [];
-  public material: string = '/assets/images/materials/burnt_umber.jpg';
+  // public material: string = '/assets/images/materials/burnt_umber.jpg';
+  public material: number = 0x5C4738;
   public tessellation: number = 0;
   public patternStrength: number = 3;
   public syd_v: any = {};
@@ -48,7 +49,7 @@ export class Feature {
     var uNum = this.syd_t.QT.GetU();
     var vNum = this.syd_t.QT.GetV();
 
-    this.syd_v.QT.Visualization.visualizeFeature(front, back, uNum, vNum, 0xddffdd);
+    this.syd_v.QT.Visualization.visualizeFeature(front, back, uNum, vNum, this.material);
   }
 
   getJsonProperties()

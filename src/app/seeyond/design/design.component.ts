@@ -57,7 +57,46 @@ export class DesignComponent implements OnInit {
   public updateSelectedMaterial(material: string) {
     console.log(material);
     this.selectedMaterial = material;
-    this.feature.material = '/assets/images/materials/' + material + '.jpg';
+    // image file not working yet?
+    // this.feature.material = '/assets/images/materials/' + material + '.jpg';
+    // pantone backup
+    switch (material) {
+      case "burnt_umber":
+        this.feature.material = 0x5C4738;
+        break;
+
+      case "cashmere":
+        this.feature.material = 0xB7A99A;
+        break;
+
+      case "cast":
+        this.feature.material = 0x6C6463;
+        break;
+
+      case "dark_gray":
+        this.feature.material = 0x53565A;
+        break;
+
+      case "ebony":
+        this.feature.material = 0x2D2926;
+        break;
+
+      case "nickel":
+        this.feature.material = 0xD0D3D4;
+        break;
+
+      case "ore":
+        this.feature.material = 0x51534A;
+        break;
+
+      case "zinc":
+        this.feature.material = 0xD7D2CB;
+        break;
+
+      default:
+        alert(material + " is not a supported material");
+        break;
+    }
 
     // update the visualization
     this.feature.reloadVisualization()
