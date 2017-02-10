@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Feature {
   private static _instance: Feature = new Feature();
-  public type: number = 0;
+  public type: number = 0; // linear partition
   public title: string = '';
   public image: string = '';
   public measurements: any = [];
