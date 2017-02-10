@@ -15,7 +15,7 @@ import { AppComponent } from './app.component';
 import { SeeyondComponent } from './seeyond/seeyond.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { OptionsComponent } from './seeyond/options/options.component';
-import { HeaderComponent } from './seeyond/header/header.component';
+import { HeaderComponent, AppInfoDialog } from './seeyond/header/header.component';
 import { VisualizationComponent } from './seeyond/visualization/visualization.component';
 import { ActionsComponent } from './seeyond/actions/actions.component';
 import { NavigationComponent } from './seeyond/navigation/navigation.component';
@@ -37,6 +37,7 @@ import { Feature } from './seeyond/feature';
     NavigationComponent,
     DimensionsComponent,
     DesignComponent,
+    AppInfoDialog,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +49,9 @@ import { Feature } from './seeyond/feature';
   providers: [
     Feature
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AppInfoDialog
+  ],
 })
 export class AppModule { }
