@@ -7,9 +7,8 @@ export class Feature {
   public title: string = '';
   public image: string = '';
   public measurements: any = [];
-  // public material: string = '/assets/images/materials/burnt_umber.jpg';
-  public material: number = 0x5C4738;
-  public tessellation: number = 0;
+  public material: string = '/assets/images/materials/burnt_umber.jpg';
+  public tessellation: number = 4;
   public patternStrength: number = 3;
   public syd_v: any = {};
   public syd_t: any = {};
