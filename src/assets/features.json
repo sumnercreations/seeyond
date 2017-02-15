@@ -1,73 +1,89 @@
-[{
-  "type": 2,
-  "type_name": "wall",
-  "title": "Wall Feature",
-  "image": "/assets/images/features/wall.jpg",
-  "measurements": [
-    {
-      "label": "Width",
-      "value": 250
-    },
-    {
-      "label": "Height",
-      "value": 250
-    }
-  ]
-}, {
-  "type": 3,
-  "type_name": "wall_to_ceiling",
-  "title": "Wall-to-Ceiling Feature",
-  "image": "/assets/images/features/wall_to_ceiling.jpg",
-  "measurements": [
-    {
-      "label": "Width",
-      "value": 250
-    },
-    {
-      "label": "Height",
-      "value": 240
-    },
-    {
-      "label": "Angle",
-      "value": 240
-    },
-    {
-      "label": "Ceiling Length",
-      "value": 240
-    }
-  ]
-}, {
-  "type": 0,
-  "type_name": "linear_partition",
-  "title": "Freestanding Linear Partition",
-  "image": "/assets/images/features/freestanding_linear_partition.jpg",
-  "measurements": [
-    {
-      "label": "Width",
-      "value": 250
-    },
-    {
-      "label": "Height",
-      "value": 240
-    }
-  ]
-}, {
-  "type": 1,
-  "type_name": "curved_partition",
-  "title": "Freestanding Curved Partition",
-  "image": "/assets/images/features/freestanding_curved_partition.jpg",
-  "measurements": [
-    {
-      "label": "Width",
-      "value": 250
-    },
-    {
-      "label": "Height",
-      "value": 240
-    },
-    {
-      "label": "Radius",
-      "value": 120
-    }
-  ]
-}]
+{
+  "0": {
+    "type": 0,
+    "type_name": "linear_partition",
+    "title": "Freestanding Linear Partition",
+    "image": "/assets/images/features/freestanding_linear_partition.jpg",
+    "width": 250,
+    "height": 240,
+    "measurements": [
+      {
+        "label": "Width",
+        "value": 250
+      },
+      {
+        "label": "Height",
+        "value": 240
+      }
+    ]
+  },
+ "1": {
+    "type": 1,
+    "type_name": "curved_partition",
+    "title": "Freestanding Curved Partition",
+    "image": "/assets/images/features/freestanding_curved_partition.jpg",
+    "width": 240,
+    "height": 250,
+    "radius": 90,
+    "measurements": [
+      {
+        "label": "Width",
+        "value": 240
+      },
+      {
+        "label": "Height",
+        "value": 250
+      },
+      {
+        "label": "Radius",
+        "value": 120
+      }
+    ]
+  },
+ "2": {
+    "type": 2,
+    "type_name": "wall",
+    "title": "Wall Feature",
+    "image": "/assets/images/features/wall.jpg",
+    "width": 250,
+    "height": 250,
+    "measurements": [
+      {
+        "label": "Width",
+        "value": 250
+      },
+      {
+        "label": "Height",
+        "value": 250
+      }
+    ]
+  },
+ "3": {
+    "type": 3,
+    "type_name": "wall_to_ceiling",
+    "title": "Wall-to-Ceiling Feature",
+    "image": "/assets/images/features/wall_to_ceiling.jpg",
+    "width": 250,
+    "height": 250,
+    "angle": 90,
+    "ceilingLength": 250,
+    "measurements": [
+      {
+        "label": "Width",
+        "value": 250
+      },
+      {
+        "label": "Height",
+        "value": 250
+      },
+      {
+        "label": "Angle",
+        "value": 90
+      },
+      {
+        "label": "Ceiling Length",
+        "value": 250
+      }
+    ]
+  }
+}

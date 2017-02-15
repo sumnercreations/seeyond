@@ -24,6 +24,7 @@ import { DesignComponent } from './seeyond/design/design.component';
 
 // classes
 import { Feature } from './seeyond/feature';
+import { KeysPipe } from './seeyond/keys.pipe';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { Feature } from './seeyond/feature';
     DimensionsComponent,
     DesignComponent,
     SeeyondInfoDialog,
-    SeeyondLoginDialog
+    SeeyondLoginDialog,
+    KeysPipe
   ],
   imports: [
     BrowserModule,
