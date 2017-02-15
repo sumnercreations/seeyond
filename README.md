@@ -1,9 +1,16 @@
 # Seeyond
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.22-1.
+This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.29.
 
 ## Development server
-Run `ng serve` for a dev server. Navigate to `http://dev-ng.3-form.com:4200/`. The app will automatically reload if you change any of the source files.
+This is built to be a PWA which means that it must be run via SSL. On my development environment I am able to do that with the following command:
+```
+ng serve --host 0.0.0.0 --ssl true --ssl-key ssl/wildcard.key --ssl-cert ssl/wildcard.crt
+```
+
+The wildcard key and certificate are for *.3-form.com which is why we use the `dev-ng` subdomain.
+
+Navigate to `https://dev-ng.3-form.com:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
@@ -46,6 +53,12 @@ Command Line Interface for Angular 2
 
 - Source: https://github.com/angular/angular-cli
 
+### Syd-visualization
+https://www.npmjs.com/package/syd-visualization
+
+### Syd-tessellation
+https://www.npmjs.com/package/syd-tessellation
+
 ### Threejs 
 Javascript 3D library used to render the visualization for the user using webGL
 
@@ -66,7 +79,7 @@ https://github.com/pboyer/verb/blob/master/examples/js/verbToThreeConversion.js
 1. install angular-cli - `npm install -g angular-cli` (unless already installed)
 2. install packages - `npm install`
 3. build code - `ng build`
-4. run server - `ng serve`
+4. run server - `ng serve --host 0.0.0.0 --ssl true --ssl-key ssl/wildcard.key --ssl-cert ssl/wildcard.crt`
 5. access server - `http://dev-ng.3-form.com:4200/`
 
 In order to use the url `http://dev-ng.3-form.com:4200/` you will need to create a record in your hosts file that points to your localhost. On the mac we use an application called [Hosts](https://github.com/specialunderwear/Hosts.prefpane/downloads). My record looks like this:
