@@ -27,7 +27,6 @@ export class Feature {
     this.syd_t = require( 'syd-tessellation' );
     this.syd_v = require( 'syd-visualization' );
 
-    console.log(this);
     Feature._instance = this;
   }
 

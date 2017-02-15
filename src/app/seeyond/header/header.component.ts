@@ -18,13 +18,11 @@ export class HeaderComponent implements OnInit {
 
   public showAppInfo()
   {
-    console.log('showing seeyond info');
     let dialogRef = this.dialog.open(SeeyondInfoDialog);
   }
 
   public loginDialog()
   {
-    console.log('showing login dialog');
     let config = new MdDialogConfig();
     config.width = '500';
     config.height = '500';

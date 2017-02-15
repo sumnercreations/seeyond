@@ -18,7 +18,6 @@ export class DimensionsComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    console.log(this.features);
     this.feature.updateFeature(this.features[2]);
   }
 
@@ -27,7 +26,6 @@ export class DimensionsComponent implements OnInit {
   }
 
   public updateSelectedFeature(type: number) {
-    console.log(type);
     this.selectedFeature = type;
     this.feature.updateFeature(this.features[type]);
   }
