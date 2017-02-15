@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Feature } from '../feature';
-import 'rxjs/add/operator/map';
 
 var featuresJSON = require('../../../assets/features.json');
 
@@ -12,31 +11,53 @@ var featuresJSON = require('../../../assets/features.json');
 })
 export class DimensionsComponent implements OnInit {
   features = [];
+  selectedFeature = 2; // wall feature
 
   constructor(private feature: Feature) {
     this.features = featuresJSON;
   }
 
   ngAfterViewInit() {
-    this.feature.updateFeature(this.features[0]);
+    console.log(this.features);
+    this.feature.updateFeature(this.features[2]);
   }
 
   ngOnInit() {
 
   }
 
-  public updateSelectedFeature(index: number) {
-    console.log(this.features[index]);
-    this.feature.updateFeature(this.features[index]);
+  public updateSelectedFeature(type: number) {
+    console.log(type);
+    this.selectedFeature = type;
+    this.feature.updateFeature(this.features[type]);
   }
 
-  public updateFeatureMeasurement(measurement: string, index: number) {
-    console.log('feature data');
-    console.log(measurement);
-    console.log(index);
+  public updateFeatureMeasurement(measurement: number, name: string) {
+    switch (name) {
+      case "Width":
+        this.feature.width = measurement;
+        break;
 
-    this.feature.measurements[index].value = measurement;
-    console.log(this.feature.measurements);
+      case "Height":
+        this.feature.height = measurement;
+        break;
+
+      case "Radius":
+        this.feature.radius = measurement;
+        break;
+
+      case "Angle":
+        this.feature.angle = measurement;
+        break;
+
+      case "Ceiling Length":
+        this.feature.ceilingLength = measurement;
+        break;
+
+      default:
+        alert(name + " is not a valid measurement");
+        break;
+    }
 
     this.feature.reloadVisualization();
   }
