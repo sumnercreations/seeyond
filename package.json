@@ -1,7 +1,7 @@
 {
   "name": "seeyond",
-  "version": "0.0.19",
-  "license": "MIT",
+  "version": "0.0.20",
+  "license": "GPL-3.0",
   "angular-cli": {},
   "scripts": {
     "ng": "ng",

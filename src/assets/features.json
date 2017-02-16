@@ -5,17 +5,7 @@
     "title": "Freestanding Linear Partition",
     "image": "/assets/images/features/freestanding_linear_partition.jpg",
     "width": 250,
-    "height": 240,
-    "measurements": [
-      {
-        "label": "Width",
-        "value": 250
-      },
-      {
-        "label": "Height",
-        "value": 240
-      }
-    ]
+    "height": 240
   },
  "1": {
     "type": 1,
@@ -24,21 +14,7 @@
     "image": "/assets/images/features/freestanding_curved_partition.jpg",
     "width": 240,
     "height": 250,
-    "radius": 90,
-    "measurements": [
-      {
-        "label": "Width",
-        "value": 240
-      },
-      {
-        "label": "Height",
-        "value": 250
-      },
-      {
-        "label": "Radius",
-        "value": 120
-      }
-    ]
+    "radius": 90
   },
  "2": {
     "type": 2,
@@ -46,17 +22,7 @@
     "title": "Wall Feature",
     "image": "/assets/images/features/wall.jpg",
     "width": 250,
-    "height": 250,
-    "measurements": [
-      {
-        "label": "Width",
-        "value": 250
-      },
-      {
-        "label": "Height",
-        "value": 250
-      }
-    ]
+    "height": 250
   },
  "3": {
     "type": 3,
@@ -66,24 +32,6 @@
     "width": 250,
     "height": 250,
     "angle": 90,
-    "ceilingLength": 250,
-    "measurements": [
-      {
-        "label": "Width",
-        "value": 250
-      },
-      {
-        "label": "Height",
-        "value": 250
-      },
-      {
-        "label": "Angle",
-        "value": 90
-      },
-      {
-        "label": "Ceiling Length",
-        "value": 250
-      }
-    ]
+    "ceilingLength": 250
   }
 }
