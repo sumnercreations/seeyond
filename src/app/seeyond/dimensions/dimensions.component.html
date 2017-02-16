@@ -31,6 +31,7 @@
         <input (change)="updateFeatureMeasurement($event.target.value, $event.target.name)" [(ngModel)]="feature.radius" type="text" class="form-control" placeholder="Radius" name="radius" id="radius">
         <span class="input-group-addon">inches</span>
       </div>
+      <span class="help-block">Must be at least 1/2 the width</span>
     </div>
   </div>
   <div class="form-group" *ngIf="feature.angle">

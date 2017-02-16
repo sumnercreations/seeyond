@@ -33,7 +33,7 @@ set :repo_url, "git@github.com:3-form/seeyond.git"
 # set :keep_releases, 5
 
 namespace :deploy do
-  desc "run npm install --no-optional"
+  desc "run npm install"
   task :npm_install do
     on roles(:web) do
       execute "cd #{release_path} && npm install"
@@ -51,6 +51,14 @@ namespace :deploy do
     end
   end
 
+  desc "precache files with sw-precache"
+  task :precache do
+    on roles(:web) do
+      execute "cd #{release_path} && npm run precache"
+    end
+  end
+
   after "updating", "deploy:npm_install"
   after "updating", "deploy:ng_build"
+  after "updating", "deploy:precache"
 end
