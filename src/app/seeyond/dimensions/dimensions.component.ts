@@ -11,14 +11,14 @@ var featuresJSON = require('../../../assets/features.json');
 })
 export class DimensionsComponent implements OnInit {
   features = [];
-  selectedFeature = 2; // wall feature
+  selectedFeature: number = this.feature.type;
 
   constructor(private feature: Feature) {
     this.features = featuresJSON;
   }
 
   ngAfterViewInit() {
-    this.feature.updateFeature(this.features[2]);
+    this.feature.reloadVisualization();
   }
 
   ngOnInit() {
@@ -32,23 +32,23 @@ export class DimensionsComponent implements OnInit {
 
   public updateFeatureMeasurement(measurement: number, name: string) {
     switch (name) {
-      case "Width":
+      case "width":
         this.feature.width = measurement;
         break;
 
-      case "Height":
+      case "height":
         this.feature.height = measurement;
         break;
 
-      case "Radius":
+      case "radius":
         this.feature.radius = measurement;
         break;
 
-      case "Angle":
+      case "angle":
         this.feature.angle = measurement;
         break;
 
-      case "Ceiling Length":
+      case "ceilingLength":
         this.feature.ceilingLength = measurement;
         break;
 
