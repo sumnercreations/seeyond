@@ -10,8 +10,8 @@ export class DesignComponent implements OnInit {
   // tooltip position
   position = 'above';
   // Selected Defaults
-  selectedTessellation = 'billow';
-  selectedMaterial = 'burnt_umber';
+  selectedTessellation = this.feature.tessellation;
+  selectedMaterial = this.feature.material;
   patternStrength = this.feature.patternStrength? this.feature.patternStrength : 3;
   strengths = [1,2,3,4,5,6,7,8,9,10];
 
@@ -20,42 +20,42 @@ export class DesignComponent implements OnInit {
   ngOnInit() {
   }
 
-  public updateSelectedTessellation(tessellation: string) {
-    switch (tessellation) {
-      case "court":
-        this.feature.tessellation = 0;
-        break;
+  public updateSelectedTessellation(tessellation: number) {
+    // switch (tessellation) {
+    //   case "court":
+    //     this.feature.tessellation = 0;
+    //     break;
 
-      case "cusp":
-        this.feature.tessellation = 1;
-        break;
+    //   case "cusp":
+    //     this.feature.tessellation = 1;
+    //     break;
 
-      case "kink":
-        this.feature.tessellation = 2;
-        break;
+    //   case "kink":
+    //     this.feature.tessellation = 2;
+    //     break;
 
-      case "tilt":
-        this.feature.tessellation = 3;
-        break;
+    //   case "tilt":
+    //     this.feature.tessellation = 3;
+    //     break;
 
-      case "billow":
-        this.feature.tessellation = 4;
-        break;
+    //   case "billow":
+    //     this.feature.tessellation = 4;
+    //     break;
 
-      default:
-        alert(tessellation + " is not a supported tessellation");
-        break;
-    }
-    this.selectedTessellation = tessellation;
+    //   default:
+    //     alert(tessellation + " is not a supported tessellation");
+    //     break;
+    // }
+    this.selectedTessellation = this.feature.tessellation = tessellation;
 
     // update the visualization
     this.feature.reloadVisualization()
   }
 
   public updateSelectedMaterial(material: string) {
-    this.selectedMaterial = material;
-    // image file path
-    this.feature.material = '/assets/images/materials/' + material + '.jpg';
+    this.selectedMaterial = this.feature.material = material;
+    // // image file path
+    // this.feature.material = '/assets/images/materials/' + material + '.jpg';
     // update the visualization
     this.feature.reloadVisualization()
   }
