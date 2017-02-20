@@ -19,7 +19,7 @@ import { HeaderComponent, SeeyondInfoDialog, SeeyondLoginDialog } from './seeyon
 import { VisualizationComponent } from './seeyond/visualization/visualization.component';
 import { ActionsComponent } from './seeyond/actions/actions.component';
 import { NavigationComponent } from './seeyond/navigation/navigation.component';
-import { DimensionsComponent } from './seeyond/dimensions/dimensions.component';
+import { DimensionsComponent, RadiusWarningSnackComponent } from './seeyond/dimensions/dimensions.component';
 import { DesignComponent } from './seeyond/design/design.component';
 
 // classes
@@ -40,7 +40,8 @@ import { KeysPipe } from './seeyond/keys.pipe';
     DesignComponent,
     SeeyondInfoDialog,
     SeeyondLoginDialog,
-    KeysPipe
+    KeysPipe,
+    RadiusWarningSnackComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +56,8 @@ import { KeysPipe } from './seeyond/keys.pipe';
   bootstrap: [AppComponent],
   entryComponents: [
     SeeyondInfoDialog,
-    SeeyondLoginDialog
+    SeeyondLoginDialog,
+    RadiusWarningSnackComponent
   ],
 })
 export class AppModule { }
