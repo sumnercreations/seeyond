@@ -56,6 +56,7 @@ export class Feature {
     var uNum = this.syd_t.QT.GetU();
     var vNum = this.syd_t.QT.GetV();
 
+    this.syd_v.QT.Visualization.SetFeatureType(this.type);
     this.syd_v.QT.Visualization.visualizeFeature(front, back, uNum, vNum, this.getMaterialImage(this.material));
   }
 
