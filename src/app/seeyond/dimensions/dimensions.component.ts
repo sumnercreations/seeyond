@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 import { Feature } from '../feature';
 
 var featuresJSON = require('../../../assets/features.json');
@@ -13,7 +14,11 @@ export class DimensionsComponent implements OnInit {
   features = [];
   selectedFeature: number = this.feature.type;
 
-  constructor(private feature: Feature) {
+  constructor(
+    private feature: Feature,
+    public snackBar: MdSnackBar,
+    public viewContainerRef: ViewContainerRef
+  ) {
     this.features = featuresJSON;
   }
 
@@ -41,7 +46,12 @@ export class DimensionsComponent implements OnInit {
         break;
 
       case "radius":
-        this.feature.radius = measurement;
+        if(measurement < this.feature.width *.5) {
+          this.openSnackBar('The radius must be at least half the width.');
+          this.feature.radius = (this.feature.width *.5) + 20;
+        } else {
+          this.feature.radius = measurement;
+        }
         break;
 
       case "angle":
@@ -60,4 +70,15 @@ export class DimensionsComponent implements OnInit {
     this.feature.reloadVisualization();
   }
 
+  public openSnackBar(msg: string) {
+      let config = new MdSnackBarConfig();
+      this.snackBar.open(msg, 'dismiss');
+  }
+
 }
+
+@Component({
+  selector: 'snack-bar-radius-warning',
+  template: '<p></p>',
+})
+export class RadiusWarningSnackComponent {}

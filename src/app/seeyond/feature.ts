@@ -69,23 +69,23 @@ export class Feature {
     return {
       "UserInputs": {
         // 0 = straight partition, 1 = arc partition, 2 = facing, 3 = transition, 4 = ceiling, 5 = bent partition
-        "Type": this.type? this.type : 2,
+        "Type": this.type,
         // 0 = court, 1 = cusp, 2 = kink, 3 = tilt, 4 = billow
-        "Tessellation": this.tessellation? this.tessellation : 4,
+        "Tessellation": this.tessellation,
         // valid values = .1 - 1.0 (we send whole numbers 1-10 and the tesselation divides by 10)
-        "PatternStrength": this.patternStrength? this.patternStrength : 3,
+        "PatternStrength": this.patternStrength,
         // relative path to rendering material image
-        "Material": this.material? this.getMaterialImage(this.material) : '/assets/images/materials/burnt_umber.jpg',
+        "Material": this.getMaterialImage(this.material),
         // in inches
-        "Width": this.width? this. width : 250,
+        "Width": this.width,
         // in inches
-        "Height": this.height? this. height : 250,
+        "Height": this. height,
         // in inches
-        "Radius": this.radius? this.radius : 120,
+        "Radius": this.radius,
         // in degrees 0-360
-        "Angle":  this.angle? this.angle : 90,
+        "Angle":  this.angle,
         // in inches
-        "Ceiling_Length": this.ceilingLength? this.ceilingLength : 250,
+        "Ceiling_Length": this.ceilingLength
       }
     }
   }
