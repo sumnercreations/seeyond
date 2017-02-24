@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Feature } from '../feature';
 
 @Component({
   selector: 'seeyond-options',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OptionsComponent implements OnInit {
 	// we will have an algorithm to figure this out.
-	estimatedAmt = '$100,000.00';
+  accounting: any;
+  boxCost: number;
+	estimatedAmt: number;
 
 	// activeTab will be determined by the seeyond-navigation component
 	activeTab = 'dimensions';
@@ -17,10 +20,17 @@ export class OptionsComponent implements OnInit {
 	chevronPosition = '';
   buttonLink = '';
 
-  constructor() { }
+  constructor(private feature: Feature) {
+    this.accounting = require( 'accounting' );
+  }
 
   ngOnInit() {
     this.updateActiveTab(this.activeTab);
+    this.estimatedAmt = this.accounting.formatMoney(this.feature.estimatedAmt);
+  }
+
+  onFeatureUpdated() {
+    this.estimatedAmt = this.accounting.formatMoney(this.feature.updateEstimatedAmount());
   }
 
   public updateActiveTab(tab: string) {

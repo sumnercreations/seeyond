@@ -51,7 +51,7 @@ import { KeysPipe } from './seeyond/keys.pipe';
     MaterialModule.forRoot()
   ],
   providers: [
-    Feature
+    Feature,
   ],
   bootstrap: [AppComponent],
   entryComponents: [
