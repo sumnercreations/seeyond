@@ -1,12 +1,12 @@
 <seeyond-navigation [activeTab]="activeTab" (activeTabEmitter)="updateActiveTab($event)"></seeyond-navigation>
 <div class="options-wrapper">
-  <seeyond-dimensions *ngIf="activeTab == 'dimensions'"></seeyond-dimensions>
+  <seeyond-dimensions *ngIf="activeTab == 'dimensions'" (onFeatureUpdated)="onFeatureUpdated()"></seeyond-dimensions>
   <seeyond-design *ngIf="activeTab == 'design'"></seeyond-design>
   <div class="options-bottom-section">
     <div class="row">
       <div class="col-xs-12">
         <hr>
-        <p class="est-amt">Estimated Total <span class="pull-right">{{estimatedAmt}}</span></p>
+        <p class="est-amt">Estimated Total <span class="pull-right">{{estimatedAmt}}</span><span class="help-block">*Taxes, Shipping and Handling not included.</span></p>
       </div>
     </div>
     <div class="row">

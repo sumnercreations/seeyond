@@ -10,6 +10,11 @@
 
 .pattern img {
   border: 1px solid #cdcdcd;
+  cursor: pointer;
+}
+
+.material img {
+  cursor: pointer;
 }
 
 .tooltip-host {
