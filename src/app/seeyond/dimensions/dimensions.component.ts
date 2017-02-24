@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
-import { Feature } from '../feature';
+import { Router } from '@angular/router';
 
-var featuresJSON = require('../../../assets/features.json');
+import { Feature } from '../feature';
 
 @Component({
   selector: 'seeyond-dimensions',
@@ -11,28 +11,20 @@ var featuresJSON = require('../../../assets/features.json');
   styleUrls: ['./dimensions.component.css']
 })
 export class DimensionsComponent implements OnInit {
-  features = [];
-  selectedFeature: number = this.feature.type;
+  @Output() onFeatureUpdated = new EventEmitter();
 
   constructor(
     private feature: Feature,
     public snackBar: MdSnackBar,
-    public viewContainerRef: ViewContainerRef
-  ) {
-    this.features = featuresJSON;
-  }
-
-  ngAfterViewInit() {
-    this.feature.reloadVisualization();
-  }
+    public viewContainerRef: ViewContainerRef,
+    public router: Router
+  ) { }
 
   ngOnInit() {
-
   }
 
-  public updateSelectedFeature(type: number) {
-    this.selectedFeature = type;
-    this.feature.updateFeature(this.features[type]);
+  public updateSelectedFeature(name: string) {
+    this.router.navigate(['/feature', name]);
   }
 
   public updateFeatureMeasurement(measurement: number, name: string) {
@@ -67,6 +59,8 @@ export class DimensionsComponent implements OnInit {
         break;
     }
 
+    console.log('emitting a feature update');
+    this.onFeatureUpdated.emit();
     this.feature.reloadVisualization();
   }
 

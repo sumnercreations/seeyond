@@ -1,37 +1,37 @@
 {
   "0": {
     "type": 0,
-    "type_name": "linear_partition",
+    "name": "linear-partition",
     "title": "Freestanding Linear Partition",
     "image": "/assets/images/features/freestanding_linear_partition.jpg",
-    "width": 250,
-    "height": 240
+    "width": 96,
+    "height": 72
   },
  "1": {
     "type": 1,
-    "type_name": "curved_partition",
+    "name": "curved-partition",
     "title": "Freestanding Curved Partition",
     "image": "/assets/images/features/freestanding_curved_partition.jpg",
-    "width": 240,
-    "height": 250,
-    "radius": 200
+    "width": 96,
+    "height": 72,
+    "radius": 60
   },
  "2": {
     "type": 2,
-    "type_name": "wall",
+    "name": "wall",
     "title": "Wall Feature",
     "image": "/assets/images/features/wall.jpg",
-    "width": 250,
-    "height": 250
+    "width": 48,
+    "height": 48
   },
  "3": {
     "type": 3,
-    "type_name": "wall_to_ceiling",
+    "name": "wall-to-ceiling",
     "title": "Wall-to-Ceiling Feature",
     "image": "/assets/images/features/wall_to_ceiling.jpg",
-    "width": 250,
-    "height": 250,
+    "width": 72,
+    "height": 96,
     "angle": 90,
-    "ceilingLength": 250
+    "ceilingLength": 72
   }
 }

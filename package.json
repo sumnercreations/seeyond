@@ -1,6 +1,6 @@
 {
   "name": "seeyond",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "license": "GPL-3.0",
   "angular-cli": {},
   "scripts": {
@@ -23,11 +23,12 @@
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
     "@types/node": "^6.0.54",
+    "accounting": "^0.4.1",
     "core-js": "^2.4.1",
     "hammerjs": "^2.0.8",
     "rxjs": "^5.0.1",
     "syd-tessellation": "0.0.40",
-    "syd-visualization": "0.0.25",
+    "syd-visualization": "0.0.26",
     "three": "0.83.0",
     "ts-helpers": "^1.1.1",
     "verb-nurbs": "2.0.0",

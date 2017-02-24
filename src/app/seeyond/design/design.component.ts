@@ -23,20 +23,20 @@ export class DesignComponent implements OnInit {
   public updateSelectedTessellation(tessellation: number) {
     this.selectedTessellation = this.feature.tessellation = tessellation;
     // update the visualization
-    this.feature.reloadVisualization()
+    this.feature.reloadVisualization();
   }
 
   public updateSelectedMaterial(material: string) {
     this.selectedMaterial = this.feature.material = material;
     // update the visualization
-    this.feature.reloadVisualization()
+    this.feature.reloadVisualization();
   }
 
   public updatePatternStrength(strength: number) {
     this.patternStrength = this.feature.patternStrength = strength;
 
     // update the visualization
-    this.feature.reloadVisualization()
+    this.feature.reloadVisualization();
   }
 
 }
