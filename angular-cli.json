@@ -10,7 +10,7 @@
       "assets": [
         "assets",
         "favicon.ico",
-        "seeyond.webmanifest",
+        "manifest.json",
         ".htaccess"
       ],
       "index": "index.html",
