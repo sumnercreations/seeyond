@@ -11,6 +11,7 @@
         "assets",
         "favicon.ico",
         "manifest.json",
+        "browserconfig.xml",
         ".htaccess"
       ],
       "index": "index.html",
