@@ -21,6 +21,7 @@ import { ActionsComponent } from './seeyond/actions/actions.component';
 import { NavigationComponent } from './seeyond/navigation/navigation.component';
 import { DimensionsComponent, RadiusWarningSnackComponent } from './seeyond/dimensions/dimensions.component';
 import { DesignComponent } from './seeyond/design/design.component';
+import { SeeyondService } from './seeyond/seeyond.service';
 
 // classes
 import { Feature } from './seeyond/feature';
@@ -52,6 +53,7 @@ import { KeysPipe } from './seeyond/keys.pipe';
   ],
   providers: [
     Feature,
+    SeeyondService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
