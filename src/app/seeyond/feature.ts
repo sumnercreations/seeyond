@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Feature {
   private static _instance: Feature = new Feature();
+  public id: number;
   public type: number;// = 2; // wall feature
   public title: string;// = 'Wall Feature';
   public name: string;
@@ -15,10 +16,12 @@ export class Feature {
   public syd_v: any = {};
   public syd_t: any = {};
   public data: any = [];
+  public xml: any = {};
   public tessellation: number = 4;
   public patternStrength: number = 3;
   public material: string = 'burnt_umber';
   public estimatedAmt: number = 9 * 85.37;
+  public boxsize: number = 14;
   public boxCost: number = 85.37;
   public boxes: number = 9; // this will need to come from the tessellation
   public features: any = {
