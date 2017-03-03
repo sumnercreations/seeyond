@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog, MdDialogRef, MdDialogConfig } from '@angular/material';
+import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { Feature } from '../feature';
 
 var packageJSON = require('../../../../package.json');
@@ -11,7 +12,10 @@ var packageJSON = require('../../../../package.json');
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private feature: Feature, public dialog: MdDialog) { }
+  constructor(
+    private feature: Feature,
+    public dialog: MdDialog
+  ) { }
 
   ngOnInit() {
   }
@@ -24,13 +28,18 @@ export class HeaderComponent implements OnInit {
   public loginDialog()
   {
     let config = new MdDialogConfig();
-    config.width = '500';
-    config.height = '500';
-    let dialogRef = this.dialog.open(SeeyondLoginDialog, config);
+    config.width = '300px';
+    let dialogRef = this.dialog.open(LoginDialogComponent, config);
   }
 
 }
 
+//     _       ____                ___       __
+//    (_)___  / __/___        ____/ (_)___ _/ /___  ____ _
+//   / / __ \/ /_/ __ \______/ __  / / __ `/ / __ \/ __ `/
+//  / / / / / __/ /_/ /_____/ /_/ / / /_/ / / /_/ / /_/ /
+// /_/_/ /_/_/  \____/      \__,_/_/\__,_/_/\____/\__, /
+//                                               /____/
 @Component({
   selector: 'seeyond-info-dialog',
   templateUrl: './seeyond-info-dialog.html',
@@ -46,16 +55,5 @@ export class SeeyondInfoDialog {
     this.appVersion = packageJSON.version;
     this.tessellationVersion = packageJSON.dependencies['syd-tessellation'];
     this.visualizationVersion = packageJSON.dependencies['syd-visualization'];
-  }
-}
-
-
-@Component({
-  selector: 'seeyond-login-dialog',
-  templateUrl: './seeyond-login-dialog.html',
-})
-export class SeeyondLoginDialog {
-  constructor(public dialogRef: MdDialogRef<SeeyondLoginDialog>) {
-
   }
 }
