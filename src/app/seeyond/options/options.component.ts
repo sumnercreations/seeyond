@@ -7,8 +7,6 @@ import { Feature } from '../feature';
   styleUrls: ['./options.component.css']
 })
 export class OptionsComponent implements OnInit {
-	// we will have an algorithm to figure this out.
-  accounting: any;
   boxCost: number;
 	estimatedAmt: number;
 
@@ -21,16 +19,15 @@ export class OptionsComponent implements OnInit {
   buttonLink = '';
 
   constructor(private feature: Feature) {
-    this.accounting = require( 'accounting' );
   }
 
   ngOnInit() {
     this.updateActiveTab(this.activeTab);
-    this.estimatedAmt = this.accounting.formatMoney(this.feature.estimatedAmt);
+    this.estimatedAmt = this.feature.getFormattedAmount();
   }
 
   onFeatureUpdated() {
-    this.estimatedAmt = this.accounting.formatMoney(this.feature.updateEstimatedAmount());
+    this.estimatedAmt = this.feature.updateEstimatedAmount();
   }
 
   public updateActiveTab(tab: string) {

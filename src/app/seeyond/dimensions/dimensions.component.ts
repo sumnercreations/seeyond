@@ -31,6 +31,11 @@ export class DimensionsComponent implements OnInit {
     switch (name) {
       case "width":
         this.feature.width = measurement;
+        if(this.feature.radius < measurement *.5) {
+          this.openSnackBar('The radius must be at least half the width.');
+          this.feature.radius = (this.feature.width *.5) + 12;
+          console.log(this.feature.radius);
+        }
         break;
 
       case "height":
@@ -40,7 +45,7 @@ export class DimensionsComponent implements OnInit {
       case "radius":
         if(measurement < this.feature.width *.5) {
           this.openSnackBar('The radius must be at least half the width.');
-          this.feature.radius = (this.feature.width *.5) + 20;
+          this.feature.radius = (this.feature.width *.5) + 12;
         } else {
           this.feature.radius = measurement;
         }
