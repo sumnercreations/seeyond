@@ -106,8 +106,8 @@ export class Feature {
     this.syd_v.QT.Visualization.SetFeatureType(this.type);
     this.syd_v.QT.Visualization.visualizeFeature(front, back, uNum, vNum, this.getMaterialImage(this.material));
 
+    // update the XML
     this.xml = this.getXML();
-    console.log(this.xml);
   }
 
   updateEstimatedAmount() {
