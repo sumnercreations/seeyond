@@ -4,20 +4,20 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-sm-3 pattern" (click)="updateSelectedTessellation(4)" [class.selected]="selectedTessellation==4">
-    <img src="/assets/images/patterns/billow.jpg" alt="Billow Pattern" class="img-responsive">
-  </div>
   <div class="col-sm-3 pattern" (click)="updateSelectedTessellation(0)" [class.selected]="selectedTessellation==0">
     <img src="/assets/images/patterns/court.jpg" alt="Court Pattern" class="img-responsive">
+  </div>
+  <div class="col-sm-3 pattern" (click)="updateSelectedTessellation(3)" [class.selected]="selectedTessellation==3">
+    <img src="/assets/images/patterns/tilt.jpg" alt="Tilt Pattern" class="img-responsive">
   </div>
   <div class="col-sm-3 pattern" (click)="updateSelectedTessellation(1)" [class.selected]="selectedTessellation==1">
     <img src="/assets/images/patterns/cusp.jpg" alt="Cusp Pattern" class="img-responsive">
   </div>
+  <div class="col-sm-3 pattern" (click)="updateSelectedTessellation(4)" [class.selected]="selectedTessellation==4">
+    <img src="/assets/images/patterns/billow.jpg" alt="Billow Pattern" class="img-responsive">
+  </div>
   <div class="col-sm-3 pattern" (click)="updateSelectedTessellation(2)" [class.selected]="selectedTessellation==2">
     <img src="/assets/images/patterns/kink.jpg" alt="Kink Pattern" class="img-responsive">
-  </div>
-  <div class="col-sm-3 pattern" (click)="updateSelectedTessellation(3)" [class.selected]="selectedTessellation==3">
-    <img src="/assets/images/patterns/tilt.jpg" alt="Tilt Pattern" class="img-responsive">
   </div>
 </div>
 <div class="row">
@@ -35,28 +35,28 @@
   </div>
 </div>
 <div class="row materials-container">
-  <div class="col-sm-3 material tooltip-host" mdTooltip="Burnt Umber" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('burnt_umber')" [class.selected]="selectedMaterial=='burnt_umber'">
-    <img src="/assets/images/materials/burnt_umber.jpg" alt="Burnt Umber" class="img-responsive">
-  </div>
-  <div class="col-sm-3 material tooltip-host" mdTooltip="Cashmere" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('cashmere')" [class.selected]="selectedMaterial=='cashmere'">
-    <img src="/assets/images/materials/cashmere.jpg" alt="Cashmere" class="img-responsive">
-  </div>
-  <div class="col-sm-3 material tooltip-host" mdTooltip="Cast" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('cast')" [class.selected]="selectedMaterial=='cast'">
-    <img src="/assets/images/materials/cast.jpg" alt="Cast" class="img-responsive">
-  </div>
-  <div class="col-sm-3 material tooltip-host" mdTooltip="Dark Gray" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('dark_gray')" [class.selected]="selectedMaterial=='dark_gray'">
-    <img src="/assets/images/materials/dark_gray.jpg" alt="Dark Gray" class="img-responsive">
-  </div>
-  <div class="col-sm-3 material tooltip-host" mdTooltip="Ebony" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('ebony')" [class.selected]="selectedMaterial=='ebony'">
-    <img src="/assets/images/materials/ebony.jpg" alt="Ebony" class="img-responsive">
+  <div class="col-sm-3 material tooltip-host" mdTooltip="Zinc" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('zinc')" [class.selected]="selectedMaterial=='zinc'">
+    <img src="/assets/images/materials/zinc.jpg" alt="Zinc" class="img-responsive">
   </div>
   <div class="col-sm-3 material tooltip-host" mdTooltip="Nickel" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('nickel')" [class.selected]="selectedMaterial=='nickel'">
     <img src="/assets/images/materials/nickel.jpg" alt="Nickel" class="img-responsive">
   </div>
+  <div class="col-sm-3 material tooltip-host" mdTooltip="Cashmere" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('cashmere')" [class.selected]="selectedMaterial=='cashmere'">
+    <img src="/assets/images/materials/cashmere.jpg" alt="Cashmere" class="img-responsive">
+  </div>
+  <div class="col-sm-3 material tooltip-host" mdTooltip="Burnt Umber" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('burnt_umber')" [class.selected]="selectedMaterial=='burnt_umber'">
+    <img src="/assets/images/materials/burnt_umber.jpg" alt="Burnt Umber" class="img-responsive">
+  </div>
   <div class="col-sm-3 material tooltip-host" mdTooltip="Ore" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('ore')" [class.selected]="selectedMaterial=='ore'">
     <img src="/assets/images/materials/ore.jpg" alt="Ore" class="img-responsive">
   </div>
-  <div class="col-sm-3 material tooltip-host" mdTooltip="Zinc" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('zinc')" [class.selected]="selectedMaterial=='zinc'">
-    <img src="/assets/images/materials/zinc.jpg" alt="Zinc" class="img-responsive">
+  <div class="col-sm-3 material tooltip-host" mdTooltip="Dark Gray" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('dark_gray')" [class.selected]="selectedMaterial=='dark_gray'">
+    <img src="/assets/images/materials/dark_gray.jpg" alt="Dark Gray" class="img-responsive">
+  </div>
+  <div class="col-sm-3 material tooltip-host" mdTooltip="Cast" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('cast')" [class.selected]="selectedMaterial=='cast'">
+    <img src="/assets/images/materials/cast.jpg" alt="Cast" class="img-responsive">
+  </div>
+  <div class="col-sm-3 material tooltip-host" mdTooltip="Ebony" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('ebony')" [class.selected]="selectedMaterial=='ebony'">
+    <img src="/assets/images/materials/ebony.jpg" alt="Ebony" class="img-responsive">
   </div>
 </div>

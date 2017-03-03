@@ -15,17 +15,20 @@ import { AppComponent } from './app.component';
 import { SeeyondComponent } from './seeyond/seeyond.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { OptionsComponent } from './seeyond/options/options.component';
-import { HeaderComponent, SeeyondInfoDialog, SeeyondLoginDialog } from './seeyond/header/header.component';
+import { HeaderComponent, SeeyondInfoDialog } from './seeyond/header/header.component';
 import { VisualizationComponent } from './seeyond/visualization/visualization.component';
 import { ActionsComponent } from './seeyond/actions/actions.component';
 import { NavigationComponent } from './seeyond/navigation/navigation.component';
 import { DimensionsComponent, RadiusWarningSnackComponent } from './seeyond/dimensions/dimensions.component';
 import { DesignComponent } from './seeyond/design/design.component';
 import { SeeyondService } from './seeyond/seeyond.service';
+import { LoginService } from './seeyond/login.service';
 
 // classes
 import { Feature } from './seeyond/feature';
 import { KeysPipe } from './seeyond/keys.pipe';
+import { QuoteDialogComponent } from './seeyond/quote-dialog/quote-dialog.component';
+import { LoginDialogComponent } from './seeyond/login-dialog/login-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,9 +43,10 @@ import { KeysPipe } from './seeyond/keys.pipe';
     DimensionsComponent,
     DesignComponent,
     SeeyondInfoDialog,
-    SeeyondLoginDialog,
     KeysPipe,
-    RadiusWarningSnackComponent
+    RadiusWarningSnackComponent,
+    QuoteDialogComponent,
+    LoginDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,13 +57,15 @@ import { KeysPipe } from './seeyond/keys.pipe';
   ],
   providers: [
     Feature,
-    SeeyondService
+    SeeyondService,
+    LoginService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
     SeeyondInfoDialog,
-    SeeyondLoginDialog,
-    RadiusWarningSnackComponent
+    RadiusWarningSnackComponent,
+    QuoteDialogComponent,
+    LoginDialogComponent
   ],
 })
 export class AppModule { }

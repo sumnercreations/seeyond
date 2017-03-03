@@ -6,9 +6,10 @@
 		<button class="btn-block button button-gray" (click)="saveFeature();">Save</button>
 	</div>
 	<div class="col-xs-3">
-		<button class="btn-block button button-gray">Download</button>
+    <a class="btn-block button button-gray" download="{{feature.name}}.xml" [href]="createXmlHref()">download</a>
+		<!-- <button class="btn-block button button-gray" (click)="downloadImages();">Download</button> -->
 	</div>
 	<div class="col-xs-3">
-		<button class="btn-block button button-orange">Get a Quote</button>
+		<button class="btn-block button button-orange" (click)="getQuote();">Get a Quote</button>
 	</div>
 </div>
