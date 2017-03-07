@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { Feature } from './feature';
+import { User } from './_models/user';
 
 @Component({
   selector: 'seeyond-seeyond',
@@ -16,8 +17,10 @@ export class SeeyondComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private feature: Feature,
-    private router: Router
+    private router: Router,
+    private user: User
   ) {
+    // initialize the feature based on the URL path.
     router.events.subscribe((event) => {
       this.route.params.subscribe(params => {
         console.log(event);
@@ -52,6 +55,19 @@ export class SeeyondComponent implements OnInit {
         }
       });
     });
+    // Check for a logged in user.
+    let seeyondUser = localStorage.getItem('seeyondUser');
+    if(seeyondUser) {
+      // set up the user values
+      var parsedUser = JSON.parse(seeyondUser);
+      this.user.uid = parsedUser.uid;
+      this.user.email = parsedUser.email;
+      this.user.firstname = parsedUser.firstname;
+      this.user.lastname = parsedUser.lastname;
+    }else{
+      // create a new empty user
+      this.user = new User;
+    }
   }
 
   ngOnInit() {

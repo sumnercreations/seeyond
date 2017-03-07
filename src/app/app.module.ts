@@ -19,16 +19,21 @@ import { HeaderComponent, SeeyondInfoDialog } from './seeyond/header/header.comp
 import { VisualizationComponent } from './seeyond/visualization/visualization.component';
 import { ActionsComponent } from './seeyond/actions/actions.component';
 import { NavigationComponent } from './seeyond/navigation/navigation.component';
-import { DimensionsComponent, RadiusWarningSnackComponent } from './seeyond/dimensions/dimensions.component';
+import { DimensionsComponent } from './seeyond/dimensions/dimensions.component';
 import { DesignComponent } from './seeyond/design/design.component';
-import { SeeyondService } from './seeyond/seeyond.service';
-import { LoginService } from './seeyond/login.service';
+import { QuoteDialogComponent } from './seeyond/quote-dialog/quote-dialog.component';
+import { LoginDialogComponent } from './seeyond/login-dialog/login-dialog.component';
+import { AlertComponent } from './seeyond/alert/alert.component';
+
+// services
+import { SeeyondService } from './seeyond/_services/seeyond.service';
+import { LoginService } from './seeyond/_services/login.service';
+import { AlertService } from './seeyond/_services/alert.service';
 
 // classes
 import { Feature } from './seeyond/feature';
 import { KeysPipe } from './seeyond/keys.pipe';
-import { QuoteDialogComponent } from './seeyond/quote-dialog/quote-dialog.component';
-import { LoginDialogComponent } from './seeyond/login-dialog/login-dialog.component';
+import { User } from './seeyond/_models/user';
 
 @NgModule({
   declarations: [
@@ -44,9 +49,9 @@ import { LoginDialogComponent } from './seeyond/login-dialog/login-dialog.compon
     DesignComponent,
     SeeyondInfoDialog,
     KeysPipe,
-    RadiusWarningSnackComponent,
     QuoteDialogComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -58,14 +63,16 @@ import { LoginDialogComponent } from './seeyond/login-dialog/login-dialog.compon
   providers: [
     Feature,
     SeeyondService,
-    LoginService
+    LoginService,
+    AlertService,
+    User
   ],
   bootstrap: [AppComponent],
   entryComponents: [
     SeeyondInfoDialog,
-    RadiusWarningSnackComponent,
     QuoteDialogComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    AlertComponent
   ],
 })
 export class AppModule { }

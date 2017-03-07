@@ -21,7 +21,8 @@
       "tsconfig": "tsconfig.json",
       "prefix": "seeyond",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "seeyond-app-theme.scss"
       ],
       "scripts": [],
       "environments": {
