@@ -3,23 +3,34 @@
   <h3 md-dialog-title>Sign In</h3>
 </div>
 <div md-dialog-content>
-  <form>
+  <form (ngSubmit)="login()" #loginForm="ngForm">
     <div class="col-sm-12">
       <div class="form-group">
         <md-input-container class="full-width">
-          <input mdInput md-input placeholder="Email" type="email" name="email" id="email">
+          <input placeholder="Email" type="email" name="email" id="email"
+          mdInput
+          md-input
+          required
+          [(ngModel)]="email">
         </md-input-container>
       </div>
       <div class="form-group">
         <md-input-container class="full-width">
-          <input mdInput md-input placeholder="Password" type="password" name="password" id="password">
+          <input placeholder="Password" type="password" name="password" id="password"
+          mdInput
+          md-input
+          required
+          [(ngModel)]="password">
         </md-input-container>
       </div>
     </div>
+    <div class="text-center">
+      <button type="submit" class="button button-gray" [hidden]="loading">Submit</button>
+      <div class="center-div" [hidden]="!loading">
+        <md-progress-spinner color="primary" mode="indeterminate"></md-progress-spinner>
+      </div>
+    </div>
   </form>
-</div>
-<div md-dialog-actions class="text-center">
-  <button (click)="dialogRef.close('submit')" class="button button-gray">Submit</button>
 </div>
 <div class="no-account text-center">
   <p><small class="text-uppercase">Don't have an account?</small></p>

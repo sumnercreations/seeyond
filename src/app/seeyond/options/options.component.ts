@@ -27,6 +27,7 @@ export class OptionsComponent implements OnInit {
   }
 
   onFeatureUpdated() {
+    console.log("$$$$$ Feature Updated $$$$$");
     this.estimatedAmt = this.feature.updateEstimatedAmount();
   }
 

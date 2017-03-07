@@ -31,7 +31,7 @@ export class Feature {
       "type": 0,
       "name": "linear-partition",
       "title": "Freestanding Linear Partition",
-      "image": "/assets/images/renderings/freestanding_linear_partition.jpg",
+      "image": "/assets/images/renderings/freestanding_linear_partition.png",
       "width": 96,
       "height": 72
     },
@@ -39,7 +39,7 @@ export class Feature {
       "type": 1,
       "name": "curved-partition",
       "title": "Freestanding Curved Partition",
-      "image": "/assets/images/renderings/freestanding_curved_partition.jpg",
+      "image": "/assets/images/renderings/freestanding_curved_partition.png",
       "width": 96,
       "height": 72,
       "radius": 60
@@ -48,7 +48,7 @@ export class Feature {
       "type": 2,
       "name": "wall",
       "title": "Wall Feature",
-      "image": "/assets/images/renderings/wall.jpg",
+      "image": "/assets/images/renderings/wall.png",
       "width": 48,
       "height": 48
     },
@@ -56,7 +56,7 @@ export class Feature {
       "type": 3,
       "name": "wall-to-ceiling",
       "title": "Wall-to-Ceiling Feature",
-      "image": "/assets/images/renderings/wall_to_ceiling.jpg",
+      "image": "/assets/images/renderings/wall_to_ceiling.png",
       "width": 72,
       "height": 96,
       "angle": 90,

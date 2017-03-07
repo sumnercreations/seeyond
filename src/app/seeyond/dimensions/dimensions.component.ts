@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewContainerRef, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 import { Router } from '@angular/router';
-
+import { AlertService } from '../_services/alert.service';
 import { Feature } from '../feature';
 
 @Component({
@@ -15,8 +14,7 @@ export class DimensionsComponent implements OnInit {
 
   constructor(
     private feature: Feature,
-    public snackBar: MdSnackBar,
-    public viewContainerRef: ViewContainerRef,
+    private alertService: AlertService,
     public router: Router
   ) { }
 
@@ -32,8 +30,8 @@ export class DimensionsComponent implements OnInit {
       case "width":
         this.feature.width = measurement;
         if(this.feature.radius < measurement *.5) {
-          this.openSnackBar('The radius must be at least half the width.');
           this.feature.radius = (this.feature.width *.5) + 12;
+          this.alertService.error('The radius must be at least half the width. Radius set to: ' + this.feature.radius);
           console.log(this.feature.radius);
         }
         break;
@@ -44,8 +42,8 @@ export class DimensionsComponent implements OnInit {
 
       case "radius":
         if(measurement < this.feature.width *.5) {
-          this.openSnackBar('The radius must be at least half the width.');
           this.feature.radius = (this.feature.width *.5) + 12;
+          this.alertService.error('The radius must be at least half the width. Radius set to: ' + this.feature.radius);
         } else {
           this.feature.radius = measurement;
         }
@@ -69,15 +67,4 @@ export class DimensionsComponent implements OnInit {
     this.feature.reloadVisualization();
   }
 
-  public openSnackBar(msg: string) {
-      let config = new MdSnackBarConfig();
-      this.snackBar.open(msg, 'dismiss');
-  }
-
 }
-
-@Component({
-  selector: 'snack-bar-radius-warning',
-  template: '<p></p>',
-})
-export class RadiusWarningSnackComponent {}
