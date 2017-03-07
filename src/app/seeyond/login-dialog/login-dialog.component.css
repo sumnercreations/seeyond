@@ -6,6 +6,10 @@
   margin-top: 15px;
 }
 
+.no-account {
+  margin-top: 20px;
+}
+
 .no-account a {
   font-size: 18px;
   color: #888888;
@@ -14,4 +18,8 @@
 .no-account a:hover {
   color: #cdcdcd;
   text-decoration: underline;
+}
+
+.center-div md-progress-spinner {
+  margin: 0 auto;
 }

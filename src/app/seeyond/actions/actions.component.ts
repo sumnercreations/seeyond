@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
-import { SeeyondService } from '../seeyond.service';
+import { SeeyondService } from '../_services/seeyond.service';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MdDialog, MdDialogConfig } from '@angular/material';
