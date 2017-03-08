@@ -13,7 +13,7 @@ export class DimensionsComponent implements OnInit {
 
   constructor(
     private feature: Feature,
-    private alertService: AlertService,
+    private alert: AlertService,
     public router: Router
   ) { }
 
@@ -30,7 +30,7 @@ export class DimensionsComponent implements OnInit {
         this.feature.width = measurement;
         if(this.feature.radius < measurement *.5) {
           this.feature.radius = (this.feature.width *.5) + 12;
-          this.alertService.error('The radius must be at least half the width. Radius set to: ' + this.feature.radius);
+          this.alert.error('The radius must be at least half the width. Radius set to: ' + this.feature.radius);
           console.log(this.feature.radius);
         }
         break;
@@ -42,7 +42,7 @@ export class DimensionsComponent implements OnInit {
       case "radius":
         if(measurement < this.feature.width *.5) {
           this.feature.radius = (this.feature.width *.5) + 12;
-          this.alertService.error('The radius must be at least half the width. Radius set to: ' + this.feature.radius);
+          this.alert.error('The radius must be at least half the width. Radius set to: ' + this.feature.radius);
         } else {
           this.feature.radius = measurement;
         }

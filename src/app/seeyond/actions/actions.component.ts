@@ -18,7 +18,7 @@ import {LoadSeeyondsDialogComponent} from "../load-seeyonds-dialog/load-seeyonds
 export class ActionsComponent implements OnInit {
 
   constructor(
-    private service: SeeyondService,
+    private seeyond: SeeyondService,
     private feature: Feature,
     private sanitizer: DomSanitizer,
     public router: Router,
@@ -40,8 +40,8 @@ export class ActionsComponent implements OnInit {
     var result;
 
     if (this.feature.id == null)
-      result = this.service.saveFeature();
-    else result = this.service.updateFeature();
+      result = this.seeyond.saveFeature();
+    else result = this.seeyond.updateFeature();
 
     result.subscribe(feature => {
       this.alert.success("Successfully saved feature");
@@ -50,14 +50,14 @@ export class ActionsComponent implements OnInit {
   }
 
   loadFeature() {
-    this.service.getMyFeatures().subscribe(features => {
+    this.seeyond.getMyFeatures().subscribe(features => {
       if (features.length) {
         var dialogRef = this.dialog.open(LoadSeeyondsDialogComponent, new MdDialogConfig);
         dialogRef.componentInstance.seeyonds = features;
       }
     });
 
-    // let serviceResponse = this.service.loadFeature(id).subscribe((res: Response) => {
+    // let serviceResponse = this.seeyond.loadFeature(id).subscribe((res: Response) => {
     //   let loadedFeature = res.json();
     //   console.log(loadedFeature);
     //   this.router.navigate(['/feature', loadedFeature.name, loadedFeature.id]);
@@ -85,7 +85,7 @@ export class ActionsComponent implements OnInit {
   quoteConfirmed() {
     console.log('quote was confirmed');
     // mark the design as quoted and save
-    this.feature.quoted = 1;
+    this.feature.quoted = true;
     // send seeyond design email
 
     // navigate to the url with the id, (if we aren't already there?)

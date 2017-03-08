@@ -15,9 +15,12 @@ export class DesignComponent implements OnInit {
   patternStrength = this.feature.patternStrength? this.feature.patternStrength : 3;
   strengths = [1,2,3,4,5,6,7,8,9,10];
 
+  acousticFoam: boolean;
+
   constructor(private feature: Feature) { }
 
   ngOnInit() {
+    this.acousticFoam = this.feature.acousticFoam;
   }
 
   public updateSelectedTessellation(tessellation: number) {
@@ -37,6 +40,10 @@ export class DesignComponent implements OnInit {
 
     // update the visualization
     this.feature.reloadVisualization();
+  }
+
+  public updateAcousticFoam() {
+    this.feature.acousticFoam = this.acousticFoam;
   }
 
 }
