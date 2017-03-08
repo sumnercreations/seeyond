@@ -34,6 +34,7 @@ import { AlertService } from './seeyond/_services/alert.service';
 import { Feature } from './seeyond/feature';
 import { KeysPipe } from './seeyond/keys.pipe';
 import { User } from './seeyond/_models/user';
+import {LoadSeeyondsDialogComponent} from "./seeyond/load-seeyonds-dialog/load-seeyonds-dialog.component";
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { User } from './seeyond/_models/user';
     KeysPipe,
     QuoteDialogComponent,
     LoginDialogComponent,
+    LoadSeeyondsDialogComponent,
     AlertComponent
   ],
   imports: [
@@ -72,7 +74,8 @@ import { User } from './seeyond/_models/user';
     SeeyondInfoDialog,
     QuoteDialogComponent,
     LoginDialogComponent,
-    AlertComponent
+    AlertComponent,
+    LoadSeeyondsDialogComponent
   ],
 })
 export class AppModule { }
