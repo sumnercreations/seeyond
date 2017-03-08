@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { AlertService } from '../_services/alert.service';
