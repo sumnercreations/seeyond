@@ -14,8 +14,8 @@ export class LoginDialogComponent {
   public loading: boolean = false;
 
   constructor(
-    private loginService: LoginService,
-    private alertService: AlertService,
+    private auth: LoginService,
+    private alert: AlertService,
     public dialogRef: MdDialogRef<LoginDialogComponent>
   ) { }
 
@@ -23,18 +23,18 @@ export class LoginDialogComponent {
     console.log(this.email);
     console.log(this.password);
     this.loading = true;
-    this.loginService.login(this.email, this.password)
+    this.auth.login(this.email, this.password)
       .subscribe(
         data => {
           console.log("data");
           console.log(data)
-          this.alertService.success("Successfully logged in.");
+          this.alert.success("Successfully logged in.");
         },
         error => {
           console.log("Error");
           console.log(error);
           if(error) {
-            this.alertService.apiAlert(error);
+            this.alert.apiAlert(error);
           }
           this.loading = false;
         }

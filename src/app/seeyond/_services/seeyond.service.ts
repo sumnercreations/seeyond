@@ -19,7 +19,7 @@ export class SeeyondService {
 
   getMyFeatures() {
     // return this.http.get(this.apiUrl + 'list/' + this.user.uid) // TODO: Make it specific to the user
-    return this.http.get(this.apiUrl)
+    return this.http.get(this.apiUrl + 'list/' + this.user.uid)
       .map((res: Response) => res.json())
       .catch(this.handleError)
   }
@@ -46,7 +46,9 @@ export class SeeyondService {
       "material": this.feature.material,
       "boxsize": this.feature.boxsize,
       "boxes": this.feature.boxes,
-      "xml": this.feature.xml
+      "xml": this.feature.xml,
+      "acousticFoam": this.feature.acousticFoam,
+      "quoted": this.feature.quoted
     };
 
     let headers = new Headers({"Content-Type": "application/json"});
@@ -75,7 +77,9 @@ export class SeeyondService {
       "material": this.feature.material,
       "boxsize": this.feature.boxsize,
       "boxes": this.feature.boxes,
-      "xml": this.feature.xml
+      "xml": this.feature.xml,
+      "acousticFoam": this.feature.acousticFoam,
+      "quoted": this.feature.quoted
     };
 
     return this.http.post(this.apiUrl, patchData)

@@ -24,8 +24,8 @@ export class Feature {
   public boxes: number; // this comes from the tessellation
   public boxCost: number;
   public estimatedAmt: number; // this should be determined by the boxCost and number of boxes in design
-  public acousticFoam: number = 0; // boolean
-  public quoted: number = 0; // boolean
+  public acousticFoam: boolean = false;
+  public quoted: boolean = false; // boolean
   public boxsize: number = 14; // baked in number right now.
   public features: any = {
     "0": {
@@ -248,7 +248,7 @@ export class Feature {
       xw.endElement('orderDate');
 
       xw.startElement('price');
-      xw.text('123.45'); //TO DO: insert price here
+      xw.text(this.estimatedAmt);
       xw.endElement('price');
 
       xw.startElement('notes');
