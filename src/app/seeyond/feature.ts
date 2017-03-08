@@ -83,7 +83,6 @@ export class Feature {
   updateFeature(
     type: number
   ) {
-    console.log("update feature");
     // load the selected feature
     var feature = this.features[type];
 
@@ -103,7 +102,6 @@ export class Feature {
   }
 
   reloadVisualization() {
-    console.log("reaload visualization");
     var jsonProperties = this.getJsonProperties();
 
     this.syd_t.QT.SetUserDataPropertiesJSONString(JSON.stringify(jsonProperties));
