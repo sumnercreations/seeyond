@@ -26,22 +26,14 @@ export class HeaderComponent implements OnInit {
     // subscribe to the login event
     this.loginService.onUserLoggedIn.subscribe(
       data => {
-        console.log(data);
-        console.log(this.user);
         // this.user = data;
         this.user.uid = data.uid;
         this.user.email = data.email;
         this.user.firstname = data.firstname;
         this.user.lastname = data.lastname;
-        console.log(this.user);
+
         // close the dialog
         this.loginDialogRef.close();
-      },
-      error => {
-        console.log(error);
-      },
-      complete => {
-        console.log(complete);
       }
     );
   }

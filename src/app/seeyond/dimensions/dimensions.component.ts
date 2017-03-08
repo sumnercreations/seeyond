@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { AlertService } from '../_services/alert.service';
@@ -10,7 +10,6 @@ import { Feature } from '../feature';
   styleUrls: ['./dimensions.component.css']
 })
 export class DimensionsComponent implements OnInit {
-  @Output() onFeatureUpdated = new EventEmitter();
 
   constructor(
     private feature: Feature,
@@ -62,8 +61,6 @@ export class DimensionsComponent implements OnInit {
         break;
     }
 
-    console.log('emitting a feature update');
-    this.onFeatureUpdated.emit();
     this.feature.reloadVisualization();
   }
 
