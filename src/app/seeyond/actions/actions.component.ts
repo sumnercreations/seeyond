@@ -3,9 +3,12 @@ import { Response } from '@angular/http';
 import { SeeyondService } from '../_services/seeyond.service';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MdDialog, MdDialogConfig } from '@angular/material';
+import {MdDialog, MdDialogConfig, MdDialogRef} from '@angular/material';
 import { QuoteDialogComponent } from '../quote-dialog/quote-dialog.component';
 import { Feature } from '../feature';
+import {User} from "../_models/user";
+import {AlertService} from "../_services/alert.service";
+import {LoadSeeyondsDialogComponent} from "../load-seeyonds-dialog/load-seeyonds-dialog.component";
 
 @Component({
   selector: 'seeyond-actions',
@@ -20,6 +23,8 @@ export class ActionsComponent implements OnInit {
     private sanitizer: DomSanitizer,
     public router: Router,
     public dialog: MdDialog,
+    private user: User,
+    private alert: AlertService
   ) { }
 
   ngOnInit() {
@@ -31,18 +36,32 @@ export class ActionsComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL( blob ));
   }
 
-  saveFeature(id: number, uid: number) {
-    console.log('saving feature: ' + id);
-    this.service.updateFeature(id, uid);
+  saveFeature() {
+    var result;
+
+    if (this.feature.id == null)
+      result = this.service.saveFeature();
+    else result = this.service.updateFeature();
+
+    result.subscribe(feature => {
+      this.alert.success("Successfully saved feature");
+      this.feature = feature;
+    });
   }
 
-  loadFeature(id: number) {
-    console.log('loading feature: ' + id);
-    let serviceResponse = this.service.loadFeature(id).subscribe((res: Response) => {
-      let loadedFeature = res.json();
-      console.log(loadedFeature);
-      this.router.navigate(['/feature', loadedFeature.name, loadedFeature.id]);
+  loadFeature() {
+    this.service.getMyFeatures().subscribe(features => {
+      if (features.length) {
+        var dialogRef = this.dialog.open(LoadSeeyondsDialogComponent, new MdDialogConfig);
+        dialogRef.componentInstance.seeyonds = features;
+      }
     });
+
+    // let serviceResponse = this.service.loadFeature(id).subscribe((res: Response) => {
+    //   let loadedFeature = res.json();
+    //   console.log(loadedFeature);
+    //   this.router.navigate(['/feature', loadedFeature.name, loadedFeature.id]);
+    // });
   }
 
   downloadImages() {
