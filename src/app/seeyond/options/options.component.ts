@@ -23,12 +23,20 @@ export class OptionsComponent implements OnInit {
 
   ngOnInit() {
     this.updateActiveTab(this.activeTab);
-    this.estimatedAmt = this.feature.getFormattedAmount();
+
+    // subscribe to the onFeatureUpdated event to update the price.
+    this.feature.onFeatureUpdated.subscribe(
+      data => {
+        this.feature.updateEstimatedAmount();
+        this.estimatedAmt = this.feature.getFormattedAmount();
+      }
+    );
   }
 
   onFeatureUpdated() {
     console.log("$$$$$ Feature Updated $$$$$");
-    this.estimatedAmt = this.feature.updateEstimatedAmount();
+    this.feature.updateEstimatedAmount();
+    this.estimatedAmt = this.feature.getFormattedAmount();
   }
 
   public updateActiveTab(tab: string) {

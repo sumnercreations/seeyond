@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable()
 export class Feature {
+  onFeatureUpdated = new EventEmitter();
   private static _instance: Feature = new Feature();
   public id: number;
   public type: number;
@@ -20,12 +21,12 @@ export class Feature {
   public tessellation: number = 0; // court
   public patternStrength: number = 3;
   public material: string = 'zinc';
-  public estimatedAmt: number = 9 * 85.37;
-  public boxsize: number = 14;
-  public boxCost: number = 85.37;
-  public boxes: number = 9; // this will need to come from the tessellation
-  public acousticFoam: number = 0;
-  public quoted: number = 0;
+  public boxes: number; // this comes from the tessellation
+  public boxCost: number;
+  public estimatedAmt: number; // this should be determined by the boxCost and number of boxes in design
+  public acousticFoam: number = 0; // boolean
+  public quoted: number = 0; // boolean
+  public boxsize: number = 14; // baked in number right now.
   public features: any = {
     "0": {
       "type": 0,
@@ -33,7 +34,8 @@ export class Feature {
       "title": "Freestanding Linear Partition",
       "image": "/assets/images/renderings/freestanding_linear_partition.png",
       "width": 96,
-      "height": 72
+      "height": 72,
+      "boxCost": 85.37
     },
    "1": {
       "type": 1,
@@ -42,7 +44,8 @@ export class Feature {
       "image": "/assets/images/renderings/freestanding_curved_partition.png",
       "width": 96,
       "height": 72,
-      "radius": 60
+      "radius": 60,
+      "boxCost": 85.37
     },
    "2": {
       "type": 2,
@@ -50,7 +53,8 @@ export class Feature {
       "title": "Wall Feature",
       "image": "/assets/images/renderings/wall.png",
       "width": 48,
-      "height": 48
+      "height": 48,
+      "boxCost": 85.37
     },
    "3": {
       "type": 3,
@@ -60,9 +64,10 @@ export class Feature {
       "width": 72,
       "height": 96,
       "angle": 90,
-      "ceilingLength": 72
+      "ceilingLength": 72,
+      "boxCost": 87.17
     }
-  }
+  };
 
   constructor() {
     if (Feature._instance) {
@@ -78,21 +83,27 @@ export class Feature {
   updateFeature(
     type: number
   ) {
+    console.log("update feature");
+    // load the selected feature
     var feature = this.features[type];
+
+    // set defaults
     this.type = type;
-    this.title = feature.title;
     this.name = feature.name;
+    this.title = feature.title;
     this.image = feature.image;
     this.width = feature.width;
     this.height = feature.height;
     this.radius = feature.radius;
     this.angle = feature.angle;
     this.ceilingLength = feature.ceilingLength;
+    this.boxCost = feature.boxCost;
 
     this.reloadVisualization();
   }
 
   reloadVisualization() {
+    console.log("reaload visualization");
     var jsonProperties = this.getJsonProperties();
 
     this.syd_t.QT.SetUserDataPropertiesJSONString(JSON.stringify(jsonProperties));
@@ -106,37 +117,20 @@ export class Feature {
     this.syd_v.QT.Visualization.SetFeatureType(this.type);
     this.syd_v.QT.Visualization.visualizeFeature(front, back, uNum, vNum, this.getMaterialImage(this.material));
 
+    // feature has been updated
+    this.onFeatureUpdated.emit();
+
     // update the XML
     this.xml = this.getXML();
   }
 
   updateEstimatedAmount() {
-    switch (this.type) {
-      case 0:
-        // linear partition
-        this.boxCost = 85.37;
-        break;
-
-      case 1:
-        // curved partition
-        this.boxCost = 85.37;
-        break
-
-      case 2:
-        // wall
-        this.boxCost = 85.37;
-        break
-
-      case 3:
-        // wall to ceiling
-        this.boxCost = 87.17;
-        break
-
-      default:
-        alert('unable to calculate the cost ' + this.type + ' is not a valid feature type');
-        break;
-    }
-
+    var sheets = this.syd_t.QT.GetSheets();
+    var magnets = this.syd_t.QT.GetMagnets();
+    this.boxes = this.syd_t.QT.GetParts();
+    console.log("boxes: " + this.boxes);
+    console.log("sheets: " + sheets);
+    console.log("magnets: " + magnets);
     this.estimatedAmt = this.boxes * this.boxCost;
     return this.estimatedAmt;
   }
