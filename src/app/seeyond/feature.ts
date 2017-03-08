@@ -62,7 +62,7 @@ export class Feature {
       "angle": 90,
       "ceilingLength": 72
     }
-  }
+  };
 
   constructor() {
     if (Feature._instance) {
