@@ -38,18 +38,25 @@ export class ActionsComponent implements OnInit {
 
   saveFeature() {
     var result;
+    var newDesign;
     console.log(this.feature.id);
-    if (this.feature.id == null)
+    if (this.feature.id == null) {
       result = this.seeyond.saveFeature();
-    else result = this.seeyond.updateFeature();
-
+      newDesign = true;
+    }else{
+      result = this.seeyond.updateFeature();
+      newDesign = false;
+    }
+    console.log(newDesign);
     result.subscribe(feature => {
       this.alert.success("Successfully saved feature");
       this.feature = feature;
+      if(newDesign)
+        this.router.navigate(['/feature', feature.id]);
     });
   }
 
-  loadFeature() {
+  myFeaturesDialog() {
     this.seeyond.getMyFeatures().subscribe(features => {
       if (features.length) {
         var dialogRef = this.dialog.open(LoadSeeyondsDialogComponent, new MdDialogConfig);
