@@ -5,7 +5,8 @@ export class Feature {
   onFeatureUpdated = new EventEmitter();
   private static _instance: Feature = new Feature();
   public id: number;
-  public type: number;
+  public uid: number;
+  public feature_type: number;
   public title: string;
   public name: string;
   public image: string;
@@ -19,7 +20,7 @@ export class Feature {
   public data: any = [];
   public xml: any = {};
   public tessellation: number = 0; // court
-  public patternStrength: number = 3;
+  public pattern_strength: number = 3;
   public material: string = 'zinc';
   public boxes: number; // this comes from the tessellation
   public boxCost: number;
@@ -29,7 +30,7 @@ export class Feature {
   public boxsize: number = 14; // baked in number right now.
   public features: any = {
     "0": {
-      "type": 0,
+      "feature_type": 0,
       "name": "linear-partition",
       "title": "Freestanding Linear Partition",
       "image": "/assets/images/renderings/freestanding_linear_partition.png",
@@ -38,7 +39,7 @@ export class Feature {
       "boxCost": 85.37
     },
    "1": {
-      "type": 1,
+      "feature_type": 1,
       "name": "curved-partition",
       "title": "Freestanding Curved Partition",
       "image": "/assets/images/renderings/freestanding_curved_partition.png",
@@ -48,7 +49,7 @@ export class Feature {
       "boxCost": 85.37
     },
    "2": {
-      "type": 2,
+      "feature_type": 2,
       "name": "wall",
       "title": "Wall Feature",
       "image": "/assets/images/renderings/wall.png",
@@ -57,7 +58,7 @@ export class Feature {
       "boxCost": 85.37
     },
    "3": {
-      "type": 3,
+      "feature_type": 3,
       "name": "wall-to-ceiling",
       "title": "Wall-to-Ceiling Feature",
       "image": "/assets/images/renderings/wall_to_ceiling.png",
@@ -81,13 +82,13 @@ export class Feature {
   }
 
   updateFeature(
-    type: number
+    feature_type: number
   ) {
     // load the selected feature
-    var feature = this.features[type];
+    var feature = this.features[feature_type];
 
     // set defaults
-    this.type = type;
+    this.feature_type = feature_type;
     this.name = feature.name;
     this.title = feature.title;
     this.image = feature.image;
@@ -97,6 +98,30 @@ export class Feature {
     this.angle = feature.angle;
     this.ceilingLength = feature.ceilingLength;
     this.boxCost = feature.boxCost;
+
+    this.reloadVisualization();
+  }
+
+  loadFeature(feature: Feature) {
+    this.id = feature.id;
+    this.uid = feature.uid;
+    this.feature_type = feature.feature_type;
+    this.title = feature.title;
+    this.name = feature.name;
+    this.width = feature.width;
+    this.height = feature.height;
+    this.radius = feature.radius;
+    this.angle = feature.angle;
+    this.ceilingLength = feature.ceilingLength;
+    this.tessellation = feature.tessellation;
+    this.pattern_strength = feature.pattern_strength;
+    this.material = feature.material;
+    this.boxes = feature.boxes;
+    this.xml = feature.xml;
+    this.acousticFoam = feature.acousticFoam;
+    this.quoted = feature.quoted;
+    this.boxCost = this.getBoxCost(feature.feature_type); // need to get this from the feature_type as well
+    this.image = this.getFeatureImage(feature.feature_type); // need to get this from the feature_type
 
     this.reloadVisualization();
   }
@@ -112,7 +137,7 @@ export class Feature {
     var uNum = this.syd_t.QT.GetU();
     var vNum = this.syd_t.QT.GetV();
 
-    this.syd_v.QT.Visualization.SetFeatureType(this.type);
+    this.syd_v.QT.Visualization.SetFeatureType(this.feature_type);
     this.syd_v.QT.Visualization.visualizeFeature(front, back, uNum, vNum, this.getMaterialImage(this.material));
 
     // feature has been updated
@@ -184,15 +209,23 @@ export class Feature {
     return this.acousticFoam ? "Yes" : "No";
   }
 
+  getBoxCost(feature_type: number) {
+    return this.features[feature_type].boxCost;
+  }
+
+  getFeatureImage(feature_type: number) {
+    return this.features[feature_type].image;
+  }
+
   getJsonProperties() {
     return {
       "UserInputs": {
         // 0 = straight partition, 1 = arc partition, 2 = facing, 3 = transition, 4 = ceiling, 5 = bent partition
-        "Type": this.type,
+        "Type": this.feature_type,
         // 0 = court, 1 = cusp, 2 = kink, 3 = tilt, 4 = billow
         "Tessellation": this.tessellation,
         // valid values = .1 - 1.0 (we send whole numbers 1-10 and the tesselation divides by 10)
-        "PatternStrength": this.patternStrength,
+        "PatternStrength": this.pattern_strength,
         // relative path to rendering material image
         "Material": this.getMaterialImage(this.material),
         // in inches
@@ -261,24 +294,28 @@ export class Feature {
 
       var feature_type = 'StraightPartition';
       switch(properties.UserInputs.Type) {
-        // wall-to-ceiling partition
-        case 1:
-        feature_type = 'Wall-to-Ceiling';
-        break;
-
         // freestanding linear
-        case 2:
-        feature_type = 'Freestanding Linear';
-        break;
+        case 0:
+          feature_type = 'Freestanding Linear';
+          break;
 
         // freestanding curved partition
+        case 1:
+          feature_type = 'Freestanding Curved';
+          break;
+
+        case 2:
+          feature_type = 'Wall';
+          break;
+
+        // wall-to-ceiling partition
         case 3:
-        feature_type = 'Freestanding Curved';
+          feature_type = 'Wall-to-Ceiling';
         break;
 
         // wall
         default:
-        feature_type = 'Wall';
+          feature_type = 'Wall';
       }
 
       xw.startElement('installationType');

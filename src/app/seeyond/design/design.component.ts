@@ -12,7 +12,7 @@ export class DesignComponent implements OnInit {
   // Selected Defaults
   selectedTessellation = this.feature.tessellation;
   selectedMaterial = this.feature.material;
-  patternStrength = this.feature.patternStrength? this.feature.patternStrength : 3;
+  pattern_strength = this.feature.pattern_strength;
   strengths = [1,2,3,4,5,6,7,8,9,10];
 
   acousticFoam: boolean;
@@ -36,7 +36,7 @@ export class DesignComponent implements OnInit {
   }
 
   public updatePatternStrength(strength: number) {
-    this.patternStrength = this.feature.patternStrength = strength;
+    this.pattern_strength = this.feature.pattern_strength = strength;
 
     // update the visualization
     this.feature.reloadVisualization();

@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { Feature } from './feature';
 import { User } from './_models/user';
+import { SeeyondService } from './_services/seeyond.service';
+import { AlertService } from './_services/alert.service';
 
 @Component({
   selector: 'seeyond-seeyond',
@@ -11,50 +13,72 @@ import { User } from './_models/user';
   styleUrls: ['./seeyond.component.css'],
 })
 export class SeeyondComponent implements OnInit {
-  private selectedFeature: string;
-  private selectedFeatureId: number;
+  private selectedFeature: any;
 
   constructor(
     private route: ActivatedRoute,
     private feature: Feature,
     private router: Router,
-    private user: User
+    private user: User,
+    private seeyond: SeeyondService,
+    private alert: AlertService
   ) {
     // initialize the feature based on the URL path.
     router.events.subscribe((event) => {
       this.route.params.subscribe(params => {
-        console.log(event);
+        console.log(params);
         if(event instanceof NavigationEnd) {
-          this.selectedFeature = params['name'];
-          this.selectedFeatureId = params['id'];
-          console.log('==== ' + this.selectedFeature + ' ====');
-          console.log('**** ' + this.selectedFeatureId + ' ****');
-          switch (this.selectedFeature) {
-            case "linear-partition":
-              this.feature.title = 'linear-partition';
-              this.feature.updateFeature(0);
-              break;
+          // feature - default values
+          this.selectedFeature = params['feature'];
 
-            case "curved-partition":
-              this.feature.updateFeature(1);
-              break;
+          if(!Number(this.selectedFeature)) {
+            console.log("LOADING DEFAULT FEATURE: " + this.selectedFeature);
+            switch (this.selectedFeature) {
+              case "linear-partition":
+                this.feature.title = 'linear-partition';
+                this.feature.updateFeature(0);
+                break;
 
-            case "wall":
-              this.feature.updateFeature(2);
-              break;
+              case "curved-partition":
+                this.feature.updateFeature(1);
+                break;
 
-            case "wall-to-ceiling":
-              this.feature.updateFeature(3);
-              break;
+              case "wall":
+                this.feature.updateFeature(2);
+                break;
 
-            default:
-              // default to the wall
-              this.feature.updateFeature(2);
-              break;
+              case "wall-to-ceiling":
+                this.feature.updateFeature(3);
+                break;
+
+              default:
+                // default to the wall if they pass something we don't support.
+                this.router.navigate(['/feature', 'wall']);
+                break;
+            }
+          }else if(Number(this.selectedFeature)) {
+            console.log("LOADING FEATURE: " + this.selectedFeature + " FROM DB");
+            this.seeyond.loadFeature(this.selectedFeature).subscribe(
+              feature => {
+                console.log(feature);
+                if(feature != null) {
+                  this.feature.loadFeature(feature);
+                }else{
+                  // redirect to default wall feature
+                  this.router.navigate(['/feature', 'wall']);
+                }
+              },
+              error => {
+                if(error) {
+                  this.alert.apiAlert(error);
+                }
+              }
+            );
           }
         }
       });
     });
+
     // Check for a logged in user.
     let seeyondUser = localStorage.getItem('seeyondUser');
     if(seeyondUser) {
