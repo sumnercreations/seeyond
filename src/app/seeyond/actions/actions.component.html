@@ -1,9 +1,9 @@
 <div id="actions" class="actions row">
 	<div class="col-xs-3">
-		<button class="btn-block button button-gray" (click)="loadFeature(1);">Load</button>
+		<button class="btn-block button button-gray" (click)="myFeaturesDialog();">Load</button>
 	</div>
 	<div class="col-xs-3">
-		<button class="btn-block button button-gray" (click)="saveFeature()">Save</button>
+		<button [disabled]="feature.uid && feature.uid != user.uid" class="btn-block button button-gray" (click)="saveFeature()">Save</button>
 	</div>
 	<div class="col-xs-3">
     <a class="btn-block button button-gray" download="{{feature.name}}.xml" [href]="createXmlHref()">download</a>
