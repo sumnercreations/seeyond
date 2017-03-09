@@ -18,14 +18,18 @@ export class SeeyondService {
   ) { }
 
   getMyFeatures() {
-    // return this.http.get(this.apiUrl + 'list/' + this.user.uid) // TODO: Make it specific to the user
     return this.http.get(this.apiUrl + 'list/' + this.user.uid)
       .map((res: Response) => res.json())
       .catch(this.handleError)
   }
 
   loadFeature(id: number) {
+    console.log('Loading Feature');
     return this.http.get(this.apiUrl + id)
+      .map((res: Response) => {
+        console.log(res);
+        return res.json();
+      })
       .catch(this.handleError);
   }
 
@@ -33,7 +37,7 @@ export class SeeyondService {
     let patchData = {
       "id": this.feature.id,
       "uid": this.user.uid,
-      "feature_type": this.feature.type,
+      "feature_type": this.feature.feature_type,
       "title": this.feature.title,
       "name": this.feature.name,
       "width": this.feature.width,
@@ -42,7 +46,7 @@ export class SeeyondService {
       "angle": this.feature.angle,
       "ceiling_length": this.feature.ceilingLength,
       "tessellation": this.feature.tessellation,
-      "pattern_strength": this.feature.patternStrength,
+      "pattern_strength": this.feature.pattern_strength,
       "material": this.feature.material,
       "boxsize": this.feature.boxsize,
       "boxes": this.feature.boxes,
@@ -64,7 +68,7 @@ export class SeeyondService {
   saveFeature() {
     let patchData = {
       "uid": this.user.uid,
-      "feature_type": this.feature.type,
+      "feature_type": this.feature.feature_type,
       "title": this.feature.title,
       "name": this.feature.name,
       "width": this.feature.width,
@@ -73,7 +77,7 @@ export class SeeyondService {
       "angle": this.feature.angle,
       "ceiling_length": this.feature.ceilingLength,
       "tessellation": this.feature.tessellation,
-      "pattern_strength": this.feature.patternStrength,
+      "pattern_strength": this.feature.pattern_strength,
       "material": this.feature.material,
       "boxsize": this.feature.boxsize,
       "boxes": this.feature.boxes,

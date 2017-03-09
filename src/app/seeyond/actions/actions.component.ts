@@ -3,12 +3,12 @@ import { Response } from '@angular/http';
 import { SeeyondService } from '../_services/seeyond.service';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import {MdDialog, MdDialogConfig, MdDialogRef} from '@angular/material';
+import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
 import { QuoteDialogComponent } from '../quote-dialog/quote-dialog.component';
 import { Feature } from '../feature';
-import {User} from "../_models/user";
-import {AlertService} from "../_services/alert.service";
-import {LoadSeeyondsDialogComponent} from "../load-seeyonds-dialog/load-seeyonds-dialog.component";
+import { User } from "../_models/user";
+import { AlertService } from "../_services/alert.service";
+import { LoadSeeyondsDialogComponent } from "../load-seeyonds-dialog/load-seeyonds-dialog.component";
 
 @Component({
   selector: 'seeyond-actions',
@@ -38,7 +38,7 @@ export class ActionsComponent implements OnInit {
 
   saveFeature() {
     var result;
-
+    console.log(this.feature.id);
     if (this.feature.id == null)
       result = this.seeyond.saveFeature();
     else result = this.seeyond.updateFeature();
