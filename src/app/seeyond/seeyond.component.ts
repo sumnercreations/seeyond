@@ -51,6 +51,10 @@ export class SeeyondComponent implements OnInit {
                 this.feature.updateFeature(3);
                 break;
 
+              case "ceiling":
+                this.feature.updateFeature(4);
+                break;
+
               default:
                 // default to the wall if they pass something we don't support.
                 this.router.navigate(['/feature', 'wall']);

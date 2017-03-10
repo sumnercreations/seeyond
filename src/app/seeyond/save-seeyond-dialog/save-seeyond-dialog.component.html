@@ -1,0 +1,31 @@
+<h2 md-dialog-title class="text-center">Save Your Design</h2>
+<div md-dialog-content>
+  <form (ngSubmit)="saveFeature()" #saveForm="ngForm">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <md-input-container class="full-width">
+          <input type="text" placeholder="{{feature.title}}" name="design_name" id="design_name"
+          mdInput
+          md-input
+          required
+          [(ngModel)]="feature.design_name">
+        </md-input-container>
+      </div>
+    </div>
+    <div class="text-center">
+      <button class="button button-gray" [hidden]="saving || !newDesign" type="submit" (click)="dialogRef.close('save')">Save</button>
+      <button class="button button-gray" [hidden]="newDesign" type="submit" (click)="dialogRef.close('overwrite')">Overwrite</button>
+      <!--
+        This will submit regardless of the "click" function.
+         - Do I create a 2 way binding on the save new button and then in the saveFeature function we check that and send it to the saveNew function?
+          How do we change the binding here? On click?
+         - Do I need to do it as an event?
+          Will that still submit the form and have the same problem?
+      -->
+      <button class="button button-gray" [hidden]="newDesign" (click)="dialogRef.close('saveNew')">Save New</button>
+      <div class="center-div" [hidden]="!saving">
+        <md-progress-spinner color="primary" mode="indeterminate"></md-progress-spinner>
+      </div>
+    </div>
+  </form>
+</div>

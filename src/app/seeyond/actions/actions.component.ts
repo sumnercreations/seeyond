@@ -4,11 +4,12 @@ import { SeeyondService } from '../_services/seeyond.service';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
-import { QuoteDialogComponent } from '../quote-dialog/quote-dialog.component';
 import { Feature } from '../feature';
 import { User } from "../_models/user";
 import { AlertService } from "../_services/alert.service";
+import { QuoteDialogComponent } from '../quote-dialog/quote-dialog.component';
 import { LoadSeeyondsDialogComponent } from "../load-seeyonds-dialog/load-seeyonds-dialog.component";
+import { SaveSeeyondDialogComponent } from "../save-seeyond-dialog/save-seeyond-dialog.component";
 
 @Component({
   selector: 'seeyond-actions',
@@ -28,6 +29,9 @@ export class ActionsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // Do we even need to do this?
+    // subscribe to the saved event to close the save dialog
+    // subscribe to the loaded event to close the load dialog
   }
 
   createXmlHref() {
@@ -36,24 +40,8 @@ export class ActionsComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL( blob ));
   }
 
-  saveFeature() {
-    var result;
-    var newDesign;
-    console.log(this.feature.id);
-    if (this.feature.id == null) {
-      result = this.seeyond.saveFeature();
-      newDesign = true;
-    }else{
-      result = this.seeyond.updateFeature();
-      newDesign = false;
-    }
-    console.log(newDesign);
-    result.subscribe(feature => {
-      this.alert.success("Successfully saved feature");
-      this.feature = feature;
-      if(newDesign)
-        this.router.navigate(['/feature', feature.id]);
-    });
+  saveFeatureDialog() {
+    var dialogRef = this.dialog.open(SaveSeeyondDialogComponent, new MdDialogConfig);
   }
 
   myFeaturesDialog() {
@@ -79,9 +67,9 @@ export class ActionsComponent implements OnInit {
 
   getQuote() {
     // load the dialog to confirm the design we will be sending
-    let config = new MdDialogConfig();
+    var config = new MdDialogConfig();
     config.width = '500px';
-    let dialogRef = this.dialog.open(QuoteDialogComponent, config);
+    var dialogRef = this.dialog.open(QuoteDialogComponent, config);
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'confirm') {
         this.quoteConfirmed();
@@ -90,8 +78,8 @@ export class ActionsComponent implements OnInit {
   }
 
   quoteConfirmed() {
-    console.log('quote was confirmed');
     // mark the design as quoted and save
+    this.alert.success("Your quote request has been sent.");
     this.feature.quoted = true;
     // send seeyond design email
 

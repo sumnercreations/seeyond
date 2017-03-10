@@ -31,14 +31,14 @@
         <input (change)="updateFeatureMeasurement($event.target.value, $event.target.name)" [(ngModel)]="feature.radius" type="text" class="form-control" placeholder="Radius" name="radius" id="radius">
         <span class="input-group-addon">inches</span>
       </div>
-      <span class="help-block">Must be at least 1/2 the width</span>
+      <span class="help-block">Must be greater than 1/2 the width</span>
     </div>
   </div>
   <div class="form-group" *ngIf="feature.feature_type==3">
-    <label [for]="feature.ceilingLength" class="col-sm-2 control-label">Ceiling Length</label>
+    <label [for]="feature.ceiling_length" class="col-sm-2 control-label">Ceiling Length</label>
     <div class="col-sm-10">
       <div class="input-group">
-        <input (change)="updateFeatureMeasurement($event.target.value, $event.target.name)" [(ngModel)]="feature.ceilingLength" type="text" class="form-control" placeholder="Ceiling Length" name="ceilingLength" id="ceilingLength">
+        <input (change)="updateFeatureMeasurement($event.target.value, $event.target.name)" [(ngModel)]="feature.ceiling_length" type="text" class="form-control" placeholder="Ceiling Length" name="ceiling_length" id="ceiling_length">
         <span class="input-group-addon">inches</span>
       </div>
     </div>

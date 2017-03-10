@@ -9,12 +9,13 @@ export class Feature {
   public feature_type: number;
   public title: string;
   public name: string;
+  public design_name: string;
   public image: string;
   public width: number;
   public height: number;
   public radius: number;
   public angle: number;
-  public ceilingLength: number;
+  public ceiling_length: number;
   public syd_v: any = {};
   public syd_t: any = {};
   public data: any = [];
@@ -65,9 +66,18 @@ export class Feature {
       "width": 72,
       "height": 96,
       "angle": 90,
-      "ceilingLength": 72,
+      "ceiling_length": 72,
       "boxCost": 87.17
     }
+    // "4": {
+    //   "feature_type": 4,
+    //   "name": "ceiling",
+    //   "title": "Ceiling Feature",
+    //   "image": "/assets/images/renderings/ceiling.png",
+    //   "width": 48,
+    //   "height": 48,
+    //   "boxCost": 85.37
+    // },
   };
 
   constructor() {
@@ -96,7 +106,7 @@ export class Feature {
     this.height = feature.height;
     this.radius = feature.radius;
     this.angle = feature.angle;
-    this.ceilingLength = feature.ceilingLength;
+    this.ceiling_length = feature.ceiling_length;
     this.boxCost = feature.boxCost;
 
     this.reloadVisualization();
@@ -112,7 +122,7 @@ export class Feature {
     this.height = feature.height;
     this.radius = feature.radius;
     this.angle = feature.angle;
-    this.ceilingLength = feature.ceilingLength;
+    this.ceiling_length = feature.ceiling_length;
     this.tessellation = feature.tessellation;
     this.pattern_strength = feature.pattern_strength;
     this.material = feature.material;
@@ -237,7 +247,7 @@ export class Feature {
         // in degrees 0-360
         "Angle":  this.angle,
         // in inches
-        "Ceiling_Length": this.ceilingLength
+        "Ceiling_Length": this.ceiling_length
       }
     }
   }
@@ -304,6 +314,7 @@ export class Feature {
           feature_type = 'Freestanding Curved';
           break;
 
+        // wall feature
         case 2:
           feature_type = 'Wall';
           break;
@@ -311,7 +322,12 @@ export class Feature {
         // wall-to-ceiling partition
         case 3:
           feature_type = 'Wall-to-Ceiling';
-        break;
+          break;
+
+        // ceiling feature
+        case 4:
+          feature_type = 'Ceiling Feature';
+          break;
 
         // wall
         default:
