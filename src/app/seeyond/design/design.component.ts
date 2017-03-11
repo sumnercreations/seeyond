@@ -43,7 +43,8 @@ export class DesignComponent implements OnInit {
   }
 
   public updateAcousticFoam() {
-    this.feature.acousticFoam = this.acousticFoam;
+    // this.feature.acousticFoam = this.acousticFoam;
+    this.feature.updateAcousticFoam(this.acousticFoam);
   }
 
 }

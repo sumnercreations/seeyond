@@ -9,12 +9,13 @@ export class Feature {
   public feature_type: number;
   public title: string;
   public name: string;
+  public design_name: string;
   public image: string;
   public width: number;
   public height: number;
   public radius: number;
   public angle: number;
-  public ceilingLength: number;
+  public ceiling_length: number;
   public syd_v: any = {};
   public syd_t: any = {};
   public data: any = [];
@@ -27,7 +28,8 @@ export class Feature {
   public estimatedAmt: number; // this should be determined by the boxCost and number of boxes in design
   public acousticFoam: boolean = false;
   public quoted: boolean = false; // boolean
-  public boxsize: number = 14; // baked in number right now.
+  public archived: boolean = false; // boolean
+  public boxsize: number = 16; // baked in number right now.
   public features: any = {
     "0": {
       "feature_type": 0,
@@ -36,7 +38,8 @@ export class Feature {
       "image": "/assets/images/renderings/freestanding_linear_partition.png",
       "width": 96,
       "height": 72,
-      "boxCost": 85.37
+      "boxCost": 163.17,
+      "boxCostWithFoam": 176.84
     },
    "1": {
       "feature_type": 1,
@@ -46,7 +49,8 @@ export class Feature {
       "width": 96,
       "height": 72,
       "radius": 60,
-      "boxCost": 85.37
+      "boxCost": 163.17,
+      "boxCostWithFoam": 176.84
     },
    "2": {
       "feature_type": 2,
@@ -55,7 +59,8 @@ export class Feature {
       "image": "/assets/images/renderings/wall.png",
       "width": 48,
       "height": 48,
-      "boxCost": 85.37
+      "boxCost": 93.01,
+      "boxCostWithFoam": 106.68
     },
    "3": {
       "feature_type": 3,
@@ -65,9 +70,20 @@ export class Feature {
       "width": 72,
       "height": 96,
       "angle": 90,
-      "ceilingLength": 72,
-      "boxCost": 87.17
+      "ceiling_length": 72,
+      "boxCost": 105.45,
+      "boxCostWithFoam": 119.13
     }
+    // "4": {
+    //   "feature_type": 4,
+    //   "name": "ceiling",
+    //   "title": "Ceiling Feature",
+    //   "image": "/assets/images/renderings/ceiling.png",
+    //   "width": 48,
+    //   "height": 48,
+    //   "boxCost": 105.45
+    //   "boxCostWithFoam": 119.13
+    // },
   };
 
   constructor() {
@@ -96,7 +112,7 @@ export class Feature {
     this.height = feature.height;
     this.radius = feature.radius;
     this.angle = feature.angle;
-    this.ceilingLength = feature.ceilingLength;
+    this.ceiling_length = feature.ceiling_length;
     this.boxCost = feature.boxCost;
 
     this.reloadVisualization();
@@ -108,11 +124,12 @@ export class Feature {
     this.feature_type = feature.feature_type;
     this.title = feature.title;
     this.name = feature.name;
+    this.design_name = feature.design_name;
     this.width = feature.width;
     this.height = feature.height;
     this.radius = feature.radius;
     this.angle = feature.angle;
-    this.ceilingLength = feature.ceilingLength;
+    this.ceiling_length = feature.ceiling_length;
     this.tessellation = feature.tessellation;
     this.pattern_strength = feature.pattern_strength;
     this.material = feature.material;
@@ -120,6 +137,7 @@ export class Feature {
     this.xml = feature.xml;
     this.acousticFoam = feature.acousticFoam;
     this.quoted = feature.quoted;
+    this.archived = feature.archived;
     this.boxCost = this.getBoxCost(feature.feature_type); // need to get this from the feature_type as well
     this.image = this.getFeatureImage(feature.feature_type); // need to get this from the feature_type
 
@@ -154,8 +172,15 @@ export class Feature {
     console.log("boxes: " + this.boxes);
     console.log("sheets: " + sheets);
     console.log("magnets: " + magnets);
-    this.estimatedAmt = this.boxes * this.boxCost;
+    console.log("feature type: " + this.feature_type);
+    this.estimatedAmt = this.boxes * this.getBoxCost(this.feature_type);
     return this.estimatedAmt;
+  }
+
+  updateAcousticFoam(value: boolean) {
+    this.acousticFoam = value;
+    // feature has been updated (so we can update the price to include acoustic foam)
+    this.onFeatureUpdated.emit();
   }
 
   getMaterialImage(material: string) {
@@ -210,7 +235,14 @@ export class Feature {
   }
 
   getBoxCost(feature_type: number) {
-    return this.features[feature_type].boxCost;
+    var cost;
+    if(this.acousticFoam) {
+      cost = this.features[feature_type].boxCostWithFoam;
+    }else{
+      cost = this.features[feature_type].boxCost;
+    }
+
+    return cost;
   }
 
   getFeatureImage(feature_type: number) {
@@ -237,7 +269,7 @@ export class Feature {
         // in degrees 0-360
         "Angle":  this.angle,
         // in inches
-        "Ceiling_Length": this.ceilingLength
+        "Ceiling_Length": this.ceiling_length
       }
     }
   }
@@ -304,6 +336,7 @@ export class Feature {
           feature_type = 'Freestanding Curved';
           break;
 
+        // wall feature
         case 2:
           feature_type = 'Wall';
           break;
@@ -311,7 +344,12 @@ export class Feature {
         // wall-to-ceiling partition
         case 3:
           feature_type = 'Wall-to-Ceiling';
-        break;
+          break;
+
+        // ceiling feature
+        case 4:
+          feature_type = 'Ceiling Feature';
+          break;
 
         // wall
         default:

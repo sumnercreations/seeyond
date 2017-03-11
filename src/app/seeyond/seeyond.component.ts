@@ -51,6 +51,10 @@ export class SeeyondComponent implements OnInit {
                 this.feature.updateFeature(3);
                 break;
 
+              case "ceiling":
+                this.feature.updateFeature(4);
+                break;
+
               default:
                 // default to the wall if they pass something we don't support.
                 this.router.navigate(['/feature', 'wall']);
@@ -61,7 +65,8 @@ export class SeeyondComponent implements OnInit {
             this.seeyond.loadFeature(this.selectedFeature).subscribe(
               feature => {
                 console.log(feature);
-                if(feature != null) {
+                // if feature was found and is not archived
+                if(feature != null && !feature.archived) {
                   this.feature.loadFeature(feature);
                 }else{
                   // redirect to default wall feature

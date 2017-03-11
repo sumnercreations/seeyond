@@ -4,11 +4,12 @@ import { SeeyondService } from '../_services/seeyond.service';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
-import { QuoteDialogComponent } from '../quote-dialog/quote-dialog.component';
 import { Feature } from '../feature';
 import { User } from "../_models/user";
 import { AlertService } from "../_services/alert.service";
+import { QuoteDialogComponent } from '../quote-dialog/quote-dialog.component';
 import { LoadSeeyondsDialogComponent } from "../load-seeyonds-dialog/load-seeyonds-dialog.component";
+import { SaveSeeyondDialogComponent } from "../save-seeyond-dialog/save-seeyond-dialog.component";
 
 @Component({
   selector: 'seeyond-actions',
@@ -16,6 +17,8 @@ import { LoadSeeyondsDialogComponent } from "../load-seeyonds-dialog/load-seeyon
   styleUrls: ['./actions.component.css']
 })
 export class ActionsComponent implements OnInit {
+  saveDialogRef: MdDialogRef<any>;
+  loadDialogRef: MdDialogRef<any>;
 
   constructor(
     private seeyond: SeeyondService,
@@ -28,6 +31,15 @@ export class ActionsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // subscribe to the saved event to close the save dialog
+    this.seeyond.onSaved.subscribe(success => {
+      console.log("Caught onSaved event");
+      this.saveDialogRef.close();
+    });
+    // subscribe to the loaded event to close the load dialog
+    this.seeyond.onLoaded.subscribe(success => {
+      this.loadDialogRef.close();
+    });
   }
 
   createXmlHref() {
@@ -36,31 +48,15 @@ export class ActionsComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL( blob ));
   }
 
-  saveFeature() {
-    var result;
-    var newDesign;
-    console.log(this.feature.id);
-    if (this.feature.id == null) {
-      result = this.seeyond.saveFeature();
-      newDesign = true;
-    }else{
-      result = this.seeyond.updateFeature();
-      newDesign = false;
-    }
-    console.log(newDesign);
-    result.subscribe(feature => {
-      this.alert.success("Successfully saved feature");
-      this.feature = feature;
-      if(newDesign)
-        this.router.navigate(['/feature', feature.id]);
-    });
+  saveFeatureDialog() {
+    this.saveDialogRef = this.dialog.open(SaveSeeyondDialogComponent, new MdDialogConfig);
   }
 
   myFeaturesDialog() {
     this.seeyond.getMyFeatures().subscribe(features => {
       if (features.length) {
-        var dialogRef = this.dialog.open(LoadSeeyondsDialogComponent, new MdDialogConfig);
-        dialogRef.componentInstance.seeyonds = features;
+        this.loadDialogRef = this.dialog.open(LoadSeeyondsDialogComponent, new MdDialogConfig);
+        this.loadDialogRef.componentInstance.seeyonds = features;
       }
     });
 
@@ -79,9 +75,9 @@ export class ActionsComponent implements OnInit {
 
   getQuote() {
     // load the dialog to confirm the design we will be sending
-    let config = new MdDialogConfig();
+    var config = new MdDialogConfig();
     config.width = '500px';
-    let dialogRef = this.dialog.open(QuoteDialogComponent, config);
+    var dialogRef = this.dialog.open(QuoteDialogComponent, config);
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'confirm') {
         this.quoteConfirmed();
@@ -90,8 +86,8 @@ export class ActionsComponent implements OnInit {
   }
 
   quoteConfirmed() {
-    console.log('quote was confirmed');
     // mark the design as quoted and save
+    this.alert.success("Your quote request has been sent.");
     this.feature.quoted = true;
     // send seeyond design email
 
