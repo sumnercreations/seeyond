@@ -28,7 +28,8 @@ export class Feature {
   public estimatedAmt: number; // this should be determined by the boxCost and number of boxes in design
   public acousticFoam: boolean = false;
   public quoted: boolean = false; // boolean
-  public boxsize: number = 14; // baked in number right now.
+  public archived: boolean = false; // boolean
+  public boxsize: number = 16; // baked in number right now.
   public features: any = {
     "0": {
       "feature_type": 0,
@@ -37,7 +38,8 @@ export class Feature {
       "image": "/assets/images/renderings/freestanding_linear_partition.png",
       "width": 96,
       "height": 72,
-      "boxCost": 85.37
+      "boxCost": 163.17,
+      "boxCostWithFoam": 176.84
     },
    "1": {
       "feature_type": 1,
@@ -47,7 +49,8 @@ export class Feature {
       "width": 96,
       "height": 72,
       "radius": 60,
-      "boxCost": 85.37
+      "boxCost": 163.17,
+      "boxCostWithFoam": 176.84
     },
    "2": {
       "feature_type": 2,
@@ -56,7 +59,8 @@ export class Feature {
       "image": "/assets/images/renderings/wall.png",
       "width": 48,
       "height": 48,
-      "boxCost": 85.37
+      "boxCost": 93.01,
+      "boxCostWithFoam": 106.68
     },
    "3": {
       "feature_type": 3,
@@ -67,7 +71,8 @@ export class Feature {
       "height": 96,
       "angle": 90,
       "ceiling_length": 72,
-      "boxCost": 87.17
+      "boxCost": 105.45,
+      "boxCostWithFoam": 119.13
     }
     // "4": {
     //   "feature_type": 4,
@@ -76,7 +81,8 @@ export class Feature {
     //   "image": "/assets/images/renderings/ceiling.png",
     //   "width": 48,
     //   "height": 48,
-    //   "boxCost": 85.37
+    //   "boxCost": 105.45
+    //   "boxCostWithFoam": 119.13
     // },
   };
 
@@ -118,6 +124,7 @@ export class Feature {
     this.feature_type = feature.feature_type;
     this.title = feature.title;
     this.name = feature.name;
+    this.design_name = feature.design_name;
     this.width = feature.width;
     this.height = feature.height;
     this.radius = feature.radius;
@@ -130,6 +137,7 @@ export class Feature {
     this.xml = feature.xml;
     this.acousticFoam = feature.acousticFoam;
     this.quoted = feature.quoted;
+    this.archived = feature.archived;
     this.boxCost = this.getBoxCost(feature.feature_type); // need to get this from the feature_type as well
     this.image = this.getFeatureImage(feature.feature_type); // need to get this from the feature_type
 
@@ -164,8 +172,15 @@ export class Feature {
     console.log("boxes: " + this.boxes);
     console.log("sheets: " + sheets);
     console.log("magnets: " + magnets);
-    this.estimatedAmt = this.boxes * this.boxCost;
+    console.log("feature type: " + this.feature_type);
+    this.estimatedAmt = this.boxes * this.getBoxCost(this.feature_type);
     return this.estimatedAmt;
+  }
+
+  updateAcousticFoam(value: boolean) {
+    this.acousticFoam = value;
+    // feature has been updated (so we can update the price to include acoustic foam)
+    this.onFeatureUpdated.emit();
   }
 
   getMaterialImage(material: string) {
@@ -220,7 +235,14 @@ export class Feature {
   }
 
   getBoxCost(feature_type: number) {
-    return this.features[feature_type].boxCost;
+    var cost;
+    if(this.acousticFoam) {
+      cost = this.features[feature_type].boxCostWithFoam;
+    }else{
+      cost = this.features[feature_type].boxCost;
+    }
+
+    return cost;
   }
 
   getFeatureImage(feature_type: number) {

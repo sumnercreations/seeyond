@@ -3,7 +3,7 @@
     <button class="btn-block button button-gray" (click)="myFeaturesDialog();">Load</button>
   </div>
   <div class="col-xs-3">
-    <button [disabled]="feature.uid && feature.uid != user.uid" class="btn-block button button-gray" (click)="saveFeatureDialog()">Save</button>
+    <button class="btn-block button button-gray" (click)="saveFeatureDialog()">Save</button>
   </div>
   <div class="col-xs-3">
     <a class="btn-block button button-gray" download="{{feature.name}}.xml" [href]="createXmlHref()">download</a>

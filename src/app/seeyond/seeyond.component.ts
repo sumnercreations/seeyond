@@ -65,7 +65,8 @@ export class SeeyondComponent implements OnInit {
             this.seeyond.loadFeature(this.selectedFeature).subscribe(
               feature => {
                 console.log(feature);
-                if(feature != null) {
+                // if feature was found and is not archived
+                if(feature != null && !feature.archived) {
                   this.feature.loadFeature(feature);
                 }else{
                   // redirect to default wall feature

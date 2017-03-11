@@ -17,6 +17,8 @@ import { SaveSeeyondDialogComponent } from "../save-seeyond-dialog/save-seeyond-
   styleUrls: ['./actions.component.css']
 })
 export class ActionsComponent implements OnInit {
+  saveDialogRef: MdDialogRef<any>;
+  loadDialogRef: MdDialogRef<any>;
 
   constructor(
     private seeyond: SeeyondService,
@@ -29,9 +31,15 @@ export class ActionsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Do we even need to do this?
     // subscribe to the saved event to close the save dialog
+    this.seeyond.onSaved.subscribe(success => {
+      console.log("Caught onSaved event");
+      this.saveDialogRef.close();
+    });
     // subscribe to the loaded event to close the load dialog
+    this.seeyond.onLoaded.subscribe(success => {
+      this.loadDialogRef.close();
+    });
   }
 
   createXmlHref() {
@@ -41,14 +49,14 @@ export class ActionsComponent implements OnInit {
   }
 
   saveFeatureDialog() {
-    var dialogRef = this.dialog.open(SaveSeeyondDialogComponent, new MdDialogConfig);
+    this.saveDialogRef = this.dialog.open(SaveSeeyondDialogComponent, new MdDialogConfig);
   }
 
   myFeaturesDialog() {
     this.seeyond.getMyFeatures().subscribe(features => {
       if (features.length) {
-        var dialogRef = this.dialog.open(LoadSeeyondsDialogComponent, new MdDialogConfig);
-        dialogRef.componentInstance.seeyonds = features;
+        this.loadDialogRef = this.dialog.open(LoadSeeyondsDialogComponent, new MdDialogConfig);
+        this.loadDialogRef.componentInstance.seeyonds = features;
       }
     });
 

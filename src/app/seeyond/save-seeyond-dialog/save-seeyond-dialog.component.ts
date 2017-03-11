@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MdDialogRef, MdDialogConfig } from '@angular/material';
 import { Router } from '@angular/router';
 import { Feature } from '../feature';
+import { User } from "../_models/user";
 import { AlertService } from "../_services/alert.service";
 import { SeeyondService } from '../_services/seeyond.service';
 
@@ -12,11 +13,13 @@ import { SeeyondService } from '../_services/seeyond.service';
 })
 export class SaveSeeyondDialogComponent {
   public newDesign: boolean;
+  public newButton: boolean = false;
 
   constructor(
     private dialogRef: MdDialogRef<SaveSeeyondDialogComponent>,
     private router: Router,
     private feature: Feature,
+    private user: User,
     private alert: AlertService,
     private seeyond: SeeyondService
   ) { }
@@ -26,16 +29,16 @@ export class SaveSeeyondDialogComponent {
     this.newDesign = this.feature.id ? false : true;
   }
 
+  newButtonClick() {
+    this.newButton = true;
+  }
+
   saveFeature() {
-    this.dialogRef.afterClosed().subscribe(button => {
-      if(button == 'saveNew') {
-        this.newDesign = true;
-      }
-    })
+    console.log(this.newButton);
     console.log(this.feature.design_name);
     console.log("Feature ID: " + this.feature.id);
     console.log("New Design: " + this.newDesign);
-    if (this.newDesign) {
+    if (this.newDesign || this.newButton) {
       this.saveNew();
     }else{
       this.seeyond.updateFeature().subscribe(feature => {
