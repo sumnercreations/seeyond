@@ -28,9 +28,9 @@ export class DimensionsComponent implements OnInit {
     switch (name) {
       case "width":
         this.feature.width = measurement;
-        if(this.feature.radius < measurement *.5) {
-          this.feature.radius = (this.feature.width *.5) + 12;
-          this.alert.error('The radius must be at least half the width. Radius set to: ' + this.feature.radius);
+        if(this.feature.radius < (measurement *.5) + 1) {
+          this.feature.radius = (this.feature.width *.5) + 1;
+          this.alert.error('The radius must be greater than half the width. Radius set to: ' + this.feature.radius);
           console.log(this.feature.radius);
         }
         break;
@@ -40,9 +40,9 @@ export class DimensionsComponent implements OnInit {
         break;
 
       case "radius":
-        if(measurement < this.feature.width *.5) {
-          this.feature.radius = (this.feature.width *.5) + 12;
-          this.alert.error('The radius must be at least half the width. Radius set to: ' + this.feature.radius);
+        if(measurement < (this.feature.width *.5) + 1) {
+          this.feature.radius = (this.feature.width *.5) + 1;
+          this.alert.error('The radius must be greater than half the width. Radius set to: ' + this.feature.radius);
         } else {
           this.feature.radius = measurement;
         }
@@ -52,8 +52,8 @@ export class DimensionsComponent implements OnInit {
         this.feature.angle = measurement;
         break;
 
-      case "ceilingLength":
-        this.feature.ceilingLength = measurement;
+      case "ceiling_length":
+        this.feature.ceiling_length = measurement;
         break;
 
       default:

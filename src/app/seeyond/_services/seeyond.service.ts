@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
@@ -9,6 +9,8 @@ import {User} from "../_models/user";
 
 @Injectable()
 export class SeeyondService {
+  onSaved = new EventEmitter();
+  onLoaded = new EventEmitter();
   apiUrl = 'https://' + environment.API_URL + '/seeyonds/';
 
   constructor(
@@ -40,11 +42,12 @@ export class SeeyondService {
       "feature_type": this.feature.feature_type,
       "title": this.feature.title,
       "name": this.feature.name,
+      "design_name": this.feature.design_name,
       "width": this.feature.width,
       "height": this.feature.height,
       "radius": this.feature.radius,
       "angle": this.feature.angle,
-      "ceiling_length": this.feature.ceilingLength,
+      "ceiling_length": this.feature.ceiling_length,
       "tessellation": this.feature.tessellation,
       "pattern_strength": this.feature.pattern_strength,
       "material": this.feature.material,
@@ -52,7 +55,8 @@ export class SeeyondService {
       "boxes": this.feature.boxes,
       "xml": this.feature.xml,
       "acousticFoam": this.feature.acousticFoam,
-      "quoted": this.feature.quoted
+      "quoted": this.feature.quoted,
+      "archived": this.feature.archived
     };
 
     let headers = new Headers({"Content-Type": "application/json"});
@@ -60,6 +64,8 @@ export class SeeyondService {
 
     return this.http.patch(this.apiUrl + this.feature.id, patchData, options)
       .map((res: Response) => {
+        this.onSaved.emit();
+        console.log("emitting onSaved");
         return res.json() || {}
       })
       .catch(this.handleError);
@@ -71,11 +77,12 @@ export class SeeyondService {
       "feature_type": this.feature.feature_type,
       "title": this.feature.title,
       "name": this.feature.name,
+      "design_name": this.feature.design_name,
       "width": this.feature.width,
       "height": this.feature.height,
       "radius": this.feature.radius,
       "angle": this.feature.angle,
-      "ceiling_length": this.feature.ceilingLength,
+      "ceiling_length": this.feature.ceiling_length,
       "tessellation": this.feature.tessellation,
       "pattern_strength": this.feature.pattern_strength,
       "material": this.feature.material,
@@ -83,11 +90,14 @@ export class SeeyondService {
       "boxes": this.feature.boxes,
       "xml": this.feature.xml,
       "acousticFoam": this.feature.acousticFoam,
-      "quoted": this.feature.quoted
+      "quoted": this.feature.quoted,
+      "archived": this.feature.archived
     };
 
     return this.http.post(this.apiUrl, patchData)
       .map((res: Response) => {
+        this.onSaved.emit();
+        console.log("emitting onSaved");
         return res.json() || {}
       })
       .catch(this.handleError);
