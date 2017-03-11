@@ -7,7 +7,7 @@
   <p>You can't save a design that is not yours.</p>
 </div>
 <!-- logged in -->
-<div *ngIf="feature.uid && feature.uid == user.uid">
+<div *ngIf="(feature.uid && feature.uid == user.uid) || (user.uid && !feature.id)">
   <h2 md-dialog-title class="text-center">Save Your Design</h2>
   <div md-dialog-content>
     <form (ngSubmit)="saveFeature()" #saveForm="ngForm">
