@@ -1,8 +1,26 @@
 <h2 md-dialog-title class="text-center">My Seeyond Projects</h2>
 <div md-dialog-content>
-  <ul class="seeyond-projects">
+  <!-- <ul class="seeyond-projects">
     <li *ngFor="let seeyond of seeyonds" class="seeyond-feature">
       ({{seeyond.id}}) {{seeyond.design_name}}
+      <i class="material-icons">delete</i>
+      <i class="material-icons">open_in_new</i>
     </li>
-  </ul>
+  </ul> -->
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+    <tr *ngFor="let seeyond of seeyonds">
+      <td (click)="load(seeyond.id)" class="link">{{seeyond.id}}</td>
+      <td (click)="load(seeyond.id)" class="link">{{seeyond.design_name}}</td>
+      <td>
+        <i class="material-icons link" (click)="delete(seeyond.id)">delete</i>
+        <!-- <i class="material-icons link" (click)="load(seeyond.id)">open_in_new</i> -->
+        <i class="material-icons link" (click)="load(seeyond.id)">open_in_new</i>
+      </td>
+    </tr>
+  </table>
 </div>

@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import { MdDialogRef, MdDialogConfig } from '@angular/material';
+import { Router } from '@angular/router';
 import { Feature } from '../feature';
 
 @Component({
@@ -11,7 +12,19 @@ export class LoadSeeyondsDialogComponent {
 
   public seeyonds: Array<Feature>;
 
-  constructor(private dialogRef: MdDialogRef<LoadSeeyondsDialogComponent>) {
+  constructor(
+    private dialogRef: MdDialogRef<LoadSeeyondsDialogComponent>,
+    private router: Router
+  ) {
+  }
+
+  load(id: number) {
+    console.log("loading seeyond id: " + id);
+    this.router.navigate(['/feature', id]);
+  }
+
+  delete(id: number) {
+    console.log("Deleting seeyond id: " + id);
   }
 
 }

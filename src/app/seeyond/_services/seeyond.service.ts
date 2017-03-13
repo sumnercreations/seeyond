@@ -29,7 +29,9 @@ export class SeeyondService {
     console.log('Loading Feature');
     return this.http.get(this.apiUrl + id)
       .map((res: Response) => {
-        console.log(res);
+        console.log(res.json());
+        this.onLoaded.emit();
+        console.log("emitting onLoaded");
         return res.json();
       })
       .catch(this.handleError);
