@@ -75,6 +75,7 @@ export class SeeyondComponent implements OnInit {
               },
               error => {
                 if(error) {
+                  console.log(error);
                   this.alert.apiAlert(error);
                 }
               }
