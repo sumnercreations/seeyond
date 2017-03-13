@@ -11,15 +11,13 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
-      <th>Actions</th>
+      <th>Delete</th>
     </tr>
     <tr *ngFor="let seeyond of seeyonds">
       <td (click)="load(seeyond.id)" class="link">{{seeyond.id}}</td>
       <td (click)="load(seeyond.id)" class="link">{{seeyond.design_name}}</td>
       <td>
         <i class="material-icons link" (click)="delete(seeyond.id)">delete</i>
-        <!-- <i class="material-icons link" (click)="load(seeyond.id)">open_in_new</i> -->
-        <i class="material-icons link" (click)="load(seeyond.id)">open_in_new</i>
       </td>
     </tr>
   </table>
