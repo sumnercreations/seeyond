@@ -28,7 +28,7 @@ export class DimensionsComponent implements OnInit {
     switch (name) {
       case "width":
         this.feature.width = measurement;
-        if(this.feature.radius < (measurement *.5) + 1) {
+        if(this.feature.feature_type == 1 && this.feature.radius < (measurement *.5) + 1) {
           this.feature.radius = (this.feature.width *.5) + 1;
           this.alert.error('The radius must be greater than half the width. Radius set to: ' + this.feature.radius);
           console.log(this.feature.radius);

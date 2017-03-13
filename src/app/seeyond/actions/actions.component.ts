@@ -38,7 +38,8 @@ export class ActionsComponent implements OnInit {
     });
     // subscribe to the loaded event to close the load dialog
     this.seeyond.onLoaded.subscribe(success => {
-      this.loadDialogRef.close();
+      console.log("Caught onLoaded event");
+      this.loadDialogRef? this.loadDialogRef.close() : null;
     });
   }
 
