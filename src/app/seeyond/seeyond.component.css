@@ -27,6 +27,8 @@
   padding: 20px;
 }
 
+/* Setting the max width to 970. Even on desktop for now. */
 .container {
   padding-bottom: 0;
+  width: 970px;
 }
