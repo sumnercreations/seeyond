@@ -12,6 +12,6 @@ export class VisualizationComponent implements OnInit {
 
 ngOnInit() {
     // var syd_v = require( 'syd-visualization' );
-    this.feature.syd_v.QT.Visualization.SetCanvasSize(740,602);
+    this.feature.syd_v.QT.Visualization.SetCanvasSize(606,602);
   }
 }
