@@ -15,8 +15,10 @@ export class AlertService {
     // api alerts contain an _body element that needs to be parsed as JSON
     body = JSON.parse(alert._body);
 
-    if(body.result.error) {
+    if(body.result && body.result.error) {
       this.error(body.result.message);
+    }else if(body.error) {
+      this.error(body.message);
     }else{
       this.success(body.result.message);
     }

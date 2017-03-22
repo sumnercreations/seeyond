@@ -27,22 +27,52 @@ export class DimensionsComponent implements OnInit {
   public updateFeatureMeasurement(measurement: number, name: string) {
     switch (name) {
       case "width":
-        this.feature.width = measurement;
-        if(this.feature.feature_type == 1 && this.feature.radius < (measurement *.5) + 1) {
+        if(measurement < 50) {
+          this.feature.width = 50;
+          this.alert.error('The minimum width is 50 inches');
+        } else if(measurement > 240) {
+          this.feature.width = 240;
+          this.alert.error('The maximum width is 240 inches');
+        } else if(this.feature.feature_type == 1 && this.feature.radius < (measurement *.5) + 1) {
+          this.feature.width = measurement;
           this.feature.radius = (this.feature.width *.5) + 1;
           this.alert.error('The radius must be greater than half the width. Radius set to: ' + this.feature.radius);
-          console.log(this.feature.radius);
+        } else {
+          this.feature.width = measurement;
         }
         break;
 
       case "height":
-        this.feature.height = measurement;
+        if(measurement < 50) {
+          this.feature.height = 50;
+          this.alert.error('The minimum height is 50 inches');
+        } else if((this.feature.feature_type == 0 || this.feature.feature_type == 1) && measurement > 84) {
+          this.feature.height = 84;
+          this.alert.error('The maximum height for partitions is 84 inches');
+        } else if(this.feature.feature_type == 2 && measurement > 120) {
+          this.feature.height = 120;
+          this.alert.error('The maximum height for wall features is 120 inches');
+        } else if(this.feature.feature_type == 3 && measurement > 192) {
+          this.feature.height = 192;
+          this.alert.error('The maximum height for wall to ceiling is 192 inches');
+        } else if(this.feature.feature_type == 4 && measurement > 240) {
+          this.feature.height = 240;
+          this.alert.error('The maximum height for ceilings is 240 inches');
+        } else {
+          this.feature.height = measurement;
+        }
         break;
 
       case "radius":
         if(measurement < (this.feature.width *.5) + 1) {
           this.feature.radius = (this.feature.width *.5) + 1;
           this.alert.error('The radius must be greater than half the width. Radius set to: ' + this.feature.radius);
+        } else if(measurement > 300) {
+          this.feature.radius = (this.feature.width *.5) + 1;
+          this.alert.error('The maximum radius is 300 inches.');
+        } else if(measurement < 30) {
+          this.feature.radius = (this.feature.width *.5) + 1;
+          this.alert.error('The minimum radius is 30 inches');
         } else {
           this.feature.radius = measurement;
         }
@@ -53,7 +83,15 @@ export class DimensionsComponent implements OnInit {
         break;
 
       case "ceiling_length":
-        this.feature.ceiling_length = measurement;
+        if(measurement < 50) {
+          this.feature.ceiling_length = 50;
+          this.alert.error('The minimum ceiling length is 50 inches');
+        } else if(measurement > 144) {
+          this.feature.ceiling_length = 144;
+          this.alert.error('The maximum ceiling length is 144 inches');
+        } else {
+          this.feature.ceiling_length = measurement;
+        }
         break;
 
       default:

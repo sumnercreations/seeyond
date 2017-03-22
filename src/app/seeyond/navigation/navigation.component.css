@@ -1,5 +1,4 @@
 .nav-pills > li {
-  // width: 49%;
   text-align: center;
   background-color: rgb(205,202,203);
 }
@@ -7,7 +6,7 @@
 .nav-pills > li > a {
   border-radius: 0;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
 }
 

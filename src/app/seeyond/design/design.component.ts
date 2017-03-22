@@ -15,12 +15,12 @@ export class DesignComponent implements OnInit {
   pattern_strength = this.feature.pattern_strength;
   strengths = [1,2,3,4,5,6,7,8,9,10];
 
-  acousticFoam: boolean;
+  acoustic_foam: boolean;
 
   constructor(private feature: Feature) { }
 
   ngOnInit() {
-    this.acousticFoam = this.feature.acousticFoam;
+    this.acoustic_foam = this.feature.acoustic_foam;
   }
 
   public updateSelectedTessellation(tessellation: number) {
@@ -31,8 +31,9 @@ export class DesignComponent implements OnInit {
 
   public updateSelectedMaterial(material: string) {
     this.selectedMaterial = this.feature.material = material;
+    this.feature.sheet_part_id = this.feature.felt_sheet_mapping[material];
     // update the visualization
-    this.feature.reloadVisualization();
+    this.feature.redrawVisualization();
   }
 
   public updatePatternStrength(strength: number) {
@@ -43,8 +44,7 @@ export class DesignComponent implements OnInit {
   }
 
   public updateAcousticFoam() {
-    // this.feature.acousticFoam = this.acousticFoam;
-    this.feature.updateAcousticFoam(this.acousticFoam);
+    this.feature.updateAcousticFoam(this.acoustic_foam);
   }
 
 }

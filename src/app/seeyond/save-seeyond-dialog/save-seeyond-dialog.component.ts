@@ -27,6 +27,8 @@ export class SaveSeeyondDialogComponent {
   ngOnInit() {
     // if the design already has an ID then it's not new.
     this.newDesign = this.feature.id ? false : true;
+    console.log("save init");
+    console.log(this.user);
   }
 
   newButtonClick() {
@@ -34,10 +36,6 @@ export class SaveSeeyondDialogComponent {
   }
 
   saveFeature() {
-    console.log(this.newButton);
-    console.log(this.feature.design_name);
-    console.log("Feature ID: " + this.feature.id);
-    console.log("New Design: " + this.newDesign);
     if (this.newDesign || this.newButton) {
       this.saveNew();
     }else{
@@ -51,16 +49,11 @@ export class SaveSeeyondDialogComponent {
         if(url != this.router.url) {
           this.router.navigate(['/feature', this.feature.id]);
         }
-        console.log("####################");
-        console.log(this.router.url);
-        console.log(url);
-        console.log("####################");
       });
     }
   }
 
   saveNew() {
-    console.log("+++++ Saving New ++++++");
     this.seeyond.saveFeature().subscribe(feature => {
       // notify the user that we saved their design
       this.alert.success("Successfully saved your design");

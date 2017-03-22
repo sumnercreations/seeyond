@@ -33,6 +33,12 @@ export class LoginService {
 
   logout() {
     localStorage.removeItem('seeyondUser');
+    console.log(this.user);
+    this.user.uid = null;
+    this.user.email = null;
+    this.user.firstname = null;
+    this.user.lastname = null;
+    console.log(this.user);
   }
 
 }
