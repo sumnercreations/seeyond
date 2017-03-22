@@ -8,7 +8,7 @@ import { Feature } from '../feature';
 })
 export class OptionsComponent implements OnInit {
   boxCost: number;
-	estimatedAmt: number;
+	estimated_amount: number;
 
 	// activeTab will be determined by the seeyond-navigation component
 	activeTab = 'dimensions';
@@ -28,7 +28,7 @@ export class OptionsComponent implements OnInit {
     this.feature.onFeatureUpdated.subscribe(
       data => {
         this.feature.updateEstimatedAmount();
-        this.estimatedAmt = this.feature.getFormattedAmount();
+        this.estimated_amount = this.feature.getFormattedAmount();
       }
     );
   }
@@ -36,7 +36,7 @@ export class OptionsComponent implements OnInit {
   onFeatureUpdated() {
     console.log("$$$$$ Feature Updated $$$$$");
     this.feature.updateEstimatedAmount();
-    this.estimatedAmt = this.feature.getFormattedAmount();
+    this.estimated_amount = this.feature.getFormattedAmount();
   }
 
   public updateActiveTab(tab: string) {

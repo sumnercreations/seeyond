@@ -20,19 +20,13 @@ export class LoginDialogComponent {
   ) { }
 
   login() {
-    console.log(this.email);
-    console.log(this.password);
     this.loading = true;
     this.auth.login(this.email, this.password)
       .subscribe(
         data => {
-          console.log("data");
-          console.log(data)
           this.alert.success("Successfully logged in.");
         },
         error => {
-          console.log("Error");
-          console.log(error);
           if(error) {
             this.alert.apiAlert(error);
           }

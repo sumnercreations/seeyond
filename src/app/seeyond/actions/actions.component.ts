@@ -33,12 +33,10 @@ export class ActionsComponent implements OnInit {
   ngOnInit() {
     // subscribe to the saved event to close the save dialog
     this.seeyond.onSaved.subscribe(success => {
-      console.log("Caught onSaved event");
-      this.saveDialogRef.close();
+      this.saveDialogRef? this.saveDialogRef.close() : null;
     });
     // subscribe to the loaded event to close the load dialog
     this.seeyond.onLoaded.subscribe(success => {
-      console.log("Caught onLoaded event");
       this.loadDialogRef? this.loadDialogRef.close() : null;
     });
   }
@@ -55,21 +53,12 @@ export class ActionsComponent implements OnInit {
 
   myFeaturesDialog() {
     this.seeyond.getMyFeatures().subscribe(features => {
-      if (features.length) {
-        this.loadDialogRef = this.dialog.open(LoadSeeyondsDialogComponent, new MdDialogConfig);
-        this.loadDialogRef.componentInstance.seeyonds = features;
-      }
+      this.loadDialogRef = this.dialog.open(LoadSeeyondsDialogComponent, new MdDialogConfig);
+      this.loadDialogRef.componentInstance.seeyonds = features;
     });
-
-    // let serviceResponse = this.seeyond.loadFeature(id).subscribe((res: Response) => {
-    //   let loadedFeature = res.json();
-    //   console.log(loadedFeature);
-    //   this.router.navigate(['/feature', loadedFeature.name, loadedFeature.id]);
-    // });
   }
 
   downloadImages() {
-    console.log('downloading the images');
     this.feature.syd_v.QT.Visualization.TakeSnapshot(45);
 
     // let profile = this.feature.syd_v.QT.TakeSnapshot(45);
@@ -80,20 +69,6 @@ export class ActionsComponent implements OnInit {
     var config = new MdDialogConfig();
     config.width = '500px';
     var dialogRef = this.dialog.open(QuoteDialogComponent, config);
-    dialogRef.afterClosed().subscribe(result => {
-      if(result == 'confirm') {
-        this.quoteConfirmed();
-      }
-    });
-  }
-
-  quoteConfirmed() {
-    // mark the design as quoted and save
-    this.alert.success("Your quote request has been sent.");
-    this.feature.quoted = true;
-    // send seeyond design email
-
-    // navigate to the url with the id, (if we aren't already there?)
   }
 
 }
