@@ -10,6 +10,8 @@ export class Feature {
   public title: string;
   public name: string;
   public design_name: string;
+  public project_name: string;
+  public specifier: string;
   public image: string;
   public width: number;
   public height: number;
@@ -23,13 +25,26 @@ export class Feature {
   public tessellation: number = 0; // court
   public pattern_strength: number = 3;
   public material: string = 'zinc';
-  public boxes: number; // this comes from the tessellation
-  public boxCost: number;
-  public estimatedAmt: number; // this should be determined by the boxCost and number of boxes in design
-  public acousticFoam: boolean = false;
+  public sheet_part_id: string = '0-51-804';
+  public boxes: number;
+  public sheets: number;
+  public estimated_amount: number;
+  public services_amount: number;
+  public acoustic_foam: boolean = false;
+  public random_seed: number;
   public quoted: boolean = false; // boolean
   public archived: boolean = false; // boolean
   public boxsize: number = 16; // baked in number right now.
+  public felt_sheet_mapping: any = {
+    "ebony": "0-51-800",
+    "dark_gray": "0-51-801",
+    "ore": "0-51-802",
+    "nickel": "0-51-803",
+    "zinc": "0-51-804",
+    "burnt_umber": "0-51-805",
+    "cashmere": "0-51-806",
+    "cast": "0-51-807"
+  }
   public features: any = {
     "0": {
       "feature_type": 0,
@@ -38,8 +53,6 @@ export class Feature {
       "image": "/assets/images/renderings/freestanding_linear_partition.png",
       "width": 96,
       "height": 72,
-      "boxCost": 163.17,
-      "boxCostWithFoam": 176.84
     },
    "1": {
       "feature_type": 1,
@@ -49,8 +62,6 @@ export class Feature {
       "width": 96,
       "height": 72,
       "radius": 60,
-      "boxCost": 163.17,
-      "boxCostWithFoam": 176.84
     },
    "2": {
       "feature_type": 2,
@@ -59,8 +70,6 @@ export class Feature {
       "image": "/assets/images/renderings/wall.png",
       "width": 48,
       "height": 48,
-      "boxCost": 93.01,
-      "boxCostWithFoam": 106.68
     },
    "3": {
       "feature_type": 3,
@@ -71,8 +80,6 @@ export class Feature {
       "height": 96,
       "angle": 90,
       "ceiling_length": 72,
-      "boxCost": 105.45,
-      "boxCostWithFoam": 119.13
     }
     // "4": {
     //   "feature_type": 4,
@@ -80,9 +87,7 @@ export class Feature {
     //   "title": "Ceiling Feature",
     //   "image": "/assets/images/renderings/ceiling.png",
     //   "width": 48,
-    //   "height": 48,
-    //   "boxCost": 105.45
-    //   "boxCostWithFoam": 119.13
+    //   "height": 48
     // },
   };
 
@@ -113,7 +118,6 @@ export class Feature {
     this.radius = feature.radius;
     this.angle = feature.angle;
     this.ceiling_length = feature.ceiling_length;
-    this.boxCost = feature.boxCost;
 
     this.reloadVisualization();
   }
@@ -125,6 +129,8 @@ export class Feature {
     this.title = feature.title;
     this.name = feature.name;
     this.design_name = feature.design_name;
+    this.project_name = feature.project_name;
+    this.specifier = feature.specifier;
     this.width = feature.width;
     this.height = feature.height;
     this.radius = feature.radius;
@@ -133,22 +139,42 @@ export class Feature {
     this.tessellation = feature.tessellation;
     this.pattern_strength = feature.pattern_strength;
     this.material = feature.material;
+    this.sheet_part_id = feature.sheet_part_id;
     this.boxes = feature.boxes;
+    this.sheets = feature.sheets;
     this.xml = feature.xml;
-    this.acousticFoam = feature.acousticFoam;
+    this.acoustic_foam = feature.acoustic_foam;
+    this.random_seed = feature.random_seed;
+    this.services_amount = feature.services_amount;
+    this.estimated_amount = feature.estimated_amount;
     this.quoted = feature.quoted;
     this.archived = feature.archived;
-    this.boxCost = this.getBoxCost(feature.feature_type); // need to get this from the feature_type as well
     this.image = this.getFeatureImage(feature.feature_type); // need to get this from the feature_type
 
     this.reloadVisualization();
   }
 
   reloadVisualization() {
+    // We need to set the random_seed before UpdateFeature()
+    if(this.random_seed != undefined) {
+      console.log('RANDOM SEED IS SET.');
+      console.log("Current Random seed: " + this.random_seed);
+      this.syd_t.QT.SetRandomSeedValue(this.random_seed);
+    }//else{
+    //   this.random_seed = this.syd_t.QT.GetRandomSeedValue();
+    // }
+
     var jsonProperties = this.getJsonProperties();
 
     this.syd_t.QT.SetUserDataPropertiesJSONString(JSON.stringify(jsonProperties));
     this.syd_t.QT.UpdateFeature();
+
+    // Set the random_seed if it's not already set
+    if(this.random_seed == undefined) {
+      console.log('RANDOM SEED IS NOT SET');
+      this.random_seed = this.syd_t.QT.GetRandomSeedValue();
+      console.log("Current Random seed: " + this.random_seed);
+    }
 
     var front = this.syd_t.QT.GetFrontSurfacePoints();
     var back = this.syd_t.QT.GetBackSurfacePoints();
@@ -165,22 +191,169 @@ export class Feature {
     this.xml = this.getXML();
   }
 
+  redrawVisualization() {
+    var front = this.syd_t.QT.GetFrontSurfacePoints();
+    var back = this.syd_t.QT.GetBackSurfacePoints();
+    var uNum = this.syd_t.QT.GetU();
+    var vNum = this.syd_t.QT.GetV();
+
+    this.syd_v.QT.Visualization.visualizeFeature(front, back, uNum, vNum, this.getMaterialImage(this.material));
+
+    // feature has been updated
+    this.onFeatureUpdated.emit();
+
+    // update the XML
+    this.xml = this.getXML();
+  }
+
   updateEstimatedAmount() {
-    var sheets = this.syd_t.QT.GetSheets();
-    var magnets = this.syd_t.QT.GetMagnets();
+    var acousticFoamCost = 13.67;
+    var sheetCost = 63.15;
+    var stapleCost: number = (5.13/5000)/.4;
+    var ziptieCost: number = 0.08;
+    var magnetCost: number = 0.83;
+    var backplateCost: number = 14.50;
+    var baseplateCost: number = 19.92;
+    var frameCost: number = 36.75;
+
+    var columns = this.syd_t.QT.GetU();
+    var rows = this.syd_t.QT.GetV();
+    this.sheets = this.syd_t.QT.GetSheets();
     this.boxes = this.syd_t.QT.GetParts();
+
+    // PRODUCTS
+    var totalProductsCost = this.sheets * sheetCost;
+    if(this.acoustic_foam) {
+      totalProductsCost += (acousticFoamCost * this.boxes);
+    }
+
+    // HARDWARE
+    // This is only for the walls just to get my head wrapped around this...
+    var totalHardwareCost = 0;
+    // 3-15-1606
+    totalHardwareCost += (4 * Math.ceil(this.boxes/4)) * 1.81;
+    // 3-85-104
+    totalHardwareCost += (4 * Math.ceil(this.boxes/4)) * 0.61;
+    // 3-85-109
+    totalHardwareCost += (4 * Math.ceil(this.boxes/4)) * 0.09;
+
+    // SERVICES
+    var staples: number = this.boxes * 25;
+    var zipties: number = this.boxes * 0;
+    var magnets: number = this.syd_t.QT.GetMagnets();
+    var frames: number = Math.ceil(this.boxes/18);
+    var backplates: number = this.getBackplates(this.feature_type);
+    var baseplates: number = this.getBaseplates(this.feature_type);
+    var fabricationCost: number = this.getFabricationCost(this.feature_type);
+
+    this.services_amount = (staples * stapleCost) + (zipties * ziptieCost) + (magnets * magnetCost) + (backplates * backplateCost) + (baseplates * baseplateCost) + (frames * frameCost) + fabricationCost;
+
+    console.log("Rows: " + rows);
+    console.log("Columns: " + columns);
     console.log("boxes: " + this.boxes);
-    console.log("sheets: " + sheets);
+    console.log("sheets: " + this.sheets);
     console.log("magnets: " + magnets);
-    console.log("feature type: " + this.feature_type);
-    this.estimatedAmt = this.boxes * this.getBoxCost(this.feature_type);
-    return this.estimatedAmt;
+    console.log("stapleCost: " + stapleCost);
+    console.log("Staples cost: " + (staples * stapleCost));
+    console.log("Zipties cost: " + (zipties * ziptieCost));
+    console.log("Magnets cost: " + (magnets * magnetCost));
+    console.log("Backplates: " + backplates);
+    console.log("Backplates cost: " + (backplates * backplateCost));
+    console.log("Baseplates: " + baseplates);
+    console.log("Baseplates cost: " + (baseplates * baseplateCost));
+    console.log("Frames: " + frames);
+    console.log("Frames cost: " + (frames * frameCost));
+    console.log("Fabrication cost: " + fabricationCost);
+    console.log("Products cost: " + totalProductsCost);
+    console.log("Hardware cost: " + totalHardwareCost);
+    console.log("Services cost: " + this.services_amount);
+
+    this.estimated_amount = totalProductsCost + totalHardwareCost + this.services_amount;
+    return this.estimated_amount;
   }
 
   updateAcousticFoam(value: boolean) {
-    this.acousticFoam = value;
+    this.acoustic_foam = value;
     // feature has been updated (so we can update the price to include acoustic foam)
     this.onFeatureUpdated.emit();
+  }
+
+  getFabricationCost(feature_type: number) {
+    var ceilingFab = 48.46;
+    var partitionFab = 48.46;
+    var wallFab = 44.13;
+    var fabricationCost: number;
+
+    switch (feature_type) {
+      case 0:
+        // linear
+        fabricationCost = this.boxes * partitionFab;
+        break;
+
+      case 1:
+        fabricationCost = this.boxes * partitionFab;
+        break;
+
+      case 2:
+        fabricationCost = this.boxes * wallFab;
+        break;
+
+      case 3:
+        fabricationCost = (this.getWallBoxes() * wallFab) + (this.getCeilingBoxes() * ceilingFab);
+        break;
+
+      case 4:
+        fabricationCost = this.boxes * ceilingFab;
+        break;
+
+      default:
+        // shouldn't happen, but if it does default to the partition fab cost.
+        fabricationCost = this.boxes * partitionFab;
+        break;
+    }
+
+    return fabricationCost;
+  }
+
+  getWallBoxes() {
+    var wallRows = this.syd_t.QT.GetWallRows();
+    var wallCols = this.syd_t.QT.GetWallColumns();
+    console.log("wall rows: " + wallRows);
+    console.log("wall cols: " + wallCols);
+
+    return wallRows * wallCols;
+  }
+
+  getCeilingBoxes() {
+    var ceilingRows = this.syd_t.QT.GetCeilingRows();
+    var ceilingCols = this.syd_t.QT.GetCeilingColumns();
+    console.log("ceiling rows: " + ceilingRows);
+    console.log("ceiling cols: " + ceilingCols);
+
+    return ceilingRows * ceilingCols;
+  }
+
+  getBackplates(feature_type: number) {
+    if(feature_type == 2) {
+      // wall
+      return Math.ceil(Math.ceil(this.boxes/4)/3);
+    }else if(feature_type == 3) {
+      // wall-to-ceiling
+      var wallRows = this.syd_t.QT.GetWallRows();
+      var wallCols = this.syd_t.QT.GetWallColumns();
+      return Math.ceil(Math.ceil((wallRows * wallCols)/4)/3);
+    }else{
+      // anything else
+      return 0;
+    }
+  }
+
+  getBaseplates(feature_type: number) {
+    if(feature_type == 0 || feature_type == 1) {
+      return Math.ceil(this.syd_t.QT.GetU()/3);
+    }else{
+      return 0;
+    }
   }
 
   getMaterialImage(material: string) {
@@ -192,7 +365,7 @@ export class Feature {
   }
 
   getTessellationImage(tessellation: number) {
-    return '/assets/images/patterns/' + this.getTessellationName(tessellation).toLowerCase() + '.jpg';
+    return '/assets/images/patterns/' + this.getTessellationName(tessellation).toLowerCase() + '.png';
   }
 
   getTessellationName(tessellation: number) {
@@ -227,22 +400,16 @@ export class Feature {
 
   getFormattedAmount() {
     var accounting = require( 'accounting' );
-    return accounting.formatMoney(this.estimatedAmt);
+    return accounting.formatMoney(this.estimated_amount);
   }
 
   getFormattedAcousticFoam() {
-    return this.acousticFoam ? "Yes" : "No";
+    return this.acoustic_foam ? "Yes" : "No";
   }
 
-  getBoxCost(feature_type: number) {
-    var cost;
-    if(this.acousticFoam) {
-      cost = this.features[feature_type].boxCostWithFoam;
-    }else{
-      cost = this.features[feature_type].boxCost;
-    }
-
-    return cost;
+  getFormattedServicesAmount() {
+    var accounting = require( 'accounting' );
+    return accounting.formatMoney(this.services_amount);
   }
 
   getFeatureImage(feature_type: number) {
@@ -282,7 +449,7 @@ export class Feature {
     var vNum = this.syd_t.QT.GetV();
 
     var properties = JSON.parse(this.syd_t.QT.GetAllPropertiesAsJSONString());
-    console.log(properties);
+    // console.log(properties);
 
     var takeOff = properties.Take_Off;
     var hemi = "single";
@@ -291,7 +458,7 @@ export class Feature {
     }
 
     var XMLWriter = require('xml-writer');
-    var xw = new XMLWriter();
+    var xw = new XMLWriter(true);
     xw.formatting = 'indented'; //add indentation and newlines
     xw.indentChar = ' '; //indent with spaces
     xw.indentation = 2; //add 2 spaces per level
@@ -299,21 +466,35 @@ export class Feature {
     xw.startElement('seeyondProject');
 
     xw.startElement('projectID');
-    xw.text('0001'); //TO DO: insert project ID here
+    if(this.id) {
+      xw.text(this.id);
+    }else{
+      xw.text('New Project');
+    }
     xw.endElement('projectID');
 
-    xw.startElement('user');
-    xw.text('testUser'); //TO DO: insert user here
-    xw.endElement('user');
+    if(this.uid) {
+      xw.startElement('user');
+         xw.startElement('uid');
+           xw.text(this.uid);
+         xw.endElement('uid');
+         // xw.startElement('name')
+         //   xw.text(this.user.getFullname());
+         // xw.endElement('name');
+         // xw.startElement('email');
+         //   xw.text(this.user.email);
+         // xw.endElement('email');
+      xw.endElement('user');
+    }
 
     xw.startElement('order');
 
       xw.startElement('orderDate');
       xw.text('2017-01-22'); //TO DO: insert order date here
       xw.endElement('orderDate');
-
+      // TO DO: add the products price, hardware price and services price
       xw.startElement('price');
-      xw.text(this.estimatedAmt);
+      xw.text(this.estimated_amount);
       xw.endElement('price');
 
       xw.startElement('notes');
@@ -423,7 +604,12 @@ export class Feature {
     xw.startElement('productAttributes');
 
       xw.startElement('material');
-      xw.text('felt');  //TO DO: insert material spec here
+        xw.startElement('partid');
+          xw.text('#-###-###'); //TO DO: add the partid as a property
+        xw.endElement('partid');
+        xw.startElement('name');
+          xw.text(this.material);
+        xw.endElement('name');
       xw.endElement('material');
 
       xw.startElement('hemisphere');

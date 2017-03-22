@@ -36,6 +36,7 @@ import { KeysPipe } from './seeyond/keys.pipe';
 import { User } from './seeyond/_models/user';
 import {LoadSeeyondsDialogComponent} from "./seeyond/load-seeyonds-dialog/load-seeyonds-dialog.component";
 import { SaveSeeyondDialogComponent } from './seeyond/save-seeyond-dialog/save-seeyond-dialog.component';
+import { ConfirmDeleteDialogComponent } from './seeyond/confirm-delete-dialog/confirm-delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { SaveSeeyondDialogComponent } from './seeyond/save-seeyond-dialog/save-s
     LoginDialogComponent,
     LoadSeeyondsDialogComponent,
     AlertComponent,
-    SaveSeeyondDialogComponent
+    SaveSeeyondDialogComponent,
+    ConfirmDeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +78,8 @@ import { SaveSeeyondDialogComponent } from './seeyond/save-seeyond-dialog/save-s
     LoginDialogComponent,
     AlertComponent,
     LoadSeeyondsDialogComponent,
-    SaveSeeyondDialogComponent
+    SaveSeeyondDialogComponent,
+    ConfirmDeleteDialogComponent
   ],
 })
 export class AppModule { }

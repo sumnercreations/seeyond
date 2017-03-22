@@ -4,20 +4,29 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-sm-3 pattern" (click)="updateSelectedTessellation(0)" [class.selected]="selectedTessellation==0">
-    <img src="/assets/images/patterns/court.jpg" alt="Court Pattern" class="img-responsive">
+  <div class="col-sm-3 pattern text-center" (click)="updateSelectedTessellation(0)" [class.selected]="selectedTessellation==0">
+    <div class="content">
+      <img src="/assets/images/patterns/court.png" alt="Court Pattern" class="img-responsive">
+      <span>Court</span>
+    </div>
   </div>
-  <div class="col-sm-3 pattern" (click)="updateSelectedTessellation(3)" [class.selected]="selectedTessellation==3">
-    <img src="/assets/images/patterns/tilt.jpg" alt="Tilt Pattern" class="img-responsive">
+  <div class="col-sm-3 pattern text-center" (click)="updateSelectedTessellation(3)" [class.selected]="selectedTessellation==3">
+    <img src="/assets/images/patterns/tilt.png" alt="Tilt Pattern" class="img-responsive">
+    <span>Tilt</span>
   </div>
-  <div class="col-sm-3 pattern" (click)="updateSelectedTessellation(1)" [class.selected]="selectedTessellation==1">
-    <img src="/assets/images/patterns/cusp.jpg" alt="Cusp Pattern" class="img-responsive">
+  <div class="col-sm-3 pattern text-center" (click)="updateSelectedTessellation(1)" [class.selected]="selectedTessellation==1">
+    <img src="/assets/images/patterns/cusp.png" alt="Cusp Pattern" class="img-responsive">
+    <span>Cusp</span>
   </div>
-  <div class="col-sm-3 pattern" (click)="updateSelectedTessellation(4)" [class.selected]="selectedTessellation==4">
-    <img src="/assets/images/patterns/billow.jpg" alt="Billow Pattern" class="img-responsive">
+  <div class="col-sm-3 pattern text-center" (click)="updateSelectedTessellation(4)" [class.selected]="selectedTessellation==4">
+    <img src="/assets/images/patterns/billow.png" alt="Billow Pattern" class="img-responsive">
+    <span>Billow</span>
   </div>
-  <div class="col-sm-3 pattern" (click)="updateSelectedTessellation(2)" [class.selected]="selectedTessellation==2">
-    <img src="/assets/images/patterns/kink.jpg" alt="Kink Pattern" class="img-responsive">
+</div>
+<div class="row">
+  <div class="col-sm-3 pattern text-center" (click)="updateSelectedTessellation(2)" [class.selected]="selectedTessellation==2">
+    <img src="/assets/images/patterns/kink.png" alt="Kink Pattern" class="img-responsive">
+    <span>Kink</span>
   </div>
 </div>
 <div class="row">
@@ -62,6 +71,7 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <md-checkbox color="primary" [(ngModel)]="acousticFoam" (change)="updateAcousticFoam()">Add Acoustic Foam</md-checkbox>
+    <md-checkbox color="primary" [(ngModel)]="acoustic_foam" (change)="updateAcousticFoam()">Add Acoustic Foam</md-checkbox>
+    <span class="help-block">Foam increases acoustic rating to .90 NRC</span>
   </div>
 </div>

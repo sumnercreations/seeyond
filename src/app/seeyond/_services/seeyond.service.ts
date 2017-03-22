@@ -45,6 +45,8 @@ export class SeeyondService {
       "title": this.feature.title,
       "name": this.feature.name,
       "design_name": this.feature.design_name,
+      "project_name": this.feature.project_name,
+      "specifier": this.feature.specifier,
       "width": this.feature.width,
       "height": this.feature.height,
       "radius": this.feature.radius,
@@ -53,10 +55,15 @@ export class SeeyondService {
       "tessellation": this.feature.tessellation,
       "pattern_strength": this.feature.pattern_strength,
       "material": this.feature.material,
+      "sheet_part_id": this.feature.sheet_part_id,
       "boxsize": this.feature.boxsize,
       "boxes": this.feature.boxes,
+      "sheets": this.feature.sheets,
       "xml": this.feature.xml,
-      "acousticFoam": this.feature.acousticFoam,
+      "acoustic_foam": this.feature.acoustic_foam,
+      "random_seed": this.feature.random_seed,
+      "services_amount": this.feature.services_amount,
+      "estimated_amount": this.feature.estimated_amount,
       "quoted": this.feature.quoted,
       "archived": this.feature.archived
     };
@@ -80,6 +87,8 @@ export class SeeyondService {
       "title": this.feature.title,
       "name": this.feature.name,
       "design_name": this.feature.design_name,
+      "project_name": this.feature.project_name,
+      "specifier": this.feature.specifier,
       "width": this.feature.width,
       "height": this.feature.height,
       "radius": this.feature.radius,
@@ -88,10 +97,15 @@ export class SeeyondService {
       "tessellation": this.feature.tessellation,
       "pattern_strength": this.feature.pattern_strength,
       "material": this.feature.material,
+      "sheet_part_id": this.feature.sheet_part_id,
       "boxsize": this.feature.boxsize,
       "boxes": this.feature.boxes,
+      "sheets": this.feature.sheets,
       "xml": this.feature.xml,
-      "acousticFoam": this.feature.acousticFoam,
+      "acoustic_foam": this.feature.acoustic_foam,
+      "random_seed": this.feature.random_seed,
+      "services_amount": this.feature.services_amount,
+      "estimated_amount": this.feature.estimated_amount,
       "quoted": this.feature.quoted,
       "archived": this.feature.archived
     };
@@ -105,8 +119,14 @@ export class SeeyondService {
       .catch(this.handleError);
   }
 
-  deleteFeature(id: number, uid: number) {
-    return this.http.delete(this.apiUrl)
+  deleteFeature(id: number) {
+    return this.http.delete(this.apiUrl + id)
+  }
+
+  sendEmail() {
+    return this.http.get(this.apiUrl + 'email/' + this.user.uid + '/feature/' + this.feature.id)
+      .map((res: Response) => res.json())
+      .catch(this.handleError)
   }
 
   private handleError(error: any) {

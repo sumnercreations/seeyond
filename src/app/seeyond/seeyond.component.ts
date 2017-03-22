@@ -26,13 +26,11 @@ export class SeeyondComponent implements OnInit {
     // initialize the feature based on the URL path.
     router.events.subscribe((event) => {
       this.route.params.subscribe(params => {
-        console.log(params);
         if(event instanceof NavigationEnd) {
           // feature - default values
           this.selectedFeature = params['feature'];
 
           if(!Number(this.selectedFeature)) {
-            console.log("LOADING DEFAULT FEATURE: " + this.selectedFeature);
             switch (this.selectedFeature) {
               case "linear-partition":
                 this.feature.title = 'linear-partition';
@@ -61,10 +59,8 @@ export class SeeyondComponent implements OnInit {
                 break;
             }
           }else if(Number(this.selectedFeature)) {
-            console.log("LOADING FEATURE: " + this.selectedFeature + " FROM DB");
             this.seeyond.loadFeature(this.selectedFeature).subscribe(
               feature => {
-                console.log(feature);
                 // if feature was found and is not archived
                 if(feature != null && !feature.archived) {
                   this.feature.loadFeature(feature);
@@ -75,7 +71,6 @@ export class SeeyondComponent implements OnInit {
               },
               error => {
                 if(error) {
-                  console.log(error);
                   this.alert.apiAlert(error);
                 }
               }
