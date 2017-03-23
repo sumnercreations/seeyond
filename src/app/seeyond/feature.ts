@@ -35,6 +35,7 @@ export class Feature {
   public quoted: boolean = false; // boolean
   public archived: boolean = false; // boolean
   public boxsize: number = 16; // baked in number right now.
+  public prices: any;
   public felt_sheet_mapping: any = {
     "ebony": "0-51-800",
     "dark_gray": "0-51-801",
@@ -207,14 +208,14 @@ export class Feature {
   }
 
   updateEstimatedAmount() {
-    var acousticFoamCost = 13.67;
-    var sheetCost = 63.15;
-    var stapleCost: number = (5.13/5000)/.4;
-    var ziptieCost: number = 0.08;
-    var magnetCost: number = 0.83;
-    var backplateCost: number = 14.50;
-    var baseplateCost: number = 19.92;
-    var frameCost: number = 36.75;
+    var acousticFoamCost = this.prices['acoustic_foam'];
+    var sheetCost = this.prices['felt_sheet'];
+    var stapleCost: number = this.prices['staple'];
+    var ziptieCost: number = this.prices['ziptie'];
+    var magnetCost: number = this.prices['magnet'];
+    var backplateCost: number = this.prices['backplate'];
+    var baseplateCost: number = this.prices['baseplate'];
+    var frameCost: number = this.prices['frame'];
 
     var columns = this.syd_t.QT.GetU();
     var rows = this.syd_t.QT.GetV();
@@ -526,12 +527,6 @@ export class Feature {
          xw.startElement('uid');
            xw.text(this.uid);
          xw.endElement('uid');
-         // xw.startElement('name')
-         //   xw.text(this.user.getFullname());
-         // xw.endElement('name');
-         // xw.startElement('email');
-         //   xw.text(this.user.email);
-         // xw.endElement('email');
       xw.endElement('user');
     }
 
