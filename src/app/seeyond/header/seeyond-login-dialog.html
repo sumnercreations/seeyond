@@ -1,0 +1,30 @@
+<div class="dialog-header text-center">
+  <p>My3form Account</p>
+  <h3 md-dialog-title>Sign In</h3>
+</div>
+<div md-dialog-content>
+  <form>
+    <div class="col-sm-12">
+      <div class="form-group">
+        <md-input-container class="full-width">
+          <input mdInput md-input placeholder="Email" type="email" name="email" id="email">
+        </md-input-container>
+      </div>
+      <div class="form-group">
+        <md-input-container class="full-width">
+          <input mdInput md-input placeholder="Password" type="password" name="password" id="password">
+        </md-input-container>
+      </div>
+    </div>
+  </form>
+</div>
+<div md-dialog-actions class="text-center">
+  <button (click)="dialogRef.close('submit')" class="button button-gray">Submit</button>
+</div>
+<div class="no-account text-center">
+  <p><small class="text-uppercase">Don't have an account?</small></p>
+  <a href="https://www.3-form.com/userprofile" target="_user" class="signup">Sign Up</a>
+</div>
+<div class="text-center dialog-footer">
+  <a href="http://www.3-form.com/userprofile/reset" target="_user" class="text-uppercase">Forgot Password?</a>
+</div>

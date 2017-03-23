@@ -5,7 +5,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 
 const appRoutes: Routes = [
-	{ path: '', component: SeeyondComponent },
+	{ path: '', redirectTo: '/feature/wall', pathMatch: 'full'},
+  { path: 'feature/:feature', component: SeeyondComponent }, // starting with a feature
 	{ path: '**', component: PageNotFoundComponent }
 ];
 

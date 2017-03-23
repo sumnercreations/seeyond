@@ -1,6 +1,7 @@
 <div id="header" class="header">
 	<h1 class="title">{{feature?.title}}</h1>
 	<ul class="pull-right">
-		<li><a href="#" class="login">Login to Account</a></li>
+		<li *ngIf="!user.uid"><button md-button (click)="loginDialog()" class="login"><i class="material-icons">account_circle</i> Login</button></li>
+    <li *ngIf="user.uid"><button md-button (click)="logout()" class="logout"><i class="material-icons">power_settings_new</i> Logout</button></li>
 	</ul>
 </div>

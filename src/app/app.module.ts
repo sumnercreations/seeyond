@@ -21,9 +21,22 @@ import { ActionsComponent } from './seeyond/actions/actions.component';
 import { NavigationComponent } from './seeyond/navigation/navigation.component';
 import { DimensionsComponent } from './seeyond/dimensions/dimensions.component';
 import { DesignComponent } from './seeyond/design/design.component';
+import { QuoteDialogComponent } from './seeyond/quote-dialog/quote-dialog.component';
+import { LoginDialogComponent } from './seeyond/login-dialog/login-dialog.component';
+import { AlertComponent } from './seeyond/alert/alert.component';
+
+// services
+import { SeeyondService } from './seeyond/_services/seeyond.service';
+import { LoginService } from './seeyond/_services/login.service';
+import { AlertService } from './seeyond/_services/alert.service';
 
 // classes
 import { Feature } from './seeyond/feature';
+import { KeysPipe } from './seeyond/keys.pipe';
+import { User } from './seeyond/_models/user';
+import {LoadSeeyondsDialogComponent} from "./seeyond/load-seeyonds-dialog/load-seeyonds-dialog.component";
+import { SaveSeeyondDialogComponent } from './seeyond/save-seeyond-dialog/save-seeyond-dialog.component';
+import { ConfirmDeleteDialogComponent } from './seeyond/confirm-delete-dialog/confirm-delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +50,13 @@ import { Feature } from './seeyond/feature';
     NavigationComponent,
     DimensionsComponent,
     DesignComponent,
+    KeysPipe,
+    QuoteDialogComponent,
+    LoginDialogComponent,
+    LoadSeeyondsDialogComponent,
+    AlertComponent,
+    SaveSeeyondDialogComponent,
+    ConfirmDeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,8 +66,20 @@ import { Feature } from './seeyond/feature';
     MaterialModule.forRoot()
   ],
   providers: [
-    Feature
+    Feature,
+    SeeyondService,
+    LoginService,
+    AlertService,
+    User
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    QuoteDialogComponent,
+    LoginDialogComponent,
+    AlertComponent,
+    LoadSeeyondsDialogComponent,
+    SaveSeeyondDialogComponent,
+    ConfirmDeleteDialogComponent
+  ],
 })
 export class AppModule { }

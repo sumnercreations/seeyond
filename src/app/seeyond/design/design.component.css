@@ -6,11 +6,23 @@
   padding-left: 5px;
   padding-right: 5px;
   margin-bottom: 10px;
-  width: 116px;
+}
+
+.pattern {
+  padding-top: 5px;
+}
+
+.pattern > span {
+  font-family: 'Graphik Web';
+  font-size: 12px;
 }
 
 .pattern img {
-  border: 1px solid #cdcdcd;
+  cursor: pointer;
+}
+
+.material img {
+  cursor: pointer;
 }
 
 .tooltip-host {
@@ -18,13 +30,18 @@
   align-items: center;
 }
 
-.selected img {
-  border: 5px solid #f5a01a;
+/* patterns have text too not just the image that need the border */
+.pattern.selected {
+  border: 2px solid #f5a01a;
 }
 
-.materials-container {
-  height: 170px;
-  overflow: scroll;
+/* no extra border around the image on patterns */
+.pattern.selected img {
+  border: none;
+}
+
+.selected img {
+  border: 2px solid #f5a01a;
 }
 
 .pattern-strenth-range {
@@ -33,7 +50,7 @@
 
 p.header {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 label {
