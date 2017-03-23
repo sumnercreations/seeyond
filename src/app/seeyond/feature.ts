@@ -228,20 +228,13 @@ export class Feature {
     }
 
     // HARDWARE
-    // This is only for the walls just to get my head wrapped around this...
     var totalHardwareCost = 0;
-    // 3-15-1606
-    totalHardwareCost += (4 * Math.ceil(this.boxes/4)) * 1.81;
-    // 3-85-104
-    totalHardwareCost += (4 * Math.ceil(this.boxes/4)) * 0.61;
-    // 3-85-109
-    totalHardwareCost += (4 * Math.ceil(this.boxes/4)) * 0.09;
 
     // SERVICES
-    var staples: number = this.boxes * 25;
-    var zipties: number = this.boxes * 0;
+    var staples: number = this.getStaples(this.feature_type);
+    var zipties: number = this.getZipties(this.feature_type);
     var magnets: number = this.syd_t.QT.GetMagnets();
-    var frames: number = Math.ceil(this.boxes/18);
+    var frames: number = this.getFrames(this.feature_type);
     var backplates: number = this.getBackplates(this.feature_type);
     var baseplates: number = this.getBaseplates(this.feature_type);
     var fabricationCost: number = this.getFabricationCost(this.feature_type);
@@ -350,9 +343,64 @@ export class Feature {
 
   getBaseplates(feature_type: number) {
     if(feature_type == 0 || feature_type == 1) {
+      // partitions
       return Math.ceil(this.syd_t.QT.GetU()/3);
     }else{
       return 0;
+    }
+  }
+
+  getStaples(feature_type: number) {
+    if(feature_type == 0 || feature_type == 1) {
+      // partitions
+      return this.boxes * 25;
+    }else if(feature_type == 2) {
+      // wall
+      return this.boxes * 25;
+    }else if(feature_type == 3) {
+      // wall-to-ceiling
+      return this.boxes * 25;
+    }else if(feature_type == 4) {
+      // ceiling
+      return this.boxes * 25;
+    }else{
+      // anything else
+      return this.boxes * 25;
+    }
+  }
+
+  getZipties(feature_type: number) {
+    if(feature_type == 0 || feature_type == 1) {
+      // partitions
+      return Math.ceil(this.boxes * 12);
+    }else if(feature_type == 2) {
+      // wall
+      return 0;
+    }else if(feature_type == 3) {
+      // wall-to-ceiling only the ceiling needs ties
+      var ceilingRows = this.syd_t.QT.GetCeilingRows();
+      var ceilingCols = this.syd_t.QT.GetCeilingColumns();
+      var ceilingBoxes = Math.ceil(ceilingRows * ceilingCols);
+      return Math.ceil(ceilingBoxes * 24);
+    }else if(feature_type == 4) {
+      // ceiling
+      return Math.ceil(this.boxes * 24);
+    }
+  }
+
+  getFrames(feature_type: number) {
+    if(feature_type == 0 || feature_type == 1) {
+      // partitions
+      return Math.ceil(this.boxes/18);
+    }else if(feature_type == 2) {
+      // wall
+      return Math.ceil(this.boxes/18);
+    }else if(feature_type == 3) {
+      // wall-to-ceiling
+      return Math.ceil(this.boxes/18);
+    }else if(feature_type == 4) {
+      // ceiling
+      return Math.ceil(this.boxes/18);
     }
   }
 
