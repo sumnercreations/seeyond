@@ -61,7 +61,7 @@ export class ActionsComponent implements OnInit {
   downloadImages() {
     this.feature.syd_v.QT.Visualization.TakeSnapshot(45);
 
-    // let profile = this.feature.syd_v.QT.TakeSnapshot(45);
+    // var profile = this.feature.syd_v.QT.TakeSnapshot(45);
   }
 
   getQuote() {
