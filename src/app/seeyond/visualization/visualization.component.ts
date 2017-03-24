@@ -8,7 +8,9 @@ import { Feature } from '../feature';
 })
 export class VisualizationComponent implements OnInit {
 
-  constructor(private feature: Feature) { }
+  constructor(
+    public feature: Feature
+  ) { }
 
 ngOnInit() {
     // var syd_v = require( 'syd-visualization' );
