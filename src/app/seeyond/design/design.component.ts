@@ -17,7 +17,9 @@ export class DesignComponent implements OnInit {
 
   acoustic_foam: boolean;
 
-  constructor(private feature: Feature) { }
+  constructor(
+    public feature: Feature
+  ) { }
 
   ngOnInit() {
     this.acoustic_foam = this.feature.acoustic_foam;

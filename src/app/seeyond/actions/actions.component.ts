@@ -22,12 +22,12 @@ export class ActionsComponent implements OnInit {
 
   constructor(
     private seeyond: SeeyondService,
-    private feature: Feature,
     private sanitizer: DomSanitizer,
+    private alert: AlertService,
     public router: Router,
     public dialog: MdDialog,
-    private user: User,
-    private alert: AlertService
+    public user: User,
+    public feature: Feature
   ) { }
 
   ngOnInit() {
