@@ -129,6 +129,12 @@ export class SeeyondService {
       .catch(this.handleError)
   }
 
+  getPrices() {
+    return this.http.get(this.apiUrl + 'prices')
+      .map((res: Response) => res.json())
+      .catch(this.handleError)
+  }
+
   private handleError(error: any) {
     let errorJson = error.json();
     if (errorJson) {
