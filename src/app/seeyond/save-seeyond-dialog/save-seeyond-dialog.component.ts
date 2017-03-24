@@ -18,10 +18,10 @@ export class SaveSeeyondDialogComponent {
   constructor(
     private dialogRef: MdDialogRef<SaveSeeyondDialogComponent>,
     private router: Router,
-    private feature: Feature,
-    private user: User,
     private alert: AlertService,
-    private seeyond: SeeyondService
+    private seeyond: SeeyondService,
+    public feature: Feature,
+    public user: User
   ) { }
 
   ngOnInit() {

@@ -12,9 +12,9 @@ import { Feature } from '../feature';
 export class DimensionsComponent implements OnInit {
 
   constructor(
-    private feature: Feature,
     private alert: AlertService,
-    public router: Router
+    public router: Router,
+    public feature: Feature
   ) { }
 
   ngOnInit() {
