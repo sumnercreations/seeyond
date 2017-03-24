@@ -26,57 +26,62 @@ export class SeeyondComponent implements OnInit {
     // initialize the feature based on the URL path.
     router.events.subscribe((event) => {
       this.route.params.subscribe(params => {
-        if(event instanceof NavigationEnd) {
-          // feature - default values
-          this.selectedFeature = params['feature'];
+        // init the seeyond prices
+        this.seeyond.getPrices().subscribe(response => {
+          console.log(response);
+          this.feature.prices = response;
+          if(event instanceof NavigationEnd) {
+            // feature - default values
+            this.selectedFeature = params['feature'];
 
-          if(!Number(this.selectedFeature)) {
-            switch (this.selectedFeature) {
-              case "linear-partition":
-                this.feature.title = 'linear-partition';
-                this.feature.updateFeature(0);
-                break;
+            if(!Number(this.selectedFeature)) {
+              switch (this.selectedFeature) {
+                case "linear-partition":
+                  this.feature.title = 'linear-partition';
+                  this.feature.updateFeature(0);
+                  break;
 
-              case "curved-partition":
-                this.feature.updateFeature(1);
-                break;
+                case "curved-partition":
+                  this.feature.updateFeature(1);
+                  break;
 
-              case "wall":
-                this.feature.updateFeature(2);
-                break;
+                case "wall":
+                  this.feature.updateFeature(2);
+                  break;
 
-              case "wall-to-ceiling":
-                this.feature.updateFeature(3);
-                break;
+                case "wall-to-ceiling":
+                  this.feature.updateFeature(3);
+                  break;
 
-              case "ceiling":
-                this.feature.updateFeature(4);
-                break;
+                case "ceiling":
+                  this.feature.updateFeature(4);
+                  break;
 
-              default:
-                // default to the wall if they pass something we don't support.
-                this.router.navigate(['/feature', 'wall']);
-                break;
-            }
-          }else if(Number(this.selectedFeature)) {
-            this.seeyond.loadFeature(this.selectedFeature).subscribe(
-              feature => {
-                // if feature was found and is not archived
-                if(feature != null && !feature.archived) {
-                  this.feature.loadFeature(feature);
-                }else{
-                  // redirect to default wall feature
+                default:
+                  // default to the wall if they pass something we don't support.
                   this.router.navigate(['/feature', 'wall']);
-                }
-              },
-              error => {
-                if(error) {
-                  this.alert.apiAlert(error);
-                }
+                  break;
               }
-            );
+            }else if(Number(this.selectedFeature)) {
+              this.seeyond.loadFeature(this.selectedFeature).subscribe(
+                feature => {
+                  // if feature was found and is not archived
+                  if(feature != null && !feature.archived) {
+                    this.feature.loadFeature(feature);
+                  }else{
+                    // redirect to default wall feature
+                    this.router.navigate(['/feature', 'wall']);
+                  }
+                },
+                error => {
+                  if(error) {
+                    this.alert.apiAlert(error);
+                  }
+                }
+              );
+            }
           }
-        }
+        });
       });
     });
 

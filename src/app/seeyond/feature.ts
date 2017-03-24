@@ -35,6 +35,7 @@ export class Feature {
   public quoted: boolean = false; // boolean
   public archived: boolean = false; // boolean
   public boxsize: number = 16; // baked in number right now.
+  public prices: any;
   public felt_sheet_mapping: any = {
     "ebony": "0-51-800",
     "dark_gray": "0-51-801",
@@ -53,6 +54,11 @@ export class Feature {
       "image": "/assets/images/renderings/freestanding_linear_partition.png",
       "width": 96,
       "height": 72,
+      "hardware": {
+        "3-15-0842": {},
+        "3-85-105": {},
+        "3-85-106": {}
+      }
     },
    "1": {
       "feature_type": 1,
@@ -62,6 +68,11 @@ export class Feature {
       "width": 96,
       "height": 72,
       "radius": 60,
+      "hardware": {
+        "3-15-0842": {},
+        "3-85-105": {},
+        "3-85-106": {}
+      }
     },
    "2": {
       "feature_type": 2,
@@ -70,6 +81,11 @@ export class Feature {
       "image": "/assets/images/renderings/wall.png",
       "width": 48,
       "height": 48,
+      "hardware": {
+        "3-15-1606": {},
+        "3-85-104": {},
+        "3-85-109": {}
+      }
     },
    "3": {
       "feature_type": 3,
@@ -80,15 +96,37 @@ export class Feature {
       "height": 96,
       "angle": 90,
       "ceiling_length": 72,
-    }
-    // "4": {
-    //   "feature_type": 4,
-    //   "name": "ceiling",
-    //   "title": "Ceiling Feature",
-    //   "image": "/assets/images/renderings/ceiling.png",
-    //   "width": 48,
-    //   "height": 48
-    // },
+      "hardware": {
+        "3-15-1606": {},
+        "3-85-104": {},
+        "3-85-109": {},
+        "3-85-107": {},
+        "3-85-108": {},
+        "3-85-105": {},
+        "3-15-1674": {},
+        "3-15-1675": {},
+        "3-15-0842": {}
+      }
+    },
+    "4": {
+      "feature_type": 4,
+      "name": "ceiling",
+      "title": "Ceiling Feature",
+      "image": "/assets/images/renderings/ceiling.png",
+      "width": 48,
+      "height": 48,
+      "hardware": {
+        "3-15-1606": {},
+        "3-85-104": {},
+        "3-85-109": {},
+        "3-85-107": {},
+        "3-85-108": {},
+        "3-85-105": {},
+        "3-15-1674": {},
+        "3-15-1675": {},
+        "3-15-0842": {}
+      }
+    },
   };
 
   constructor() {
@@ -207,14 +245,14 @@ export class Feature {
   }
 
   updateEstimatedAmount() {
-    var acousticFoamCost = 13.67;
-    var sheetCost = 63.15;
-    var stapleCost: number = (5.13/5000)/.4;
-    var ziptieCost: number = 0.08;
-    var magnetCost: number = 0.83;
-    var backplateCost: number = 14.50;
-    var baseplateCost: number = 19.92;
-    var frameCost: number = 36.75;
+    var acousticFoamCost = this.prices['acoustic_foam'];
+    var sheetCost = this.prices['felt_sheet'];
+    var stapleCost: number = this.prices['staple'];
+    var ziptieCost: number = this.prices['ziptie'];
+    var magnetCost: number = this.prices['magnet'];
+    var backplateCost: number = this.prices['backplate'];
+    var baseplateCost: number = this.prices['baseplate'];
+    var frameCost: number = this.prices['frame'];
 
     var columns = this.syd_t.QT.GetU();
     var rows = this.syd_t.QT.GetV();
@@ -526,12 +564,6 @@ export class Feature {
          xw.startElement('uid');
            xw.text(this.uid);
          xw.endElement('uid');
-         // xw.startElement('name')
-         //   xw.text(this.user.getFullname());
-         // xw.endElement('name');
-         // xw.startElement('email');
-         //   xw.text(this.user.email);
-         // xw.endElement('email');
       xw.endElement('user');
     }
 
