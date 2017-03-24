@@ -18,8 +18,9 @@ export class OptionsComponent implements OnInit {
 	chevronPosition = '';
   buttonLink = '';
 
-  constructor(private feature: Feature) {
-  }
+  constructor(
+    public feature: Feature
+  ) { }
 
   ngOnInit() {
     this.updateActiveTab(this.activeTab);

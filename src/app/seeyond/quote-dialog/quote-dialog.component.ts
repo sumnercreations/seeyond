@@ -13,11 +13,11 @@ import { SeeyondService } from '../_services/seeyond.service';
 export class QuoteDialogComponent {
 
   constructor(
-    private feature: Feature,
     private seeyond: SeeyondService,
     private alert: AlertService,
     private router: Router,
-    public dialogRef: MdDialogRef<QuoteDialogComponent>
+    public dialogRef: MdDialogRef<QuoteDialogComponent>,
+    public feature: Feature
   ) { }
 
   quoteConfirmed() {
