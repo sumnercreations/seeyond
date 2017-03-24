@@ -59,9 +59,21 @@ export class ActionsComponent implements OnInit {
   }
 
   downloadImages() {
-    this.feature.syd_v.QT.Visualization.TakeSnapshot(45);
+    var profile = this.feature.syd_v.QT.Visualization.TakeSnapshot(45);
+    var facing  = this.feature.syd_v.QT.Visualization.TakeSnapshot(0);
+    var filename = this.feature.name + ".zip";
+    var FileSaver = require('file-saver');
+    var JSZip = require("jszip");
+    var zip = new JSZip();
 
-    // let profile = this.feature.syd_v.QT.TakeSnapshot(45);
+    profile = profile.replace(/^data:image\/(png|jpg);base64,/, '');
+    facing = facing.replace(/^data:image\/(png|jpg);base64,/, '');
+    zip.file("profile.png", profile, {base64: true});
+    zip.file("facing.png", facing, {base64: true});
+    zip.generateAsync({type:"blob"})
+    .then(function (blob) {
+        FileSaver.saveAs(blob, filename);
+    });
   }
 
   getQuote() {
