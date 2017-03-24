@@ -54,6 +54,11 @@ export class Feature {
       "image": "/assets/images/renderings/freestanding_linear_partition.png",
       "width": 96,
       "height": 72,
+      "hardware": {
+        "3-15-0842": {},
+        "3-85-105": {},
+        "3-85-106": {}
+      }
     },
    "1": {
       "feature_type": 1,
@@ -63,6 +68,11 @@ export class Feature {
       "width": 96,
       "height": 72,
       "radius": 60,
+      "hardware": {
+        "3-15-0842": {},
+        "3-85-105": {},
+        "3-85-106": {}
+      }
     },
    "2": {
       "feature_type": 2,
@@ -71,6 +81,11 @@ export class Feature {
       "image": "/assets/images/renderings/wall.png",
       "width": 48,
       "height": 48,
+      "hardware": {
+        "3-15-1606": {},
+        "3-85-104": {},
+        "3-85-109": {}
+      }
     },
    "3": {
       "feature_type": 3,
@@ -81,15 +96,37 @@ export class Feature {
       "height": 96,
       "angle": 90,
       "ceiling_length": 72,
-    }
-    // "4": {
-    //   "feature_type": 4,
-    //   "name": "ceiling",
-    //   "title": "Ceiling Feature",
-    //   "image": "/assets/images/renderings/ceiling.png",
-    //   "width": 48,
-    //   "height": 48
-    // },
+      "hardware": {
+        "3-15-1606": {},
+        "3-85-104": {},
+        "3-85-109": {},
+        "3-85-107": {},
+        "3-85-108": {},
+        "3-85-105": {},
+        "3-15-1674": {},
+        "3-15-1675": {},
+        "3-15-0842": {}
+      }
+    },
+    "4": {
+      "feature_type": 4,
+      "name": "ceiling",
+      "title": "Ceiling Feature",
+      "image": "/assets/images/renderings/ceiling.png",
+      "width": 48,
+      "height": 48,
+      "hardware": {
+        "3-15-1606": {},
+        "3-85-104": {},
+        "3-85-109": {},
+        "3-85-107": {},
+        "3-85-108": {},
+        "3-85-105": {},
+        "3-15-1674": {},
+        "3-15-1675": {},
+        "3-15-0842": {}
+      }
+    },
   };
 
   constructor() {
