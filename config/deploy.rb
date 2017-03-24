@@ -58,6 +58,13 @@ namespace :deploy do
     end
   end
 
+  desc "display angular version"
+  task :ng_version do
+    on roles(:web) do
+      execute "ng -v"
+    end
+  end
+
   after "updating", "deploy:npm_install"
   after "updating", "deploy:ng_build"
   after "updating", "deploy:precache"
