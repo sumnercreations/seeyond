@@ -20,8 +20,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private feature: Feature,
-    private user: User,
+    public feature: Feature,
+    public user: User,
     public dialog: MdDialog
   ) { }
 

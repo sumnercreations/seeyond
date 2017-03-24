@@ -18,12 +18,12 @@ export class LoadSeeyondsDialogComponent {
 
   constructor(
     private dialogRef: MdDialogRef<LoadSeeyondsDialogComponent>,
-    private feature: Feature,
-    private user: User,
     private alert: AlertService,
     private seeyond: SeeyondService,
     private router: Router,
-    public dialog: MdDialog
+    public dialog: MdDialog,
+    public feature: Feature,
+    public user: User
   ) {
   }
 
