@@ -9,8 +9,8 @@ import { AlertService } from '../_services/alert.service';
   styleUrls: ['./login-dialog.component.css']
 })
 export class LoginDialogComponent {
-  private email: string;
-  private password: string;
+  public email: string;
+  public password: string;
   public loading: boolean = false;
 
   constructor(
