@@ -38,6 +38,9 @@ export class SeeyondService {
   }
 
   updateFeature() {
+    console.log(this.feature.hardware);
+    let hardware = JSON.stringify({hardware: this.feature.hardware});
+    console.log(hardware)
     let patchData = {
       "id": this.feature.id,
       "uid": this.user.uid,
@@ -65,7 +68,8 @@ export class SeeyondService {
       "services_amount": this.feature.services_amount,
       "estimated_amount": this.feature.estimated_amount,
       "quoted": this.feature.quoted,
-      "archived": this.feature.archived
+      "archived": this.feature.archived,
+      "hardware": this.feature.hardware
     };
 
     let headers = new Headers({"Content-Type": "application/json"});
@@ -107,7 +111,8 @@ export class SeeyondService {
       "services_amount": this.feature.services_amount,
       "estimated_amount": this.feature.estimated_amount,
       "quoted": this.feature.quoted,
-      "archived": this.feature.archived
+      "archived": this.feature.archived,
+      "hardware": this.feature.hardware
     };
 
     return this.http.post(this.apiUrl, patchData)

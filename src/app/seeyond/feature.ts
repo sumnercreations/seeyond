@@ -36,6 +36,7 @@ export class Feature {
   public archived: boolean = false; // boolean
   public boxsize: number = 16; // baked in number right now.
   public prices: any;
+  public hardware: any = [];
   public felt_sheet_mapping: any = {
     "ebony": "0-51-800",
     "dark_gray": "0-51-801",
@@ -285,16 +286,16 @@ export class Feature {
     // console.log("sheets: " + this.sheets);
     // console.log("magnets: " + magnets);
     // console.log("stapleCost: " + stapleCost);
-    // console.log("Staples cost: " + (staples * stapleCost));
-    // console.log("Zipties cost: " + (zipties * ziptieCost));
-    // console.log("Magnets cost: " + (magnets * magnetCost));
+    console.log("Staples cost: " + (staples * stapleCost));
+    console.log("Zipties cost: " + (zipties * ziptieCost));
+    console.log("Magnets cost: " + (magnets * magnetCost));
     // console.log("Backplates: " + backplates);
-    // console.log("Backplates cost: " + (backplates * backplateCost));
+    console.log("Backplates cost: " + (backplates * backplateCost));
     // console.log("Baseplates: " + baseplates);
-    // console.log("Baseplates cost: " + (baseplates * baseplateCost));
+    console.log("Baseplates cost: " + (baseplates * baseplateCost));
     // console.log("Frames: " + frames);
-    // console.log("Frames cost: " + (frames * frameCost));
-    // console.log("Fabrication cost: " + fabricationCost);
+    console.log("Frames cost: " + (frames * frameCost));
+    console.log("Fabrication cost: " + fabricationCost);
     console.log("Products cost: " + totalProductsCost);
     console.log("Hardware cost: " + totalHardwareCost);
     console.log("Services cost: " + this.services_amount);
@@ -443,16 +444,25 @@ export class Feature {
   }
 
   getHardwareCost(feature_type: number) {
+    // reset hardware array
+    this.hardware = [];
     var hardwareCost: number = 0.00;
     console.log('========== PARTITION HARDWARE ===============')
     var hardwares = this.features[feature_type].hardware;
     var size = Object.keys(hardwares).length;
+    var qty;
     for (var hardware in hardwares) {
       if(hardwares.hasOwnProperty(hardware)) {
         console.log(hardware);
         console.log('PRICE: ' + this.prices[hardware]);
-        hardwareCost += (this.prices[hardware] * this.getHardwareQty(feature_type, hardware));
+        qty = this.getHardwareQty(feature_type, hardware);
+        hardwareCost += (this.prices[hardware] * qty);
         console.log("HARDWARE COST: " + hardwareCost);
+        var hwpart = {
+          "part_id": hardware,
+          "qty": qty
+        }
+        this.hardware.push(hwpart);
       }
     }
     console.log('========== /PARTITION HARDWARE ===============')
