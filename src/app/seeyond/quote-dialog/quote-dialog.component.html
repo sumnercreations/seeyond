@@ -1,51 +1,58 @@
-<h2 md-dialog-title class="text-center" [ngClass]="{'hidden': feature.quoted}">Confirm Your Design</h2>
-<h2 md-dialog-title class="text-center" [ngClass]="{'hidden': !feature.quoted}">Your Quoted Design</h2>
-<div md-dialog-content>
-  <dl class="dl-horizontal">
-    <dt>Feature</dt>
-    <dd>{{feature.title}}</dd>
-    <dt>Material</dt>
-    <dd>{{feature.getMaterialName(feature.material)}}</dd>
-    <dt>Pattern</dt>
-    <dd>{{feature.getTessellationName(feature.tessellation)}}</dd>
-    <dt>Width</dt>
-    <dd>{{feature.width}}"</dd>
-    <dt>Height</dt>
-    <dd>{{feature.height}}"</dd>
-    <dt>Pattern Strength</dt>
-    <dd>{{feature.pattern_strength}}</dd>
-    <dt>Add acoustic Foam?</dt>
-    <dd>{{feature.getFormattedAcousticFoam()}}</dd>
-    <dt>Estimated Amount</dt>
-    <dd>{{feature.getFormattedAmount()}}</dd>
-    <dt [ngClass]="{'hidden': !feature.quoted}">Project Name</dt>
-    <dd [ngClass]="{'hidden': !feature.quoted}">{{feature.project_name}}</dd>
-    <dt [ngClass]="{'hidden': !feature.quoted}">Specifier</dt>
-    <dd [ngClass]="{'hidden': !feature.quoted}">{{feature.specifier}}</dd>
-  </dl>
+<!-- not logged in -->
+<div *ngIf="!user.uid" class="text-center">
+  <p>You must be logged in to quote your design.</p>
+</div>
 
-  <form (ngSubmit)="quoteConfirmed()" #confirmQuote="ngForm" [ngClass]="{'hidden': feature.quoted}">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="form-group">
-          <md-input-container class="full-width">
-            <input type="text" placeholder="Project Name" name="project_name" id="project_name" mdInput md-input required [(ngModel)]="feature.project_name">
-          </md-input-container>
+<div *ngIf="user.uid">
+  <h2 md-dialog-title class="text-center" [ngClass]="{'hidden': feature.quoted}">Confirm Your Design</h2>
+  <h2 md-dialog-title class="text-center" [ngClass]="{'hidden': !feature.quoted}">Your Quoted Design</h2>
+  <div md-dialog-content>
+    <dl class="dl-horizontal">
+      <dt>Feature</dt>
+      <dd>{{feature.title}}</dd>
+      <dt>Material</dt>
+      <dd>{{feature.getMaterialName(feature.material)}}</dd>
+      <dt>Pattern</dt>
+      <dd>{{feature.getTessellationName(feature.tessellation)}}</dd>
+      <dt>Width</dt>
+      <dd>{{feature.width}}"</dd>
+      <dt>Height</dt>
+      <dd>{{feature.height}}"</dd>
+      <dt>Pattern Strength</dt>
+      <dd>{{feature.pattern_strength}}</dd>
+      <dt>Add acoustic Foam?</dt>
+      <dd>{{feature.getFormattedAcousticFoam()}}</dd>
+      <dt>Estimated Amount</dt>
+      <dd>{{feature.getFormattedAmount()}}</dd>
+      <dt [ngClass]="{'hidden': !feature.quoted}">Project Name</dt>
+      <dd [ngClass]="{'hidden': !feature.quoted}">{{feature.project_name}}</dd>
+      <dt [ngClass]="{'hidden': !feature.quoted}">Specifier</dt>
+      <dd [ngClass]="{'hidden': !feature.quoted}">{{feature.specifier}}</dd>
+    </dl>
+
+    <form (ngSubmit)="quoteConfirmed()" #confirmQuote="ngForm" [ngClass]="{'hidden': feature.quoted}">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <md-input-container class="full-width">
+              <input type="text" placeholder="Project Name" name="project_name" id="project_name" mdInput md-input required [(ngModel)]="feature.project_name">
+            </md-input-container>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="form-group">
-          <md-input-container class="full-width">
-            <input type="text" placeholder="Specifier" name="specifier" id="specifier" mdInput md-input required [(ngModel)]="feature.specifier">
-          </md-input-container>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <md-input-container class="full-width">
+              <input type="text" placeholder="Specifier" name="specifier" id="specifier" mdInput md-input required [(ngModel)]="feature.specifier">
+            </md-input-container>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="text-center">
-      <button md-button type="submit" class="button button-gray" [ngClass]="{'hidden': feature.quoted}">Confirm</button>
-      <button md-button (click)="dialogRef.close('cancel')" class="button button-gray">Cancel</button>
-    </div>
-  </form>
+      <div class="text-center">
+        <button md-button type="submit" class="button button-gray" [ngClass]="{'hidden': feature.quoted}">Confirm</button>
+        <button md-button (click)="dialogRef.close('cancel')" class="button button-gray">Cancel</button>
+      </div>
+    </form>
+  </div>
 </div>
