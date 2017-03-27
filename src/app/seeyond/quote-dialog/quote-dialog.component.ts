@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MdDialogRef, MdDialogConfig } from '@angular/material';
 import { Router } from '@angular/router';
 import { Feature } from '../feature';
+import { User } from "../_models/user";
 import { AlertService } from "../_services/alert.service";
 import { SeeyondService } from '../_services/seeyond.service';
 
@@ -17,7 +18,8 @@ export class QuoteDialogComponent {
     private alert: AlertService,
     private router: Router,
     public dialogRef: MdDialogRef<QuoteDialogComponent>,
-    public feature: Feature
+    public feature: Feature,
+    public user: User
   ) { }
 
   quoteConfirmed() {
@@ -42,6 +44,8 @@ export class QuoteDialogComponent {
       this.feature.quoted = true;
       this.seeyond.saveFeature().subscribe(feature => {
         // send seeyond design email after we have saved.
+        // set the feature to what was returned.
+        this.feature.id = feature.seeyond.id;
         this.seeyond.sendEmail().subscribe(response => {
           console.log(response);
         });
