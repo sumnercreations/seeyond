@@ -1,0 +1,66 @@
+.design-column-padding-adjust {
+  padding-left: 5px;
+}
+
+.pattern, .material {
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 10px;
+}
+
+.pattern {
+  padding-top: 5px;
+}
+
+.pattern > span {
+  font-family: 'Graphik Web';
+  font-size: 12px;
+}
+
+.pattern img {
+  cursor: pointer;
+}
+
+.material img {
+  cursor: pointer;
+}
+
+.tooltip-host {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* patterns have text too not just the image that need the border */
+.pattern.selected {
+  border: 2px solid #f5a01a;
+}
+
+/* no extra border around the image on patterns */
+.pattern.selected img {
+  border: none;
+}
+
+.selected img {
+  border: 2px solid #f5a01a;
+}
+
+.pattern-strenth-range {
+  margin-top: 12px;
+}
+
+p.header {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+label {
+  font-weight: 300;
+}
+
+.md-slider-horizontal {
+  width: 100%;
+}
+
+.md-slider-thumb {
+  background-color: #cdcdcd;
+}

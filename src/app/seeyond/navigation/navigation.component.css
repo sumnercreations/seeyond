@@ -1,0 +1,18 @@
+.nav-pills > li {
+  text-align: center;
+  background-color: rgb(205,202,203);
+}
+
+.nav-pills > li > a {
+  border-radius: 0;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  color: rgb(102,102,102);
+  background-color: #fff;
+}

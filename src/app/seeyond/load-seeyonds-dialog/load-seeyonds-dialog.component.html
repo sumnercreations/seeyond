@@ -1,0 +1,25 @@
+<!-- not logged in -->
+<div *ngIf="!user.uid" class="text-center">
+  <p>You must be logged in to see your saved designs.</p>
+</div>
+
+<div *ngIf="user.uid">
+  <h2 md-dialog-title class="text-center">My Seeyond Projects</h2>
+  <div md-dialog-content>
+    <p *ngIf="!seeyonds.length">Looks like you don't have any design saved yet.</p>
+    <table *ngIf="seeyonds.length" class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Delete</th>
+      </tr>
+      <tr *ngFor="let seeyond of seeyonds">
+        <td (click)="load(seeyond.id)" class="link">{{seeyond.id}}</td>
+        <td (click)="load(seeyond.id)" class="link">{{seeyond.design_name}}</td>
+        <td>
+          <i class="material-icons link" (click)="delete(seeyond.id, $event.target.parentNode.parentNode)">delete</i>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

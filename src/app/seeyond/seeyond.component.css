@@ -1,0 +1,34 @@
+/*
+:host {
+  padding: 100px 0;
+  display: block;
+}
+*/
+
+/*.seeyond-wrapper {
+  border: 1px solid #000;
+  background-color: #fff;
+  padding: 20px 0;
+}*/
+
+.bordered {
+	border: 1px solid gray;
+}
+
+.options {
+  background-color: #f1f1f1;
+  height: 748px;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.design {
+  background-color: #fff;
+  padding: 20px;
+}
+
+/* Setting the max width to 970. Even on desktop for now. */
+.container {
+  padding-bottom: 0;
+  width: 970px;
+}

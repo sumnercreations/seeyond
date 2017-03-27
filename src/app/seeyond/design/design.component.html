@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-xs-12 design-column-padding-adjust">
+    <p class="header">Patterns</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-3 pattern text-center" (click)="updateSelectedTessellation(0)" [class.selected]="selectedTessellation==0">
+    <img src="/assets/images/patterns/court.png" alt="Court Pattern" class="img-responsive">
+    <span>Court</span>
+  </div>
+  <div class="col-sm-3 pattern text-center" (click)="updateSelectedTessellation(3)" [class.selected]="selectedTessellation==3">
+    <img src="/assets/images/patterns/tilt.png" alt="Tilt Pattern" class="img-responsive">
+    <span>Tilt</span>
+  </div>
+  <div class="col-sm-3 pattern text-center" (click)="updateSelectedTessellation(1)" [class.selected]="selectedTessellation==1">
+    <img src="/assets/images/patterns/cusp.png" alt="Cusp Pattern" class="img-responsive">
+    <span>Cusp</span>
+  </div>
+  <div class="col-sm-3 pattern text-center" (click)="updateSelectedTessellation(4)" [class.selected]="selectedTessellation==4">
+    <img src="/assets/images/patterns/billow.png" alt="Billow Pattern" class="img-responsive">
+    <span>Billow</span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-3 pattern text-center" (click)="updateSelectedTessellation(2)" [class.selected]="selectedTessellation==2">
+    <img src="/assets/images/patterns/kink.png" alt="Kink Pattern" class="img-responsive">
+    <span>Kink</span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12 design-column-padding-adjust">
+    <label for="pattern-strength">Pattern Strength</label>
+    <select name="pattern-strength" id="pattern-strength" [value]="pattern_strength" (change)="updatePatternStrength($event.target.value)" class="form-control">
+      <option *ngFor="let strength of strengths" [value]="strength">{{strength}}</option>
+    </select>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-sm-12 design-column-padding-adjust">
+    <p class='header'>Materials</p>
+  </div>
+</div>
+<div class="row materials-container">
+  <div class="col-sm-3 material tooltip-host" mdTooltip="Zinc" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('zinc')" [class.selected]="selectedMaterial=='zinc'">
+    <img src="/assets/images/materials/zinc.jpg" alt="Zinc" class="img-responsive">
+  </div>
+  <div class="col-sm-3 material tooltip-host" mdTooltip="Nickel" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('nickel')" [class.selected]="selectedMaterial=='nickel'">
+    <img src="/assets/images/materials/nickel.jpg" alt="Nickel" class="img-responsive">
+  </div>
+  <div class="col-sm-3 material tooltip-host" mdTooltip="Cashmere" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('cashmere')" [class.selected]="selectedMaterial=='cashmere'">
+    <img src="/assets/images/materials/cashmere.jpg" alt="Cashmere" class="img-responsive">
+  </div>
+  <div class="col-sm-3 material tooltip-host" mdTooltip="Burnt Umber" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('burnt_umber')" [class.selected]="selectedMaterial=='burnt_umber'">
+    <img src="/assets/images/materials/burnt_umber.jpg" alt="Burnt Umber" class="img-responsive">
+  </div>
+  <div class="col-sm-3 material tooltip-host" mdTooltip="Ore" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('ore')" [class.selected]="selectedMaterial=='ore'">
+    <img src="/assets/images/materials/ore.jpg" alt="Ore" class="img-responsive">
+  </div>
+  <div class="col-sm-3 material tooltip-host" mdTooltip="Dark Gray" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('dark_gray')" [class.selected]="selectedMaterial=='dark_gray'">
+    <img src="/assets/images/materials/dark_gray.jpg" alt="Dark Gray" class="img-responsive">
+  </div>
+  <div class="col-sm-3 material tooltip-host" mdTooltip="Cast" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('cast')" [class.selected]="selectedMaterial=='cast'">
+    <img src="/assets/images/materials/cast.jpg" alt="Cast" class="img-responsive">
+  </div>
+  <div class="col-sm-3 material tooltip-host" mdTooltip="Ebony" [mdTooltipPosition]="position" (click)="updateSelectedMaterial('ebony')" [class.selected]="selectedMaterial=='ebony'">
+    <img src="/assets/images/materials/ebony.jpg" alt="Ebony" class="img-responsive">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <md-checkbox color="primary" [(ngModel)]="acoustic_foam" (change)="updateAcousticFoam()">Add Acoustic Foam</md-checkbox>
+    <span class="help-block">Foam increases acoustic rating to .90 NRC</span>
+  </div>
+</div>
