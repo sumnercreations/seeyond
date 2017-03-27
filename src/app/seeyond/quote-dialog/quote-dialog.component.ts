@@ -45,6 +45,7 @@ export class QuoteDialogComponent {
       this.seeyond.saveFeature().subscribe(feature => {
         // send seeyond design email after we have saved.
         // set the feature to what was returned.
+        this.feature.id = feature.seeyond.id;
         this.seeyond.sendEmail().subscribe(response => {
           console.log(response);
         });
