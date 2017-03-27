@@ -21,42 +21,36 @@ export class QuoteDialogComponent {
   ) { }
 
   quoteConfirmed() {
-    // Save the hardare to a database with IDs and quantities
-    // We shouldn't send this as a separate request, instead the
-    // hardware should be sent as part of the feature and then
-    // the API can save the hardware to the seeyond_hw_parts table.
-    // This way we can ensure that we have the correct seeyond ID.
-    console.log(this.feature.hardware);
     // mark the design as quoted and save
-    // if(this.feature.id) {
-    //   this.feature.quoted = true;
-    //   this.seeyond.updateFeature().subscribe(feature => {
-    //     // send seeyond design email after we have saved.
-    //     this.seeyond.sendEmail().subscribe(response => {
-    //       console.log(response);
-    //     });
-    //     // redirect to the new URL if we aren't already there.
-    //     var url = this.router.createUrlTree(['/feature', this.feature.id]).toString();
-    //     if(url != this.router.url) {
-    //       this.router.navigate(['/feature', this.feature.id]);
-    //     }
-    //     this.alert.success("Your quote request has been sent.");
-    //   });
-    // } else {
-    //   // set the design name to something simple
-    //   this.feature.design_name = this.feature.title + ' - ' +  this.getToday();
-    //   this.feature.quoted = true;
-    //   this.seeyond.saveFeature().subscribe(feature => {
-    //     // send seeyond design email after we have saved.
-    //     this.seeyond.sendEmail().subscribe(response => {
-    //       console.log(response);
-    //     });
-    //     // redirect to the URL of the saved design.
-    //     this.alert.success("We saved your design so we can quote it and you can load it later.");
-    //     this.feature = feature.seeyond;
-    //     this.router.navigate(['/feature', this.feature.id]);
-    //   });
-    // }
+    if(this.feature.id) {
+      this.feature.quoted = true;
+      this.seeyond.updateFeature().subscribe(feature => {
+        // send seeyond design email after we have saved.
+        this.seeyond.sendEmail().subscribe(response => {
+          console.log(response);
+        });
+        // redirect to the new URL if we aren't already there.
+        var url = this.router.createUrlTree(['/feature', this.feature.id]).toString();
+        if(url != this.router.url) {
+          this.router.navigate(['/feature', this.feature.id]);
+        }
+        this.alert.success("Your quote request has been sent.");
+      });
+    } else {
+      // set the design name to something simple
+      this.feature.design_name = this.feature.title + ' - ' +  this.getToday();
+      this.feature.quoted = true;
+      this.seeyond.saveFeature().subscribe(feature => {
+        // send seeyond design email after we have saved.
+        this.seeyond.sendEmail().subscribe(response => {
+          console.log(response);
+        });
+        // redirect to the URL of the saved design.
+        this.alert.success("We saved your design so we can quote it and you can load it later.");
+        this.feature = feature.seeyond;
+        this.router.navigate(['/feature', this.feature.id]);
+      });
+    }
   }
 
   getToday() {
