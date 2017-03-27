@@ -30,9 +30,12 @@ export class DimensionsComponent implements OnInit {
         if(measurement < 50) {
           this.feature.width = 50;
           this.alert.error('The minimum width is 50 inches');
-        } else if(measurement > 240) {
+        } else if((this.feature.feature_type == 0 || this.feature.feature_type == 1) && measurement > 240) {
           this.feature.width = 240;
-          this.alert.error('The maximum width is 240 inches');
+          this.alert.error('The maximum width for partitions is 240 inches');
+        }else if(measurement > 480) {
+          this.feature.width = 480;
+          this.alert.error('The maximum width for walls and ceilings is 480 inches');
         } else if(this.feature.feature_type == 1 && this.feature.radius < (measurement *.5) + 1) {
           this.feature.width = measurement;
           this.feature.radius = (this.feature.width *.5) + 1;
@@ -49,15 +52,9 @@ export class DimensionsComponent implements OnInit {
         } else if((this.feature.feature_type == 0 || this.feature.feature_type == 1) && measurement > 84) {
           this.feature.height = 84;
           this.alert.error('The maximum height for partitions is 84 inches');
-        } else if(this.feature.feature_type == 2 && measurement > 120) {
-          this.feature.height = 120;
-          this.alert.error('The maximum height for wall features is 120 inches');
-        } else if(this.feature.feature_type == 3 && measurement > 192) {
-          this.feature.height = 192;
-          this.alert.error('The maximum height for wall to ceiling is 192 inches');
-        } else if(this.feature.feature_type == 4 && measurement > 240) {
-          this.feature.height = 240;
-          this.alert.error('The maximum height for ceilings is 240 inches');
+        } else if(measurement > 480) {
+          this.feature.height = 480;
+          this.alert.error('The maximum height for walls and ceilings is 480 inches');
         } else {
           this.feature.height = measurement;
         }
