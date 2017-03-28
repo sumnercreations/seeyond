@@ -18,17 +18,15 @@ export class SaveSeeyondDialogComponent {
   constructor(
     private dialogRef: MdDialogRef<SaveSeeyondDialogComponent>,
     private router: Router,
-    private feature: Feature,
-    private user: User,
     private alert: AlertService,
-    private seeyond: SeeyondService
+    private seeyond: SeeyondService,
+    public feature: Feature,
+    public user: User
   ) { }
 
   ngOnInit() {
     // if the design already has an ID then it's not new.
     this.newDesign = this.feature.id ? false : true;
-    console.log("save init");
-    console.log(this.user);
   }
 
   newButtonClick() {
@@ -54,6 +52,10 @@ export class SaveSeeyondDialogComponent {
   }
 
   saveNew() {
+    // reset some values for the new quote
+    this.feature.quoted = false;
+    this.feature.project_name = null;
+    this.feature.specifier = null;
     this.seeyond.saveFeature().subscribe(feature => {
       // notify the user that we saved their design
       this.alert.success("Successfully saved your design");

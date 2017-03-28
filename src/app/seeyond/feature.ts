@@ -36,6 +36,7 @@ export class Feature {
   public archived: boolean = false; // boolean
   public boxsize: number = 16; // baked in number right now.
   public prices: any;
+  public hardware: any = [];
   public felt_sheet_mapping: any = {
     "ebony": "0-51-800",
     "dark_gray": "0-51-801",
@@ -116,9 +117,6 @@ export class Feature {
       "width": 48,
       "height": 48,
       "hardware": {
-        "3-15-1606": {},
-        "3-85-104": {},
-        "3-85-109": {},
         "3-85-107": {},
         "3-85-108": {},
         "3-85-105": {},
@@ -256,8 +254,14 @@ export class Feature {
 
     var columns = this.syd_t.QT.GetU();
     var rows = this.syd_t.QT.GetV();
-    this.sheets = this.syd_t.QT.GetSheets();
-    this.boxes = this.syd_t.QT.GetParts();
+    if(this.feature_type == 0 || this.feature_type == 1) {
+      // double sheet and boxes
+      this.sheets = this.syd_t.QT.GetSheets() * 2;
+      this.boxes = this.syd_t.QT.GetParts() * 2;
+    }else{
+      this.sheets = this.syd_t.QT.GetSheets();
+      this.boxes = this.syd_t.QT.GetParts();
+    }
 
     // PRODUCTS
     var totalProductsCost = this.sheets * sheetCost;
@@ -266,7 +270,7 @@ export class Feature {
     }
 
     // HARDWARE
-    var totalHardwareCost = 0;
+    var totalHardwareCost = this.getHardwareCost(this.feature_type);
 
     // SERVICES
     var staples: number = this.getStaples(this.feature_type);
@@ -284,15 +288,15 @@ export class Feature {
     console.log("boxes: " + this.boxes);
     console.log("sheets: " + this.sheets);
     console.log("magnets: " + magnets);
-    console.log("stapleCost: " + stapleCost);
+    // console.log("stapleCost: " + stapleCost);
     console.log("Staples cost: " + (staples * stapleCost));
     console.log("Zipties cost: " + (zipties * ziptieCost));
     console.log("Magnets cost: " + (magnets * magnetCost));
-    console.log("Backplates: " + backplates);
+    // console.log("Backplates: " + backplates);
     console.log("Backplates cost: " + (backplates * backplateCost));
-    console.log("Baseplates: " + baseplates);
+    // console.log("Baseplates: " + baseplates);
     console.log("Baseplates cost: " + (baseplates * baseplateCost));
-    console.log("Frames: " + frames);
+    // console.log("Frames: " + frames);
     console.log("Frames cost: " + (frames * frameCost));
     console.log("Fabrication cost: " + fabricationCost);
     console.log("Products cost: " + totalProductsCost);
@@ -390,8 +394,8 @@ export class Feature {
 
   getStaples(feature_type: number) {
     if(feature_type == 0 || feature_type == 1) {
-      // partitions
-      return this.boxes * 25;
+      // partitions. we need to double the number of frames
+      return this.boxes * 25 * 2;
     }else if(feature_type == 2) {
       // wall
       return this.boxes * 25;
@@ -428,8 +432,8 @@ export class Feature {
 
   getFrames(feature_type: number) {
     if(feature_type == 0 || feature_type == 1) {
-      // partitions
-      return Math.ceil(this.boxes/18);
+      // partitions. we need to double the number of frames
+      return Math.ceil(this.boxes/18) * 2;
     }else if(feature_type == 2) {
       // wall
       return Math.ceil(this.boxes/18);
@@ -440,6 +444,105 @@ export class Feature {
       // ceiling
       return Math.ceil(this.boxes/18);
     }
+  }
+
+  getHardwareCost(feature_type: number) {
+    // reset hardware array
+    this.hardware = [];
+    var totalHardwareCost: number = 0.00;
+    console.log('========== FEATURE HARDWARE ===============')
+    var hardwares = this.features[feature_type].hardware;
+    var size = Object.keys(hardwares).length;
+    var qty;
+    for (var hardware in hardwares) {
+      if(hardwares.hasOwnProperty(hardware)) {
+        qty = this.getHardwareQty(feature_type, hardware);
+        var hardwareCost = this.prices[hardware] * qty;
+        totalHardwareCost += hardwareCost;
+        console.log(hardware);
+        console.log('PRICE: ' + this.prices[hardware]);
+        console.log("QUANTITY: " + qty);
+        console.log("HARDWARE COST: " + hardwareCost);
+        var hwpart = {
+          "part_id": hardware,
+          "qty": qty
+        }
+        this.hardware.push(hwpart);
+      }
+    }
+    console.log('========== /FEATURE HARDWARE ===============')
+    return totalHardwareCost;
+  }
+
+  getHardwareQty(feature_type: number, hardware: string) {
+    var hardwareQty: number = 0;
+    var columns = this.syd_t.QT.GetU();
+    var rows = this.syd_t.QT.GetV();
+    switch (hardware) {
+      // WALL
+      case "3-15-1606":
+        hardwareQty = Math.ceil(this.boxes / 4) * 4;
+        break;
+
+      case "3-85-104":
+        hardwareQty = Math.ceil(this.boxes / 4) * 4;
+        break;
+
+      case "3-85-109":
+        hardwareQty = Math.ceil(this.boxes / 4) * 4;
+        break;
+      // END WALL
+
+      // PARTITIONS
+      case "3-85-106":
+        hardwareQty = columns * 4;
+        break;
+
+      // Used in partitions and ceilings
+      case "3-15-0842":
+        if(feature_type == 0 || feature_type == 1) {
+          hardwareQty = this.getBaseplates(feature_type) * 3;
+        }else if(feature_type == 3) {
+          hardwareQty = Math.ceil(this.syd_t.QT.GetCeilingRows() / 2) * Math.ceil(this.syd_t.QT.GetCeilingColumns() / 2) * 2;
+        }else if(feature_type == 4) {
+          hardwareQty = Math.ceil(rows / 2) * Math.ceil(columns / 2) * 2;
+        }
+        break;
+
+      // Used in partitions and ceilings
+      case "3-85-105":
+        if(feature_type == 0 || feature_type == 1) {
+          hardwareQty = columns * 4;
+        }else if(feature_type == 3) {
+          hardwareQty = Math.ceil(this.syd_t.QT.GetCeilingRows() / 2) * Math.ceil(this.syd_t.QT.GetCeilingColumns() / 2) * 4;
+        }else if(feature_type == 4) {
+          hardwareQty = Math.ceil(rows / 2) * Math.ceil(columns / 2) * 4;
+        }
+        break;
+
+      // CEILINGS
+      case "3-85-107":
+        hardwareQty = Math.ceil(rows / 2) * Math.ceil(columns / 2);
+        break;
+
+      case "3-85-108":
+        hardwareQty = Math.ceil(rows / 2) * Math.ceil(columns / 2);
+        break;
+
+      case "3-15-1674":
+        hardwareQty = Math.ceil(rows / 2) * Math.ceil(columns / 2);
+        break;
+
+      case "3-15-1675":
+        hardwareQty = Math.ceil(rows / 2) * Math.ceil(columns / 2);
+        break;
+      // END CEILINGS
+
+      default:
+        alert("Unknown hardware part: " + hardware);
+        break;
+    }
+    return hardwareQty;
   }
 
   getMaterialImage(material: string) {
