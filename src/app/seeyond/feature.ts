@@ -4,6 +4,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class Feature {
   onFeatureUpdated = new EventEmitter();
   private static _instance: Feature = new Feature();
+  public debug: any;
   public id: number;
   public uid: number;
   public feature_type: number;
@@ -134,6 +135,7 @@ export class Feature {
 
     this.syd_t = require( 'syd-tessellation' );
     this.syd_v = require( 'syd-visualization' );
+    this.debug = require( 'debug' )('feature');
 
     Feature._instance = this;
   }
@@ -193,6 +195,7 @@ export class Feature {
   reloadVisualization() {
     // We need to set the random_seed before UpdateFeature()
     if(this.random_seed != undefined) {
+      this.debug('RANDOM SEED IS SET.');
       console.log('RANDOM SEED IS SET.');
       console.log("Current Random seed: " + this.random_seed);
       this.syd_t.QT.SetRandomSeedValue(this.random_seed);
