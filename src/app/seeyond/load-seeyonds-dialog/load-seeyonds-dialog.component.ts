@@ -18,12 +18,12 @@ export class LoadSeeyondsDialogComponent {
 
   constructor(
     private dialogRef: MdDialogRef<LoadSeeyondsDialogComponent>,
-    private feature: Feature,
-    private user: User,
     private alert: AlertService,
     private seeyond: SeeyondService,
     private router: Router,
-    public dialog: MdDialog
+    public dialog: MdDialog,
+    public feature: Feature,
+    public user: User
   ) {
   }
 
@@ -33,14 +33,15 @@ export class LoadSeeyondsDialogComponent {
   }
 
   delete(id: number, target: any) {
-    if(this.feature.id === id) {
-      console.log("Should we allow them to delete the feature they are on? If we do, then do we redirect to /wall?");
-    }
     var dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, new MdDialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'confirm') {
         console.log("Oh, now you've gone and really done it.");
         this.seeyond.deleteFeature(id).subscribe(response => {
+          if(this.feature.id === id) {
+            console.log("Deleting the feature we have loaded");
+            this.router.navigate(['feature', this.feature.name]);
+          }
           target.remove();
           this.alert.success('Seeyond ID: ' + id + ' has been deleted');
         },

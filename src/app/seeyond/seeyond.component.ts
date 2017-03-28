@@ -17,11 +17,11 @@ export class SeeyondComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private feature: Feature,
     private router: Router,
-    private user: User,
     private seeyond: SeeyondService,
-    private alert: AlertService
+    private alert: AlertService,
+    public feature: Feature,
+    public user: User
   ) {
     // initialize the feature based on the URL path.
     router.events.subscribe((event) => {
