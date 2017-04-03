@@ -30,7 +30,7 @@
     "hammerjs": "^2.0.8",
     "jszip": "^3.1.3",
     "rxjs": "^5.0.1",
-    "syd-tessellation": "0.0.58",
+    "syd-tessellation": "0.0.59",
     "syd-visualization": "0.0.44",
     "three": "0.83.0",
     "ts-helpers": "^1.1.1",
