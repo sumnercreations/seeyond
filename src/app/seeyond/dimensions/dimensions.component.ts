@@ -10,17 +10,20 @@ import { Feature } from '../feature';
   styleUrls: ['./dimensions.component.css']
 })
 export class DimensionsComponent implements OnInit {
+  private debug;
 
   constructor(
     private alert: AlertService,
     public router: Router,
-    public feature: Feature
+    public feature: Feature,
   ) { }
 
   ngOnInit() {
+    this.debug = require( 'debug' )('seeyond-dimensions');
   }
 
   public updateSelectedFeature(name: string) {
+    this.debug("updateSelectedFeature");
     this.router.navigate(['/feature', name]);
   }
 
