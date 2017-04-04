@@ -12,6 +12,7 @@ import { SeeyondService } from '../_services/seeyond.service';
   styleUrls: ['./quote-dialog.component.css']
 })
 export class QuoteDialogComponent {
+  private debug;
 
   constructor(
     private seeyond: SeeyondService,
@@ -20,7 +21,9 @@ export class QuoteDialogComponent {
     public dialogRef: MdDialogRef<QuoteDialogComponent>,
     public feature: Feature,
     public user: User
-  ) { }
+  ) {
+    this.debug = require( 'debug' )('quote-dialog');
+  }
 
   quoteConfirmed() {
     // mark the design as quoted and save
