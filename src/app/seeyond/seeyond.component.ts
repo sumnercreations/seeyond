@@ -14,6 +14,7 @@ import { AlertService } from './_services/alert.service';
 })
 export class SeeyondComponent implements OnInit {
   private selectedFeature: any;
+  private debug;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,12 +24,14 @@ export class SeeyondComponent implements OnInit {
     public feature: Feature,
     public user: User
   ) {
+    // setup the debug for logging
+    this.debug = require( 'debug' )('seeyond-component');
     // initialize the feature based on the URL path.
     router.events.subscribe((event) => {
       this.route.params.subscribe(params => {
         // init the seeyond prices
         this.seeyond.getPrices().subscribe(response => {
-          console.log(response);
+          this.debug(response);
           this.feature.prices = response;
           if(event instanceof NavigationEnd) {
             // feature - default values

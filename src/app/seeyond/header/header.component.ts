@@ -17,22 +17,25 @@ export class HeaderComponent implements OnInit {
   appVersion = '';
   tessellationVersion = '';
   visualizationVersion = '';
+  private debug;
 
   constructor(
     private loginService: LoginService,
     public feature: Feature,
     public user: User,
     public dialog: MdDialog
-  ) { }
+  ) {
+    this.debug = require( 'debug' )('versions');
+  }
 
   ngOnInit() {
     // log the versions for future debugging purposes
     this.appVersion = packageJSON.version;
     this.tessellationVersion = packageJSON.dependencies['syd-tessellation'];
     this.visualizationVersion = packageJSON.dependencies['syd-visualization'];
-    console.log("Seeyond: " + this.appVersion);
-    console.log("Syd-Tessellation: " + this.tessellationVersion);
-    console.log("Syd-Visualization: " + this.visualizationVersion);
+    this.debug("Seeyond: " + this.appVersion);
+    this.debug("Syd-Tessellation: " + this.tessellationVersion);
+    this.debug("Syd-Visualization: " + this.visualizationVersion);
 
     // subscribe to the login event
     this.loginService.onUserLoggedIn.subscribe(

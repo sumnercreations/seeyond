@@ -4,7 +4,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class Feature {
   onFeatureUpdated = new EventEmitter();
   private static _instance: Feature = new Feature();
-  public debug: any;
+  private debug: any;
   public id: number;
   public uid: number;
   public feature_type: number;
@@ -195,9 +195,8 @@ export class Feature {
   reloadVisualization() {
     // We need to set the random_seed before UpdateFeature()
     if(this.random_seed != undefined) {
-      this.debug('RANDOM SEED IS SET.');
-      console.log('RANDOM SEED IS SET.');
-      console.log("Current Random seed: " + this.random_seed);
+      this.debug("RANDOM SEED IS SET.");
+      this.debug("Current Random seed: " + this.random_seed);
       this.syd_t.QT.SetRandomSeedValue(this.random_seed);
     }//else{
     //   this.random_seed = this.syd_t.QT.GetRandomSeedValue();
@@ -210,9 +209,9 @@ export class Feature {
 
     // Set the random_seed if it's not already set
     if(this.random_seed == undefined) {
-      console.log('RANDOM SEED IS NOT SET');
+      this.debug('RANDOM SEED IS NOT SET');
       this.random_seed = this.syd_t.QT.GetRandomSeedValue();
-      console.log("Current Random seed: " + this.random_seed);
+      this.debug("Current Random seed: " + this.random_seed);
     }
 
     var front = this.syd_t.QT.GetFrontSurfacePoints();
@@ -286,25 +285,25 @@ export class Feature {
 
     this.services_amount = (staples * stapleCost) + (zipties * ziptieCost) + (magnets * magnetCost) + (backplates * backplateCost) + (baseplates * baseplateCost) + (frames * frameCost) + fabricationCost;
 
-    console.log("Rows: " + rows);
-    console.log("Columns: " + columns);
-    console.log("boxes: " + this.boxes);
-    console.log("sheets: " + this.sheets);
-    console.log("magnets: " + magnets);
-    // console.log("stapleCost: " + stapleCost);
-    console.log("Staples cost: " + (staples * stapleCost));
-    console.log("Zipties cost: " + (zipties * ziptieCost));
-    console.log("Magnets cost: " + (magnets * magnetCost));
-    // console.log("Backplates: " + backplates);
-    console.log("Backplates cost: " + (backplates * backplateCost));
-    // console.log("Baseplates: " + baseplates);
-    console.log("Baseplates cost: " + (baseplates * baseplateCost));
-    // console.log("Frames: " + frames);
-    console.log("Frames cost: " + (frames * frameCost));
-    console.log("Fabrication cost: " + fabricationCost);
-    console.log("Products cost: " + totalProductsCost);
-    console.log("Hardware cost: " + totalHardwareCost);
-    console.log("Services cost: " + this.services_amount);
+    this.debug("Rows: " + rows);
+    this.debug("Columns: " + columns);
+    this.debug("boxes: " + this.boxes);
+    this.debug("sheets: " + this.sheets);
+    this.debug("magnets: " + magnets);
+    this.debug("stapleCost: " + stapleCost);
+    this.debug("Staples cost: " + (staples * stapleCost));
+    this.debug("Zipties cost: " + (zipties * ziptieCost));
+    this.debug("Magnets cost: " + (magnets * magnetCost));
+    this.debug("Backplates: " + backplates);
+    this.debug("Backplates cost: " + (backplates * backplateCost));
+    this.debug("Baseplates: " + baseplates);
+    this.debug("Baseplates cost: " + (baseplates * baseplateCost));
+    this.debug("Frames: " + frames);
+    this.debug("Frames cost: " + (frames * frameCost));
+    this.debug("Fabrication cost: " + fabricationCost);
+    this.debug("Products cost: " + totalProductsCost);
+    this.debug("Hardware cost: " + totalHardwareCost);
+    this.debug("Services cost: " + this.services_amount);
 
     this.estimated_amount = totalProductsCost + totalHardwareCost + this.services_amount;
     return this.estimated_amount;
@@ -356,8 +355,8 @@ export class Feature {
   getWallBoxes() {
     var wallRows = this.syd_t.QT.GetWallRows();
     var wallCols = this.syd_t.QT.GetWallColumns();
-    console.log("wall rows: " + wallRows);
-    console.log("wall cols: " + wallCols);
+    this.debug("wall rows: " + wallRows);
+    this.debug("wall cols: " + wallCols);
 
     return wallRows * wallCols;
   }
@@ -365,8 +364,8 @@ export class Feature {
   getCeilingBoxes() {
     var ceilingRows = this.syd_t.QT.GetCeilingRows();
     var ceilingCols = this.syd_t.QT.GetCeilingColumns();
-    console.log("ceiling rows: " + ceilingRows);
-    console.log("ceiling cols: " + ceilingCols);
+    this.debug("ceiling rows: " + ceilingRows);
+    this.debug("ceiling cols: " + ceilingCols);
 
     return ceilingRows * ceilingCols;
   }
@@ -453,7 +452,7 @@ export class Feature {
     // reset hardware array
     this.hardware = [];
     var totalHardwareCost: number = 0.00;
-    console.log('========== FEATURE HARDWARE ===============')
+    this.debug('========== FEATURE HARDWARE ===============')
     var hardwares = this.features[feature_type].hardware;
     var size = Object.keys(hardwares).length;
     var qty;
@@ -462,10 +461,10 @@ export class Feature {
         qty = this.getHardwareQty(feature_type, hardware);
         var hardwareCost = this.prices[hardware] * qty;
         totalHardwareCost += hardwareCost;
-        console.log(hardware);
-        console.log('PRICE: ' + this.prices[hardware]);
-        console.log("QUANTITY: " + qty);
-        console.log("HARDWARE COST: " + hardwareCost);
+        this.debug(hardware);
+        this.debug('PRICE: ' + this.prices[hardware]);
+        this.debug("QUANTITY: " + qty);
+        this.debug("HARDWARE COST: " + hardwareCost);
         var hwpart = {
           "part_id": hardware,
           "qty": qty
@@ -473,7 +472,7 @@ export class Feature {
         this.hardware.push(hwpart);
       }
     }
-    console.log('========== /FEATURE HARDWARE ===============')
+    this.debug('========== /FEATURE HARDWARE ===============')
     return totalHardwareCost;
   }
 
@@ -641,7 +640,7 @@ export class Feature {
     var vNum = this.syd_t.QT.GetV();
 
     var properties = JSON.parse(this.syd_t.QT.GetAllPropertiesAsJSONString());
-    // console.log(properties);
+    this.debug(properties);
 
     var takeOff = properties.Take_Off;
     var hemi = "single";
