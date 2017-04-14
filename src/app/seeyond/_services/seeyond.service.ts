@@ -12,12 +12,15 @@ export class SeeyondService {
   onSaved = new EventEmitter();
   onLoaded = new EventEmitter();
   apiUrl = 'https://' + environment.API_URL + '/seeyonds/';
+  private debug;
 
   constructor(
     private http: Http,
     private feature: Feature,
     private user: User
-  ) { }
+  ) {
+    this.debug = require( 'debug' )('seeyond-service');
+  }
 
   getMyFeatures() {
     return this.http.get(this.apiUrl + 'list/' + this.user.uid)
@@ -26,21 +29,21 @@ export class SeeyondService {
   }
 
   loadFeature(id: number) {
-    console.log('Loading Feature');
+    this.debug('Loading Feature');
     return this.http.get(this.apiUrl + id)
       .map((res: Response) => {
-        console.log(res.json());
+        this.debug(res.json());
         this.onLoaded.emit();
-        console.log("emitting onLoaded");
+        this.debug("emitting onLoaded");
         return res.json();
       })
       .catch(this.handleError);
   }
 
   updateFeature() {
-    console.log(this.feature.hardware);
+    this.debug(this.feature.hardware);
     let hardware = JSON.stringify({hardware: this.feature.hardware});
-    console.log(hardware)
+    this.debug(hardware)
     let patchData = {
       "id": this.feature.id,
       "uid": this.user.uid,
@@ -78,7 +81,7 @@ export class SeeyondService {
     return this.http.patch(this.apiUrl + this.feature.id, patchData, options)
       .map((res: Response) => {
         this.onSaved.emit();
-        console.log("emitting onSaved");
+        this.debug("emitting onSaved");
         return res.json() || {}
       })
       .catch(this.handleError);
@@ -118,7 +121,7 @@ export class SeeyondService {
     return this.http.post(this.apiUrl, patchData)
       .map((res: Response) => {
         this.onSaved.emit();
-        console.log("emitting onSaved");
+        this.debug("emitting onSaved");
         return res.json() || {}
       })
       .catch(this.handleError);
