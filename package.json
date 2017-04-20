@@ -1,6 +1,6 @@
 {
   "name": "seeyond",
-  "version": "0.0.71",
+  "version": "0.0.74",
   "license": "GPL-3.0",
   "angular-cli": {},
   "scripts": {
@@ -18,7 +18,7 @@
     "@angular/core": "2.4.6",
     "@angular/forms": "2.4.6",
     "@angular/http": "2.4.6",
-    "@angular/material": "^2.0.0-beta.2",
+    "@angular/material": "2.0.0-beta.2",
     "@angular/platform-browser": "2.4.6",
     "@angular/platform-browser-dynamic": "2.4.6",
     "@angular/router": "3.4.1",
@@ -30,7 +30,7 @@
     "hammerjs": "^2.0.8",
     "jszip": "^3.1.3",
     "rxjs": "^5.0.1",
-    "syd-tessellation": "0.0.57",
+    "syd-tessellation": "0.0.64",
     "syd-visualization": "0.0.45",
     "three": "0.83.0",
     "ts-helpers": "^1.1.1",
