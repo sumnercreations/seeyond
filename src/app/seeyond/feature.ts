@@ -81,8 +81,8 @@ export class Feature {
       "name": "wall",
       "title": "Wall Feature",
       "image": "/assets/images/renderings/wall.png",
-      "width": 48,
-      "height": 48,
+      "width": 50,
+      "height": 50,
       "hardware": {
         "3-15-1606": {},
         "3-85-104": {},
@@ -115,8 +115,8 @@ export class Feature {
       "name": "ceiling",
       "title": "Ceiling Feature",
       "image": "/assets/images/renderings/ceiling.png",
-      "width": 48,
-      "height": 48,
+      "width": 50,
+      "height": 50,
       "hardware": {
         "3-85-107": {},
         "3-85-108": {},
