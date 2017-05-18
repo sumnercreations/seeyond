@@ -59,7 +59,8 @@ export class Feature {
       "hardware": {
         "3-15-0842": {},
         "3-85-105": {},
-        "3-85-106": {}
+        "3-85-106": {},
+        "3-85-102": {} //zipties
       }
     },
    "1": {
@@ -73,7 +74,8 @@ export class Feature {
       "hardware": {
         "3-15-0842": {},
         "3-85-105": {},
-        "3-85-106": {}
+        "3-85-106": {},
+        "3-85-102": {} //zipties
       }
     },
    "2": {
@@ -107,7 +109,8 @@ export class Feature {
         "3-85-105": {},
         "3-15-1674": {},
         "3-15-1675": {},
-        "3-15-0842": {}
+        "3-15-0842": {},
+        "3-85-102": {} //zipties
       }
     },
     "4": {
@@ -123,7 +126,8 @@ export class Feature {
         "3-85-105": {},
         "3-15-1674": {},
         "3-15-1675": {},
-        "3-15-0842": {}
+        "3-15-0842": {},
+        "3-85-102": {} //zipties
       }
     },
   };
@@ -276,14 +280,14 @@ export class Feature {
 
     // SERVICES
     var staples: number = this.getStaples(this.feature_type);
-    var zipties: number = this.getZipties(this.feature_type);
+    // var zipties: number = this.getZipties(this.feature_type);
     var magnets: number = this.syd_t.QT.GetMagnets();
     var frames: number = this.getFrames(this.feature_type);
     var backplates: number = this.getBackplates(this.feature_type);
     var baseplates: number = this.getBaseplates(this.feature_type);
     var fabricationCost: number = this.getFabricationCost(this.feature_type);
 
-    this.services_amount = (staples * stapleCost) + (zipties * ziptieCost) + (magnets * magnetCost) + (backplates * backplateCost) + (baseplates * baseplateCost) + (frames * frameCost) + fabricationCost;
+    this.services_amount = (staples * stapleCost) + (magnets * magnetCost) + (backplates * backplateCost) + (baseplates * baseplateCost) + (frames * frameCost) + fabricationCost;
 
     this.debug("Rows: " + rows);
     this.debug("Columns: " + columns);
@@ -292,7 +296,7 @@ export class Feature {
     this.debug("magnets: " + magnets);
     this.debug("stapleCost: " + stapleCost);
     this.debug("Staples cost: " + (staples * stapleCost));
-    this.debug("Zipties cost: " + (zipties * ziptieCost));
+    // this.debug("Zipties cost: " + (zipties * ziptieCost));
     this.debug("Magnets cost: " + (magnets * magnetCost));
     this.debug("Backplates: " + backplates);
     this.debug("Backplates cost: " + (backplates * backplateCost));
@@ -519,6 +523,20 @@ export class Feature {
           hardwareQty = Math.ceil(this.syd_t.QT.GetCeilingRows() / 2) * Math.ceil(this.syd_t.QT.GetCeilingColumns() / 2) * 4;
         }else if(feature_type == 4) {
           hardwareQty = Math.ceil(rows / 2) * Math.ceil(columns / 2) * 4;
+        }
+        break;
+
+      // Used in partitions and ceilings
+      case "3-85-102":
+        if(feature_type == 0 || feature_type == 1) {
+          hardwareQty = Math.ceil(this.boxes * 12);
+        }else if(feature_type == 3) {
+          var ceilingRows = this.syd_t.QT.GetCeilingRows();
+          var ceilingCols = this.syd_t.QT.GetCeilingColumns();
+          var ceilingBoxes = Math.ceil(ceilingRows * ceilingCols);
+          hardwareQty = Math.ceil(ceilingBoxes * 24);
+        }else if(feature_type == 4) {
+          hardwareQty = Math.ceil(this.boxes * 24);
         }
         break;
 
