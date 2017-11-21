@@ -19,6 +19,7 @@ export class Feature {
   public radius: number;
   public angle: number;
   public ceiling_length: number;
+  public depth: number;
   public syd_v: any = {};
   public syd_t: any = {};
   public data: any = [];
@@ -225,6 +226,9 @@ export class Feature {
 
     this.syd_v.QT.Visualization.SetFeatureType(this.feature_type);
     this.syd_v.QT.Visualization.visualizeFeature(front, back, uNum, vNum, this.getMaterialImage(this.material));
+
+    // update the feature depth
+    this.depth = this.syd_v.QT.Visualization.GetBoundingBoxDepth().toFixed(2);
 
     // feature has been updated
     this.onFeatureUpdated.emit();
@@ -623,6 +627,21 @@ export class Feature {
 
   getFeatureImage(feature_type: number) {
     return this.features[feature_type].image;
+  }
+
+  getDimensionString() {
+    let dimensionString: string;
+    dimensionString = this.width + " W x " + this.height + " H x " + this.depth + " D";
+    // curved partition has radius
+    if(this.feature_type === 1) {
+      dimensionString += " x " + this.radius + " R";
+    }
+
+    // wall to ceiling has ceiling_length
+    if(this.feature_type === 3) {
+      dimensionString += " x " + this.ceiling_length + " CL";
+    }
+    return dimensionString;
   }
 
   getJsonProperties() {
