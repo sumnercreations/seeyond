@@ -13,6 +13,7 @@ export class Feature {
   public design_name: string;
   public project_name: string;
   public specifier: string;
+  public units: string;
   public image: string;
   public width: number;
   public height: number;
@@ -33,6 +34,7 @@ export class Feature {
   public estimated_amount: number;
   public services_amount: number;
   public acoustic_foam: boolean = false;
+  public cove_lighting: boolean = false;
   public random_seed: number;
   public quoted: boolean = false; // boolean
   public archived: boolean = false; // boolean
@@ -174,11 +176,13 @@ export class Feature {
     this.design_name = feature.design_name;
     this.project_name = feature.project_name;
     this.specifier = feature.specifier;
+    this.units = feature.units;
     this.width = feature.width;
     this.height = feature.height;
     this.radius = feature.radius;
     this.angle = feature.angle;
     this.ceiling_length = feature.ceiling_length;
+    this.depth = feature.depth;
     this.tessellation = feature.tessellation;
     this.pattern_strength = feature.pattern_strength;
     this.material = feature.material;
@@ -187,6 +191,7 @@ export class Feature {
     this.sheets = feature.sheets;
     this.xml = feature.xml;
     this.acoustic_foam = feature.acoustic_foam;
+    this.cove_lighting = feature.cove_lighting;
     this.random_seed = feature.random_seed;
     this.services_amount = feature.services_amount;
     this.estimated_amount = feature.estimated_amount;
