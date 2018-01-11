@@ -66,18 +66,10 @@ export class DimensionsComponent implements OnInit {
       case "radius":
         const halfRadius = (this.feature.width *.5) + 1;
         if(measurement < 30) {
-          if (halfRadius < 30 ) {
-            this.feature.radius = 30;
-          } else {
-            this.feature.radius = halfRadius;
-          }
+          this.feature.radius = (halfRadius < 30 ) ? 30 : halfRadius;
           this.alert.error('The minimum radius is 30 inches and must be greater than half the width');
         } else if(measurement > 300) {
-          if (halfRadius > 300 ) {
-            this.feature.radius = 300;
-          } else {
-            this.feature.radius = halfRadius;
-          }
+          this.feature.radius = (halfRadius < 300 ) ? 300 : halfRadius;
           this.alert.error('The maximum radius is 300 inches.');
         } else if(measurement < (this.feature.width *.5) + 1) {
           this.feature.radius = (this.feature.width *.5) + 1;
