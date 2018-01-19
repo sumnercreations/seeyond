@@ -34,7 +34,7 @@ import { AlertService } from './seeyond/_services/alert.service';
 import { Feature } from './seeyond/feature';
 import { KeysPipe } from './seeyond/keys.pipe';
 import { User } from './seeyond/_models/user';
-import {LoadSeeyondsDialogComponent} from "./seeyond/load-seeyonds-dialog/load-seeyonds-dialog.component";
+import { LoadSeeyondsDialogComponent } from "./seeyond/load-seeyonds-dialog/load-seeyonds-dialog.component";
 import { SaveSeeyondDialogComponent } from './seeyond/save-seeyond-dialog/save-seeyond-dialog.component';
 import { ConfirmDeleteDialogComponent } from './seeyond/confirm-delete-dialog/confirm-delete-dialog.component';
 
