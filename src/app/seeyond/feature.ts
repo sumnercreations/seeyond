@@ -636,7 +636,7 @@ export class Feature {
 
   getDimensionString() {
     let dimensionString: string;
-    dimensionString = this.width + " W x " + this.height + " H x " + this.depth + " D";
+    dimensionString = this.width + "\" W x " + this.height + "\" H x " + this.depth + "\" D";
     // curved partition has radius
     if(this.feature_type === 1) {
       dimensionString += " x " + this.radius + " R";
