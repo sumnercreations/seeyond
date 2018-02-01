@@ -13,12 +13,14 @@ export class Feature {
   public design_name: string;
   public project_name: string;
   public specifier: string;
+  public units: string;
   public image: string;
   public width: number;
   public height: number;
   public radius: number;
   public angle: number;
   public ceiling_length: number;
+  public depth: number;
   public syd_v: any = {};
   public syd_t: any = {};
   public data: any = [];
@@ -32,6 +34,7 @@ export class Feature {
   public estimated_amount: number;
   public services_amount: number;
   public acoustic_foam: boolean = false;
+  public cove_lighting: boolean = false;
   public random_seed: number;
   public quoted: boolean = false; // boolean
   public archived: boolean = false; // boolean
@@ -173,11 +176,13 @@ export class Feature {
     this.design_name = feature.design_name;
     this.project_name = feature.project_name;
     this.specifier = feature.specifier;
+    this.units = feature.units;
     this.width = feature.width;
     this.height = feature.height;
     this.radius = feature.radius;
     this.angle = feature.angle;
     this.ceiling_length = feature.ceiling_length;
+    this.depth = feature.depth;
     this.tessellation = feature.tessellation;
     this.pattern_strength = feature.pattern_strength;
     this.material = feature.material;
@@ -186,6 +191,7 @@ export class Feature {
     this.sheets = feature.sheets;
     this.xml = feature.xml;
     this.acoustic_foam = feature.acoustic_foam;
+    this.cove_lighting = feature.cove_lighting;
     this.random_seed = feature.random_seed;
     this.services_amount = feature.services_amount;
     this.estimated_amount = feature.estimated_amount;
@@ -225,6 +231,9 @@ export class Feature {
 
     this.syd_v.QT.Visualization.SetFeatureType(this.feature_type);
     this.syd_v.QT.Visualization.visualizeFeature(front, back, uNum, vNum, this.getMaterialImage(this.material));
+
+    // update the feature depth
+    this.depth = this.syd_v.QT.Visualization.GetBoundingBoxDepth().toFixed(2);
 
     // feature has been updated
     this.onFeatureUpdated.emit();
@@ -623,6 +632,21 @@ export class Feature {
 
   getFeatureImage(feature_type: number) {
     return this.features[feature_type].image;
+  }
+
+  getDimensionString() {
+    let dimensionString: string;
+    dimensionString = this.width + "\" W x " + this.height + "\" H x " + this.depth + "\" D";
+    // curved partition has radius
+    if(this.feature_type === 1) {
+      dimensionString += " x " + this.radius + " R";
+    }
+
+    // wall to ceiling has ceiling_length
+    if(this.feature_type === 3) {
+      dimensionString += " x " + this.ceiling_length + " CL";
+    }
+    return dimensionString;
   }
 
   getJsonProperties() {

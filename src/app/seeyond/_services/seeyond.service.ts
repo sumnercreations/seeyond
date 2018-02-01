@@ -53,11 +53,13 @@ export class SeeyondService {
       "design_name": this.feature.design_name,
       "project_name": this.feature.project_name,
       "specifier": this.feature.specifier,
+      "units": this.feature.units,
       "width": this.feature.width,
       "height": this.feature.height,
       "radius": this.feature.radius,
       "angle": this.feature.angle,
       "ceiling_length": this.feature.ceiling_length,
+      "depth": this.feature.depth,
       "tessellation": this.feature.tessellation,
       "pattern_strength": this.feature.pattern_strength,
       "material": this.feature.material,
@@ -66,7 +68,7 @@ export class SeeyondService {
       "boxes": this.feature.boxes,
       "sheets": this.feature.sheets,
       "xml": this.feature.xml,
-      "acoustic_foam": this.feature.acoustic_foam,
+      "cove_lighting": this.feature.cove_lighting,
       "random_seed": this.feature.random_seed,
       "services_amount": this.feature.services_amount,
       "estimated_amount": this.feature.estimated_amount,
@@ -74,7 +76,7 @@ export class SeeyondService {
       "archived": this.feature.archived,
       "hardware": this.feature.hardware
     };
-
+    this.debug(patchData);
     let headers = new Headers({"Content-Type": "application/json"});
     let options = new RequestOptions({headers: headers});
 
@@ -96,11 +98,13 @@ export class SeeyondService {
       "design_name": this.feature.design_name,
       "project_name": this.feature.project_name,
       "specifier": this.feature.specifier,
+      "units": this.feature.units,
       "width": this.feature.width,
       "height": this.feature.height,
       "radius": this.feature.radius,
       "angle": this.feature.angle,
       "ceiling_length": this.feature.ceiling_length,
+      "depth": this.feature.depth,
       "tessellation": this.feature.tessellation,
       "pattern_strength": this.feature.pattern_strength,
       "material": this.feature.material,
@@ -109,7 +113,7 @@ export class SeeyondService {
       "boxes": this.feature.boxes,
       "sheets": this.feature.sheets,
       "xml": this.feature.xml,
-      "acoustic_foam": this.feature.acoustic_foam,
+      "cove_lighting": this.feature.cove_lighting,
       "random_seed": this.feature.random_seed,
       "services_amount": this.feature.services_amount,
       "estimated_amount": this.feature.estimated_amount,
